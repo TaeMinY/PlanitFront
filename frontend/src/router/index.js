@@ -1,26 +1,22 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Landing from '../views/Landing'
-import Signin from '../views/Signin'
-import Signup from '../views/Signup'
 Vue.use(VueRouter)
 
 const routes = [
   	{
     	path: '/',
     	name: 'Landing',
-    	component: Landing
+    	component: () => import("../views/Landing.vue"),
   	},
 	{
-		path: '/signin',
-		name: 'Signin',
-		component: Signin
-	},
-	{
-		path: '/signup',
-		name: 'Signup',
-		component: Signup
-	}
+    path: "/Account",
+    name: "Account",
+    component: () => import("../views/account.vue"),
+    children: [
+      { path: "signin", name: "signin", component: () => import("../views/Signin.vue") },
+      { path: "signup", name: "signup", component: () => import("../views/Signup.vue") },
+    ]
+  },
 	
 ]
 

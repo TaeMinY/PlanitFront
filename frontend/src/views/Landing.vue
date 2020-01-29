@@ -2,15 +2,14 @@
   <div class="landing">
     <div class="landing__animation">
     <Topbar class="topbar"></Topbar>
-
 		<div class="landing__title">
         <h1>Planit</h1>
         <div
           style="minwidth:300px;width:440px; text-align:start;font-family:NanumSR; line-height:24px;">
 			새해 목표, 이젠 "함께" 달성해 보세요! </br>
 			Planit - 플래닛은 나의 새해 목표를 다른 사람들과 공유하고, 함께 달성해 나가며 동기를 얻을 수 있는 서비스입니다.</div>
-        <div class="landing__button">
-          <span @click="start()">시작하기</span>
+        <div class="landing__button" @click="start()">
+          <span>시작하기</span>
         </div>
       </div>
       <div class="landing__animation__big__box"></div>
@@ -19,8 +18,32 @@
       </div>
 		 <div class="landing__triangle"></div>
     </div>
-	<div style="width:100%; height:100vh;"></div>
-
+	<div class="wrap1">
+        <img src="../assets/calendar.svg" alt="사진" width="25%" style="min-width:300px" data-aos="fade-right" />
+        <div class="planner" >
+            <div class="planner__title">강력한 플래너 기능 제공</div>
+            <div style="margin: 5% 0px 3% 0px;" class="planner__text">단순한 "플래너 기능"만을 제공하는 서비스는 이제 지겹습니다. </div>
+            <div class="planner__text">플래닛에서는 사용자의 체계적인 새해 목표 달성을 위해,<br>
+				<span style="font-family:NanumSB; ">캘린더/플래너/리마인더/스티커</span> 메모 등 다양하고 강력한 기능들을 한번에 제공합니다.</div>
+        </div>
+    </div>
+	<div class="wrap2">
+		  <div class="community">
+            <div class="community__title" >함께 달성하는 새해 목표</div>
+            <div style="margin: 5% 0px 3% 0px;" class="community__text">혼자서는 어려운 일이라도, 다른 사람들과 힘을 합치면 쉽게 달성할 수 있죠! </div>
+            <div class="community__text">플래닛에서는 새해 목표를 작성하고, <span style="font-family:NanumSB; ">다른 사람들과 공유</span>하며 <span style="font-family:NanumSB; ">서로					를 응원</span>할 수 있습니다.<br>
+				나의 노력을 꾸준히 기록하고, 목표 달성을 자랑해 보세요!
+			</div>
+        </div>
+        <img src="../assets/community.svg" alt="사진" width="25%" style="min-width:300px" />
+    </div>
+	<div class="wrap3">
+		<div class="started_title">2020년 새해 목표, 플래닛에서 시작해 보세요</div>
+        <img src="../assets/started.svg" alt="사진" width="25%" style="min-width:300px"/>
+        <div class="started__button" @click="start()">
+          <span>시작하기</span>
+        </div>
+    </div>
   </div>
 </template>
 
@@ -34,7 +57,7 @@ export default {
 	methods:{
 		start(){
 		this.$store.state.transtionStatus = "bottom";
-			this.$router.push("/signin");
+			this.$router.push("/account/signin");
 		}
 	}
 };
@@ -42,6 +65,83 @@ export default {
 <style >
 * {
   overflow-x: hidden !important;
+}
+.wrap1{
+    width:100%; height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+	position:relative;
+	z-index: 1000;
+    overflow-y: hidden;
+}
+.wrap2{
+    width:100%; height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+		position:relative;
+	z-index: 1000;
+    overflow-y: hidden;
+}
+.wrap3{
+    width:100%; height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+	flex-direction:column;
+		position:relative;
+		z-index: 1000;
+    overflow-y: hidden;
+
+}
+	@media(max-width:768px){
+		.wrap1,.wrap3{	
+			flex-direction:column;
+		}
+		.wrap2{
+            flex-direction:column-reverse;
+		}
+	}
+.planner{
+	text-align:left;
+	max-width:35%;
+	min-width:300px;
+	word-break:break-all;
+}
+.community{
+	text-align:left;
+	max-width:35%;
+	min-width:300px;
+	word-break:break-all;
+}
+
+.wrap1 > div{
+	margin: 4% 3% 0 7%;
+}
+.wrap2 > div{
+	margin: 0 7% 0 3%;
+}
+.planner__title{
+  font-size:36px;
+  font-family: "NanumSEB";
+}
+.planner__text{
+		font-family: "NanumSR";
+	font-size:18px;
+}
+.community__title{
+  font-size:36px;
+  font-family: "NanumSEB";
+}
+.started_title{
+  font-size:36px;
+  font-family: "NanumSEB";	
+  margin-bottom:5%;
+}
+.community__text{
+		font-family: "NanumSR";
+	font-size:18px;
 }
 .landing__triangle {
   width: 300px;
@@ -65,7 +165,6 @@ export default {
   }
   100% {
     left:8%;
-
   }
 }
 .topbar {
@@ -94,7 +193,6 @@ export default {
   position: relative;
   z-index: 1000;
 	    overflow-y: hidden;
-
 }
 .landing__title {
   width: 70%;
@@ -175,8 +273,23 @@ h1 {
   background-color: #6c63ff;
   color: white;
   font-family: NanumSR;
-	
+  cursor: pointer;
 }
+.started__button{
+  width: 180px;
+  height: 47px;
+  border-radius: 30px;
+  box-sizing: border-box;
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "NanumSB";
+  background-color: #6c63ff;
+  color: white;
+  font-family: NanumSB;
+  cursor: pointer;
+	}
 .landing__animation__phrase {
   position: absolute;
   width: 250px;
@@ -223,7 +336,6 @@ h1 {
     width: 15%;
   }
 }
-
 @keyframes phrase {
   0% {
     bottom: -65px;

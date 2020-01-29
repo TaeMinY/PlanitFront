@@ -1,37 +1,31 @@
 <template>
-    <div class="signin">
-        <div class="background">
-            <div class="background__left"></div>
-            <div class="background__right"></div>
-        </div>
-        <div class="signin__main">
-			<div class="signin__container">
-			
+       <div style="display:flex">
                 <div class="input_div">
-                    <img src="https://kr.vuejs.org/images/logo.png" alt="로고" class="title_logo" />
-                    <h1 class="signin_title">Welcome to Planit</h1>
+                    <img src="../assets/logo.svg" alt="로고" class="title_logo" />
+                    <h1 class="signin_title">Sign In</h1>
                     <div class="signin_text">
                         <input type="email" class="input-email" placeholder="Email" />
                         <input type="password" class="input-password" placeholder="Password" />
                         <router-link class="find-password" to="">Find Password</router-link>
                         <input type="submit" class="input-login" value="Login" />
                     </div>
-					<div style="margin-top: 10px;">
-                    <router-link class="signup" to="/signup">Sign Up</router-link>
-					<router-link class="forgot__password" to="">Forgot password</router-link>
+					<div style=" display:flex; width:100%; margin: 10px auto 0px auto; justify-content:center">
+                    	<div @click="signupgo()">Sign Up</div>
+						<div class="forgot__password" >Forgot password</div>
 					</div>
                 </div>
                 <div class="image_div">
                     <img src="../assets/undraw_authentication_fsn5.svg" alt="로고" class="logo-2" />
                 </div>
-			</div>
-        </div>
-    </div>
+	</div>
 </template>
 <style lang="css">
 .signin {
     width: 100%;
-    height: 100vh;
+    height: 100%;
+	display:flex;
+	justify-content:center;
+	align-items:center;
 }
 .background {
     width: 100%;
@@ -159,6 +153,7 @@
 	text-decoration:none;
 	color:black;
 	margin: 0px 3px;
+	width:fit-content;
 }
 .signin__container {
     display: flex;
@@ -171,6 +166,11 @@
 <script>
 export default {
     name: 'signin',
-    logo: 'https://kr.vuejs.org/images/logo.png'
+    logo: 'https://kr.vuejs.org/images/logo.png',
+	 methods:{
+	  signupgo(){
+		this.$router.push("/account/signup")
+	  },
+  }
 };
 </script>

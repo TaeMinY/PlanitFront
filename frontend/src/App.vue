@@ -2,7 +2,7 @@
   <div id="app">
    <transition  :name="$store.state.transtionStatus">
     <router-view class="router-view"/>
-   </transition >
+   </transition>
   </div>
 </template>
 
@@ -40,6 +40,11 @@
 	font-display: swap;
 }
 @font-face {
+    font-family: 'NanumSB';
+    src: url('./assets/font/NanumSquareB.ttf') format('truetype');
+	font-display: swap;
+}
+@font-face {
     font-family: 'NanumSRB';
     src: url('./assets/font/NanumSquareRoundB.ttf') format('truetype');
 	font-display: swap;
@@ -47,6 +52,11 @@
 @font-face {
     font-family: 'ProductSansM';
     src: url('./assets/font/ProductSans-Black.ttf') format('truetype');
+	font-display: swap;
+}
+@font-face {
+    font-family: 'NanumSEB';
+    src: url('./assets/font/NanumSquareEB.ttf') format('truetype');
 	font-display: swap;
 }
 .bottom-leave-active {
@@ -106,6 +116,21 @@
 }
 .top-leave-to {
   transform: translateY(100%);
+}
+.fade-enter-active,
+.fade-leave-active {
+	transition: 0.5s;
+	position: absolute;
+}
+.fade-enter,
+.fade-leave-to {
+	opacity: 0;
+	transform: scale(0.9);
+}
+.fade-enter-to,
+.fade-leave {
+	opacity: 1;
+	transform: scale(1);
 }
 .router-view {
   transition: 1s cubic-bezier(0.175, 0.885, 0.32, 1);

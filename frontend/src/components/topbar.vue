@@ -1,9 +1,7 @@
 <<template>
   <div class="topbar">
 	<div class="topbar__logo">
-		<div>
-			Logo
-		</div>
+		<img src="../assets/logo.svg" alt="로고" width="48px"/>
 		<div class="topbar__logo__title">
 			Planit
 		</div>
@@ -20,19 +18,20 @@ export default {
   methods:{
 	  signup(){
 		this.$store.state.transtionStatus = "bottom";
-		this.$router.push("/signup")
+		this.$router.push("/account/signup")
 	  },
 	  signin(){
 		this.$store.state.transtionStatus = "bottom";
-		this.$router.push("/signin")
+		this.$router.push("/account/signin")
 	  }
   }
 }
 </script>
 <style lang="scss">
 	.nonecolor{
-		    text-decoration: none;
+		text-decoration: none;
 		color:white;
+		cursor: pointer;
 	}
 	.topbar{
 		width:100%;
@@ -59,6 +58,7 @@ export default {
 		color:white;
 	}
 	.topbar__logo{
+		cursor: pointer;
 		display:flex;
 		font-family: "ProductSansM";
 	}

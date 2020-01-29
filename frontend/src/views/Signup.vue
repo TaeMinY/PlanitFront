@@ -1,17 +1,12 @@
 <template>
-    <div class="signin">
-        <div class="background">
-            <div class="background__left"></div>
-            <div class="background__right"></div>
-        </div>
-        <div class="signin__main">
-			<div class="signin__container">
-			
+       <div style="display:flex">
+		   
+	
+   
                 <div class="input_div">
-                    <img src="https://kr.vuejs.org/images/logo.png" alt="로고" class="title_logo" />
-                    <h1 class="signin_title">Planit-플래닛
-	<br>회원가입</h1>
-                    <div class="signin_text">
+                    <img src="../assets/logo.svg" alt="로고" class="title_logo" />
+                    <h1 class="signup__title">Get Started</h1>
+                    <div class="signup__text">
                         <input type="email" class="input-email" placeholder="Email" />
                         <input type="password" class="input-password" placeholder="Password" />
 						<input type="password" class="input-password" placeholder="Check Password">
@@ -21,17 +16,19 @@
                     </div>
                 </div>
                 <div class="image_div">
-                    <img src="../assets/undraw_authentication_fsn5.svg" alt="로고" class="logo-2" />
+                    <img src="../assets/undraw_post_online_dkuk.svg" alt="로고" class="logo-2" />
                 </div>
-			</div>
-        </div>
-    </div>
+</div>
 </template>
 <style lang="css">
-.signin {
-    width: 100%;
-    height: 100vh;
+.signup {
+
 }
+	.signup__text{
+		display:flex;
+		justify-content:center;
+		flex-direction:column;
+	}
 .background {
     width: 100%;
     height: 100%;
@@ -48,7 +45,7 @@
     flex: 1;
     background-color: #323565;
 }
-.signin__main {
+.signup__main {
     position: absolute;
     top: 0;
     left: 0;
@@ -70,7 +67,7 @@
 	border-radius: 30px 0px 0px 30px;
 
 }
-.signin_title {
+.signup__title {
 	font-family: "ProductSansM";
     color: black;
     text-align: center;
@@ -153,7 +150,7 @@
 	color:black;
 	margin: 0px 3px;
 }
-.signin__container {
+.signup__container {
     display: flex;
     justify-content: center;
     align-items: center;

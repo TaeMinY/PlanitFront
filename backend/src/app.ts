@@ -4,7 +4,7 @@ import * as helmet from 'helmet';
 import * as morgan from 'morgan';
 import * as cors from 'cors';
 import Router from "./Routers/index";
-import socket from "./Module/socket";
+// import socket from "./Module/socket";
 const app: express.Application = express();
 const connectDB = require('./Module/connectDB');
 const PORT = process.env.PORT || 4000;
@@ -26,5 +26,5 @@ app.get("/", (req: express.Request, res: express.Response) => {
 server.listen(PORT, () => {
     console.log(`http://localhost:${PORT} OnOn`);
 });
-const io = require('socket.io')(server);
-socket(io)
+// const io = require('socket.io')(server);
+// socket(io)

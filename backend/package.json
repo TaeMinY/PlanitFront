@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "sudo pm2 start src/app.ts",
     "stop": "sudo pm2 delete app",
-    "db": "mongod --dbpath ./db",
+    "db": "sudo pm2 start mongod --dbpath ./db",
     "dev": "cross-env nodemon ./src/app.ts",
     "build": "webpack --config webpack.config.js",
     "buildtsc": "nodemon tsc"

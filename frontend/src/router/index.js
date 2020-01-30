@@ -9,7 +9,12 @@ const routes = [
     	component: () => import("../views/Landing.vue"),
   	},
 	{
-    path: "/Account",
+    	path: '/main',
+    	name: 'Main',
+    	component: () => import("../views/Main.vue"),
+  	},
+	{
+    path: "/account",
     name: "Account",
     component: () => import("../views/account.vue"),
     children: [

@@ -1,13 +1,14 @@
 <template>
        <div style="display:flex">
                 <div class="input_div">
+						<img src="../assets/arrow_back.svg" alt="화살표" width="25px" height="25px" class="arrow" @click="back()"/>
                     <img src="../assets/logo.svg" alt="로고" class="title_logo" />
                     <h1 class="signin_title">Sign In</h1>
                     <div class="signin_text">
-                        <input type="email" class="input-email" placeholder="Email" />
-                        <input type="password" class="input-password" placeholder="Password" />
-                        <router-link class="find-password" to="">Find Password</router-link>
-                        <input type="submit" class="input-login" value="Login" />
+                        <input type="email" class="input-email" placeholder="Email" v-model="email"/>
+                        <input type="password" class="input-password" placeholder="Password" v-model="password"/>
+                        <div class="error">{{error}}</div>
+                        <input type="submit" class="input-login" value="Login" @click="submit()"/>
                     </div>
 					<div style=" display:flex; width:100%; margin: 10px auto 0px auto; justify-content:center">
                     	<div @click="signupgo()">Sign Up</div>
@@ -19,13 +20,65 @@
                 </div>
 	</div>
 </template>
-<style lang="css">
+<script>
+export default {
+    name: 'signin',
+	data(){
+		return{
+			email:'',
+			password:'',
+			error:''
+		}
+	},
+	 methods:{
+	  	signupgo(){
+			this.$router.push("/account/signup")
+	  	},
+		back(){
+			this.$store.state.transtionStatus ="bottom";
+			this.$router.push("/");
+		},
+		submit(){
+			 this.$store
+				.dispatch("signin", {email:this.email,password:this.password})
+				.then(response => {
+					   if(response.data.result == true){
+				this.email = "",
+				this.password = "",
+				this.error ="",
+				this.$store.state.transtionStatus ="bottom";
+				this.$router.push("/main");
+			}else{
+				this.error = response.data.mes
+			}
+				})
+				.catch(err => {
+					console.log(err);
+				});
+		}
+  }
+};
+</script>
+
+<style lang="css" scoped>
+	.error{
+		font-size:14px;
+		color:red;
+		margin:5px 0px;
+	}
 .signin {
     width: 100%;
     height: 100%;
 	display:flex;
 	justify-content:center;
 	align-items:center;
+}
+.arrow{
+	padding: 8px;
+	cursor: pointer;
+	position:absolute;
+	top:30px;
+	left:30px;
 }
 .background {
     width: 100%;
@@ -41,7 +94,7 @@
 }
 .background__right {
     flex: 1;
-    background-color: #323565;
+    background-color: #ffffff;/*#323565;*/
 }
 .signin__main {
     position: absolute;
@@ -53,11 +106,12 @@
     justify-content: center;
     align-items: center;
 }
+	
 .signin_text {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-itmes: center;
+    align-items: center;
 }
 .input_div {
     background-color: white;
@@ -69,7 +123,7 @@
 	align-items:center;
 	flex-direction:column;
 	border-radius: 30px 0px 0px 30px;
-
+	position:relative;
 }
 .signin_title {
 	font-family: "ProductSansM";
@@ -131,8 +185,9 @@
     text-align: center;
 }
 .logo-2 {
-    width: 580px;
-    height: 580px;
+    width: 100%;
+    height: 100%;
+	min-width:300px;
     text-align: center;
 }
 .signup,
@@ -163,14 +218,3 @@
     border-radius: 30px;
 }
 </style>
-<script>
-export default {
-    name: 'signin',
-    logo: 'https://kr.vuejs.org/images/logo.png',
-	 methods:{
-	  signupgo(){
-		this.$router.push("/account/signup")
-	  },
-  }
-};
-</script>

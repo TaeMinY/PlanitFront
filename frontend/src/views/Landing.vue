@@ -1,7 +1,8 @@
 <template>
   <div class="landing">
     <div class="landing__animation">
-    	<Topbar class="topbar"></Topbar>
+    <Topbar class="topbar"></Topbar>
+
 		<div class="landing__title">
         <h1>Planit</h1>
         <div
@@ -31,7 +32,7 @@
 		  <div class="community">
             <div class="community__title">함께 달성하는 새해 목표</div>
             <div style="margin: 5% 0px 3% 0px;" class="community__text">혼자서는 어려운 일이라도, 다른 사람들과 힘을 합치면 쉽게 달성할 수 있죠! </div>
-            <div class="community__text">플래닛에서는 새해 목표를 작성하고, <span style="font-family:NanumSB; ">다른 사람들과 공유</span>하며 <span style="font-family:NanumSB; ">서로					를 응원</span>할 수 있습니다.<br>
+            <div class="community__text">플래닛에서는 새해 목표를 작성하고, <span style="font-family:NanumSB; ">다른 사람들과 공유</span>하며 <span style="font-family:NanumSB; ">서로를 응원</span>할 수 있습니다.<br>
 				나의 노력을 꾸준히 기록하고, 목표 달성을 자랑해 보세요!
 			</div>
         </div>
@@ -143,7 +144,7 @@ export default {
   background-repeat: no-repeat;
   position: absolute;
   top: 60vh;
-  left:5%;
+    left:5%;
   z-index: -1;
 }
 @keyframes triangle {
@@ -179,7 +180,7 @@ export default {
   height: 100vh;
   position: relative;
   z-index: 1000;
-  overflow-y: hidden;
+	    overflow-y: hidden;
 }
 .landing__title {
   width: 70%;

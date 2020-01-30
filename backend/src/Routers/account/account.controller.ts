@@ -14,7 +14,9 @@ export const Signup = async (req: Request, res: Response) => {
 		password2,
         email,
     } = req.body;
-	
+	if(!(username||password||password2||email)){
+             return Send(res,200,'입력창을 모두 입력해주세요',false)
+    }
 	if(password != password2){
 		return Send(res,200,"비밀번호가 일치하지 않습니다",false);
 	}
@@ -27,12 +29,9 @@ export const Signup = async (req: Request, res: Response) => {
 	
     User.findOne({email: email},async function(err,result){
         if(err) throw err;
-        if(!(username||password||email)){
-             return Send(res,200,'입력창을 모두 입력해주세요',false)
-        }
+       
         if(result == null){//생성
             bcrypt.hash(password, null, null, function(err, hash){
-				console.log("toddddd")
                 const user: any = new User({
                     email : email,
                     password: hash,
@@ -41,12 +40,12 @@ export const Signup = async (req: Request, res: Response) => {
                 });
                 user.save()
 		            .then((data) => {
-                       return Send(res,200,'회원가입 성공.',true)
+                       return Send(res,200,'회원가입을 성공하셨습니다.',true)
 		        	})
-		           .catch(err => Send(res,200,'DB 저장을 실패했습니다.',false));
+		           // .catch(err => Send(res,200,'DB 저장을 실패했습니다.',false));
             });
         }else{
-            return Send(res,200,'이메일 중복',false)
+            return Send(res,200,'이메일이 이미 있습니다.',false)
         }
     })
 }

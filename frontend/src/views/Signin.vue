@@ -3,18 +3,20 @@
                 <div class="input_div">
 						<img src="../assets/arrow_back.svg" alt="화살표" width="25px" height="25px" class="arrow" @click="back()"/>
                     <img src="../assets/logo.svg" alt="로고" class="title_logo" />
-                    <h1 class="signin_title">Sign In</h1>
+                    <h1 class="signin_title">Hello, Planit!</h1>
                     <div class="signin_text">
 						
 						
                         <input type="email" class="input-email" placeholder="Email" v-model="email"  />
-                        <input type="password" class="input-password" placeholder="Password" v-model="password"/>
+                        <input  type="password" class="input-password" placeholder="Password" v-model="password"/>
                         <div class="error">{{error}}</div>
                         <input type="submit" class="input-login" value="Login" @click="submit()"/>
                     </div>
-					<div style=" display:flex; width:100%; margin: 10px auto 0px auto; justify-content:center">
-                    	<div @click="signupgo()">Sign Up</div>
-						<div class="forgot__password" style="margin-top: 16px;">Forgot password?</div>
+					
+					<div @click="signupgo()" class="input-signup">Sign Up</div>
+					<div style=" display:flex; flex-direction:column; width:100%; margin: 10px auto 0px auto; align-items: center;">
+                    	
+						<div class="forgot__password" style="margin-top:16px;">Forgot password?</div>
 					</div>
                 </div>
                 <div class="image_div">
@@ -139,31 +141,41 @@ export default {
     font-size: 36px;
 }
 .input-email {
+	border-radius: 3px;
 	min-width: 300px;
 	width: 330px;
     height: 30px;
-    border: 1px solid black;
+    border: 1px solid #adb5bd;
     margin: 5px auto;
 	padding: 5px 10px;
-
+	font-family: "ProductSansR";
 
 }
 .input-email::placeholder {
     font-size: 14px;
+	font-family: "ProductSansR";
+	color: #adb5bd;
 }
 .input-password {
+	border-radius: 3px;
     min-width: 300px;
 		width: 330px;
     height: 30px;
     margin: 5px auto;
-	border: 1px solid black;
+	border: 1px solid #adb5bd;
 	padding: 5px 10px;
+	font-family: "ProductSansR";
 
 }
 .input-password::placeholder {
     font-size: 14px;
+	font-family: "ProductSansR";
+	color: #adb5bd;
 }
 .input-login {
+	border-radius: 3px;
+	font-family: "ProductSansR";
+	cursor:pointer;
     height: 30px;
     margin: 5px auto;
     border: 0;
@@ -171,10 +183,28 @@ export default {
     font-size: 14px;
     padding: 5px 10px;
     color: #ffffff;
-    background-color: blue;
+    background-color: #6C63FF;
 	min-width: 300px;
 	width: 330px;
 	     box-sizing: content-box;
+}
+.input-signup {
+	/*border: 1px solid #6C63FF;*/
+	border-radius: 3px;
+	font-family: "ProductSansR";
+	cursor:pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+    height: 30px;
+    text-align: center;
+    font-size: 14px;
+    padding: 5px 10px;
+    color: #6C63FF;
+    background-color: #ffffff;
+	min-width: 300px;
+	width: 330px;
+	box-sizing: content-box;
 }
 .image_div {
     width: 40vw;
@@ -211,9 +241,10 @@ export default {
 
 }
 .forgot__password{
+	font-size: 14px;
+	font-family: "ProductSansR";
 	text-decoration:none;
-	color:black;
-	margin: 0px 3px;
+	color:#868e96;
 	width:fit-content;
 }
 .signin__container {

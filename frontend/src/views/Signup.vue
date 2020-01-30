@@ -1,28 +1,65 @@
 <template>
   <div style="display:flex">
     <div class="input_div">
-		<img src="../assets/arrow_back.svg" alt="화살표" width="25px" height="25px" class="arrow" @click="back()"/>
-      <img src="../assets/logo.svg" alt="로고" class="title_logo" />
+      <img
+        src="../assets/arrow_back.svg"
+        alt="화살표"
+        width="25px"
+        height="25px"
+        class="arrow"
+        @click="back()"
+      />
       <h1 class="signup_title">Get Started</h1>
+
+      <input type="file" ref="profile" @change="fileSelect" id="bin" accept="image/*"/>
       <div class="signup_text">
-		<input type="text" class="input-username" placeholder="Username" v-model="username" v-on:keyup.enter="submit()"/>
-        <input type="email" class="input-email" placeholder="Email" v-model="email" v-on:keyup.enter="submit()"/>
-        <input type="password" class="input-password" placeholder="Password" v-model="password" v-on:keyup.enter="submit()" />
-        <input type="password" class="input-password" placeholder="Confirm Password" v-model="password2" v-on:keyup.enter="submit()"/>
-		                          <div class="error">{{error}}</div>
-		<input type="submit" class="input-login" value="Signup" @click="submit()" />
+        <input
+          type="text"
+          class="input-username"
+          placeholder="Username"
+          v-model="username"
+        />
+        <input
+          type="email"
+          class="input-email"
+          placeholder="Email"
+          v-model="email"
+        />
+        <input
+          type="password"
+          class="input-password"
+          placeholder="Password"
+          v-model="password"
+        />
+        <input
+          type="password"
+          class="input-password"
+          placeholder="Confirm Password"
+          v-model="password2"
+        />
+        <div class="error">{{ error }}</div>
+        <input
+          type="submit"
+          class="input-login"
+          value="Signup"
+          @click="submit()"
+        />
       </div>
     </div>
     <div class="image_div">
-      <img src="../assets/undraw_post_online_dkuk.svg" alt="로고" class="logo-2" />
+      <img
+        src="../assets/undraw_post_online_dkuk.svg"
+        alt="로고"
+        class="logo-2"
+      />
     </div>
   </div>
 </template>
 <style lang="css">
-.error{
-		font-size:14px;
-		color:red;
-		margin:5px 0px;
+.error {
+  font-size: 14px;
+  color: red;
+  margin: 5px 0px;
 }
 .signup {
   width: 100%;
@@ -73,7 +110,7 @@
   align-items: center;
   flex-direction: column;
   border-radius: 30px 0px 0px 30px;
-	position:relative;
+  position: relative;
 }
 .signup_title {
   font-family: "ProductSansM";
@@ -161,12 +198,12 @@
   color: black;
   margin: 0px 3px;
 }
-.arrow{
-	padding: 8px;
-	cursor: pointer;
-	position:absolute;
-	top:30px;
-	left:30px;
+.arrow {
+  padding: 8px;
+  cursor: pointer;
+  position: absolute;
+  top: 30px;
+  left: 30px;
 }
 .forgot__password {
   text-decoration: none;
@@ -190,28 +227,46 @@ export default {
     signupgo() {
       this.$router.push("/account/signup");
     },
-	  back(){
-			this.$store.state.transtionStatus ="bottom";
-			this.$router.push("/account/signin");
-		},
+    back() {
+      this.$store.state.transtionStatus = "bottom";
+      this.$router.push("/account/signin");
+    },
+
     submit() {
+      const formData = new FormData();
+      formData.append("profile", this.profile);
+      formData.append("name", this.email);
       this.$store
-        .dispatch("signup", { email: this.email, password: this.password,password2:this.password2,profile_image:this.profile_image,username:this.username })
+        .dispatch("signup", {
+          email: this.email,
+          password: this.password,
+          password2: this.password2,
+          profile_image: this.profile_image,
+          username: this.username
+        })
         .then(response => {
           if (response) {
             console.log(response);
-            if(response.data.result == true){
-				this.email = "",
-				this.password = "",
-				this.password2 = "",
-				this.username = "",
-									this.error ="",
-				this.profile_image = "ss"
-				this.$store.state.transtionStatus ="bottom";
-				this.$router.push("/account/signin");
-			}else{
-				this.error = response.data.mes
-			}
+            const fd = new FormData();
+
+            fd.append("name", this.email+'png');
+            fd.append("bin", document.getElementById("bin").files[0]);
+
+            this.$store.dispatch("profile", fd).then(response => {
+              //받기
+              if (response.data.result == true) {
+                (this.email = ""),
+                  (this.password = ""),
+                  (this.password2 = ""),
+                  (this.username = ""),
+                  (this.error = ""),
+                  (this.profile_image = "ss");
+                this.$store.state.transtionStatus = "bottom";
+                this.$router.push("/account/signin");
+              } else {
+                this.error = response.data.mes;
+              }
+            });
           }
         })
         .catch(e => {
@@ -223,12 +278,12 @@ export default {
     return {
       email: "",
       password: "",
-	  error:"",
-	  username:"",
-		password2:"",
-		profile_image:"ss",
+      error: "",
+      username: "",
+      password2: "",
+      profile_image: "ss",
+      profileImage
     };
-  },
- 
+  }
 };
 </script>

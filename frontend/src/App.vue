@@ -87,6 +87,11 @@ body {
   font-display: swap;
 }
 @font-face {
+  font-family: "ProductSansR";
+  src: url("./assets/font/ProductSans-Medium.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
   font-family: "NanumSEB";
   src: url("./assets/font/NanumSquareEB.ttf") format("truetype");
   font-display: swap;

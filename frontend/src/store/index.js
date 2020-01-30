@@ -7,7 +7,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
 	  transtionStatus: "bottom",
-	  token:"",
+	  userdata:{},
   },
   mutations: {
   },
@@ -20,7 +20,6 @@ export default new Vuex.Store({
 					.then(value => {
 						console.log(value);
 						resolve(value);
-            			this.state.token = value.data.token
 					})
 					.catch(err => {
 						reject(err);
@@ -32,6 +31,20 @@ export default new Vuex.Store({
 			console.log(data)
 				axios
 					.post("http://nulllove-rgobq.run.goorm.io/api/account/signup", data)
+					.then(value => {
+						console.log(value);
+						resolve(value);
+					})
+					.catch(err => {
+						reject(err);
+					});
+			});
+		},
+	 token({ commit, state },data) {
+		return new Promise((resolve, reject) => {
+			console.log(data)
+				axios
+					.post("http://nulllove-rgobq.run.goorm.io/api/account/token", data)
 					.then(value => {
 						console.log(value);
 						resolve(value);

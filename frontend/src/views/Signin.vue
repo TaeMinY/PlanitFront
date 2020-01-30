@@ -5,14 +5,16 @@
                     <img src="../assets/logo.svg" alt="로고" class="title_logo" />
                     <h1 class="signin_title">Sign In</h1>
                     <div class="signin_text">
-                        <input type="email" class="input-email" placeholder="Email" v-model="email"/>
+						
+						
+                        <input type="email" class="input-email" placeholder="Email" v-model="email"  />
                         <input type="password" class="input-password" placeholder="Password" v-model="password"/>
                         <div class="error">{{error}}</div>
                         <input type="submit" class="input-login" value="Login" @click="submit()"/>
                     </div>
 					<div style=" display:flex; width:100%; margin: 10px auto 0px auto; justify-content:center">
                     	<div @click="signupgo()">Sign Up</div>
-						<div class="forgot__password" >Forgot password</div>
+						<div class="forgot__password" style="margin-top: 16px;">Forgot password?</div>
 					</div>
                 </div>
                 <div class="image_div">
@@ -43,11 +45,15 @@ export default {
 				.dispatch("signin", {email:this.email,password:this.password})
 				.then(response => {
 					   if(response.data.result == true){
+						   console.log("ddd");
+				localStorage.setItem('token',  response.data.token);
+				this.$store.state.userdata = response.data.userdata;
 				this.email = "",
 				this.password = "",
 				this.error ="",
 				this.$store.state.transtionStatus ="bottom";
 				this.$router.push("/main");
+				
 			}else{
 				this.error = response.data.mes
 			}
@@ -56,7 +62,7 @@ export default {
 					console.log(err);
 				});
 		}
-  }
+  },
 };
 </script>
 
@@ -94,7 +100,7 @@ export default {
 }
 .background__right {
     flex: 1;
-    background-color: #ffffff;/*#323565;*/
+    background-color: #323565;
 }
 .signin__main {
     position: absolute;

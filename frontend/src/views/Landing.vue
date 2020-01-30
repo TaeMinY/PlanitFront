@@ -60,7 +60,8 @@ export default {
 		this.$store.state.transtionStatus = "bottom";
 			this.$router.push("/account/signin");
 		}
-	}
+	},
+	
 };
 </script>
 <style >

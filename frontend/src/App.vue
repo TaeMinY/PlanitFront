@@ -1,10 +1,42 @@
 <template>
   <div id="app">
-   <transition :name="$store.state.transtionStatus">
-    <router-view class="router-view"/>
-   </transition>
+    <transition :name="$store.state.transtionStatus">
+      <router-view class="router-view" />
+    </transition>
   </div>
 </template>
+<script>
+export default {
+  created() {
+	
+    if (
+      !localStorage.getItem("token") &&
+      window.location.pathname != "/" &&
+      window.location.pathname != "/account/signin" &&
+      window.location.pathname != "/account/signup"
+    ){
+      this.$router.push("/");
+    }
+    if (localStorage.getItem("token")) {
+		console.log("토큰인증")
+      this.$store
+        .dispatch("token", {
+         token :localStorage.getItem("token")
+        })
+        .then(response => {
+          if (response.data.result) {
+            	this.$router.push("/main");
+          }else{
+			  this.$router.push("/");
+		  }
+        })
+        .catch(e => {
+          console.log("에러");
+        });
+    }
+  }
+};
+</script>
 
 <style lang="scss">
 *::-webkit-scrollbar {
@@ -18,59 +50,59 @@
   border-radius: 30px;
 }
 #app {
-  font-family: 'NanumSR', Helvetica, Arial, sans-serif;
+  font-family: "NanumSR", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-   width:100vw;
-	 height:100vh;
-	overflow-y:hidden;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: hidden;
 }
-	html{
-	}
-	body{
-		margin: 0;
-		padding: 0;
-		box-sizing:border-box;
-	}
-@font-face {
-    font-family: 'NanumSR';
-    src: url('./assets/font/NanumSquareR.ttf') format('truetype');
-	font-display: swap;
+html {
+}
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 @font-face {
-    font-family: 'NanumSB';
-    src: url('./assets/font/NanumSquareB.ttf') format('truetype');
-	font-display: swap;
+  font-family: "NanumSR";
+  src: url("./assets/font/NanumSquareR.ttf") format("truetype");
+  font-display: swap;
 }
 @font-face {
-    font-family: 'NanumSRB';
-    src: url('./assets/font/NanumSquareRoundB.ttf') format('truetype');
-	font-display: swap;
+  font-family: "NanumSB";
+  src: url("./assets/font/NanumSquareB.ttf") format("truetype");
+  font-display: swap;
 }
 @font-face {
-    font-family: 'ProductSansM';
-    src: url('./assets/font/ProductSans-Black.ttf') format('truetype');
-	font-display: swap;
+  font-family: "NanumSRB";
+  src: url("./assets/font/NanumSquareRoundB.ttf") format("truetype");
+  font-display: swap;
 }
 @font-face {
-    font-family: 'NanumSEB';
-    src: url('./assets/font/NanumSquareEB.ttf') format('truetype');
-	font-display: swap;
+  font-family: "ProductSansM";
+  src: url("./assets/font/ProductSans-Black.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "NanumSEB";
+  src: url("./assets/font/NanumSquareEB.ttf") format("truetype");
+  font-display: swap;
 }
 .bottom-leave-active {
-	position: absolute;
-	top: 0;
-	left: 0;
-	transition: 1s cubic-bezier(0.175, 0.885, 0.32, 1);
-	overflow-y:hidden !important;
-
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: 1s cubic-bezier(0.175, 0.885, 0.32, 1);
+  overflow-y: hidden !important;
 }
-.bottom-enter {  transform: translateY(100%);
+.bottom-enter {
+  transform: translateY(100%);
 }
 .bottom-enter-to {
-  top:0;
+  top: 0;
   transform: translateY(0vh);
 }
 .bottom-leave {
@@ -78,7 +110,7 @@
 }
 .bottom-leave-to {
   position: absolute;
-  top:0;
+  top: 0;
   transform: translateY(-100%);
 }
 .left-enter {
@@ -119,23 +151,23 @@
 }
 .fade-enter-active,
 .fade-leave-active {
-	transition: 0.5s;
-	position: absolute;
+  transition: 0.5s;
+  position: absolute;
 }
 .fade-enter,
 .fade-leave-to {
-	opacity: 0;
-	transform: scale(0.9);
+  opacity: 0;
+  transform: scale(0.9);
 }
 .fade-enter-to,
 .fade-leave {
-	opacity: 1;
-	transform: scale(1);
+  opacity: 1;
+  transform: scale(1);
 }
 .router-view {
   transition: 1s cubic-bezier(0.175, 0.885, 0.32, 1);
-	// overflow-y:hidden !important;
-	width: 100%;
-	height: 100%;
+  // overflow-y:hidden !important;
+  width: 100%;
+  height: 100%;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="landing">
     <div class="landing__animation">
-    <Topbar class="topbar"></Topbar>
+    	<Topbar class="topbar"></Topbar>
 		<div class="landing__title">
         <h1>Planit</h1>
         <div
@@ -19,8 +19,8 @@
 		 <div class="landing__triangle"></div>
     </div>
 	<div class="wrap1">
-        <img src="../assets/calendar.svg" alt="사진" width="25%" style="min-width:300px" data-aos="fade-right" />
-        <div class="planner" >
+        <img src="../assets/calendar.svg" alt="사진" width="25%" style="min-width:300px" />
+        <div class="planner">
             <div class="planner__title">강력한 플래너 기능 제공</div>
             <div style="margin: 5% 0px 3% 0px;" class="planner__text">단순한 "플래너 기능"만을 제공하는 서비스는 이제 지겹습니다. </div>
             <div class="planner__text">플래닛에서는 사용자의 체계적인 새해 목표 달성을 위해,<br>
@@ -29,13 +29,13 @@
     </div>
 	<div class="wrap2">
 		  <div class="community">
-            <div class="community__title" >함께 달성하는 새해 목표</div>
+            <div class="community__title">함께 달성하는 새해 목표</div>
             <div style="margin: 5% 0px 3% 0px;" class="community__text">혼자서는 어려운 일이라도, 다른 사람들과 힘을 합치면 쉽게 달성할 수 있죠! </div>
             <div class="community__text">플래닛에서는 새해 목표를 작성하고, <span style="font-family:NanumSB; ">다른 사람들과 공유</span>하며 <span style="font-family:NanumSB; ">서로					를 응원</span>할 수 있습니다.<br>
 				나의 노력을 꾸준히 기록하고, 목표 달성을 자랑해 보세요!
 			</div>
         </div>
-        <img src="../assets/community.svg" alt="사진" width="25%" style="min-width:300px" />
+        <img src="../assets/community.svg" alt="사진" width="25%" style="min-width:300px"/>
     </div>
 	<div class="wrap3">
 		<div class="started_title">2020년 새해 목표, 플래닛에서 시작해 보세요</div>
@@ -71,18 +71,12 @@ export default {
     display:flex;
     justify-content:center;
     align-items:center;
-	position:relative;
-	z-index: 1000;
-    overflow-y: hidden;
 }
 .wrap2{
     width:100%; height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-		position:relative;
-	z-index: 1000;
-    overflow-y: hidden;
 }
 .wrap3{
     width:100%; height:100vh;
@@ -90,17 +84,10 @@ export default {
     justify-content:center;
     align-items:center;
 	flex-direction:column;
-		position:relative;
-		z-index: 1000;
-    overflow-y: hidden;
-
 }
 	@media(max-width:768px){
-		.wrap1,.wrap3{	
+		.wrap1,.wrap2,.wrap3{	
 			flex-direction:column;
-		}
-		.wrap2{
-            flex-direction:column-reverse;
 		}
 	}
 .planner{
@@ -156,7 +143,7 @@ export default {
   background-repeat: no-repeat;
   position: absolute;
   top: 60vh;
-    left:5%;
+  left:5%;
   z-index: -1;
 }
 @keyframes triangle {
@@ -192,7 +179,7 @@ export default {
   height: 100vh;
   position: relative;
   z-index: 1000;
-	    overflow-y: hidden;
+  overflow-y: hidden;
 }
 .landing__title {
   width: 70%;

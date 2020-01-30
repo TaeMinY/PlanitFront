@@ -5,8 +5,8 @@
   "main": "./src/app.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cross-env pm2 start ./pm2.json",
-    "stop": "sudo pm2 delete ./pm2.json",
+    "start": "sudo pm2 start src/app.ts",
+    "stop": "sudo pm2 delete app",
     "db": "mongod --dbpath ./db",
     "dev": "cross-env nodemon ./src/app.ts",
     "build": "webpack --config webpack.config.js",
@@ -31,6 +31,7 @@
     "fs": "0.0.1-security",
     "helmet": "^3.21.2",
     "http": "^0.0.0",
+    "jsonwebtoken": "^8.5.1",
     "lowdb": "^1.0.0",
     "mongodb": "^3.5.2",
     "mongoose": "^5.8.2",

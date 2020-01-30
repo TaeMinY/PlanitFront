@@ -1,6 +1,6 @@
 import { model, Schema, Model, Document } from 'mongoose';
 const userSchema = new Schema({
-    id: {
+    username: {
         type: String,
         required: true
     },
@@ -8,26 +8,21 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    nickname: {
-        type: String,
-        required: true
-    },
     email: {
         type: String,
         required: true
     },
-    userdata : {
-        type: Object,
+    profile_image : {
+        type: String,
         required:true
     }
 });
 export interface UserDocument extends Document {
-    id: string;
+    username: string;
     password: string;
     enckey: string;
-    nickname: string;
     email: string;
-    userdata : Object;
+    profile_image : string;
 }
 const User: Model<UserDocument> = model('user', userSchema);
 export default User;

@@ -21,24 +21,28 @@
           class="input-username"
           placeholder="Username"
           v-model="username"
+		  v-on:keyup.enter="submit"
         />
         <input
           type="email"
           class="input-email"
           placeholder="Email"
           v-model="email"
+			   v-on:keyup.enter="submit"
         />
         <input
           type="password"
           class="input-password"
           placeholder="Password"
           v-model="password"
+			   v-on:keyup.enter="submit"
         />
         <input
           type="password"
           class="input-password"
           placeholder="Confirm Password"
           v-model="password2"
+			   v-on:keyup.enter="submit"
         />
         <div class="error">{{errorMes}}</div>
         <input

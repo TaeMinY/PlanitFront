@@ -1,7 +1,7 @@
 <template>
   <div class="calander">
-	  <p class="calander_title">calander</p>
-	  <div class="calander_main">
+	<p class="calander_title">Calander</p>
+		<div class="calander_main"> 
 		</div>
   </div>
 </template>
@@ -22,10 +22,12 @@ export default {
 		width:100%;
 		height:100%;
 		background-color:#f1f3f5;
+		padding:30px;
 	}
 	.calander_title{
         font-size: 40px;
         font-style: normal;
+		font-family: ProductSansM;
         color: #000000;
 		text-align: left;
 		margin-left: 10px;

@@ -2,7 +2,14 @@
   <div class="main">
 	<Topbar></Topbar>
 	 <div class="main__wrap">
-		<div class="main__left__bar">대시보드</div>
+		<div class="main__left__bar">
+			<div class="main__dashboards">
+	
+			</div>
+			<div class="main__nofitications">
+	
+			</div>
+		</div>
 		<router-view></router-view>
 	</div>
   </div>
@@ -29,9 +36,31 @@ export default {
 	}
 	.main__wrap{
 		display:flex;
+		width:100%;
 		height:100%;
 	}
 	.main__left__bar{
 		width:350px;
+		background-color:#f1f3f5;
+		display:flex;
+		justify-content:center;
+		align-items:center;
+		padding:30px 30px;
+		flex-direction:column;
+	}
+	.main__left__bar > * {
+		margin:10px;
+	}
+	.main__dashboards{
+		background-color:white;
+		width:85%;
+		height:40%;
+		border-radius:20px;
+	}
+	.main__nofitications{
+		background-color:white;
+		width:85%;
+		height:60%;
+		border-radius:20px;
 	}
 </style>

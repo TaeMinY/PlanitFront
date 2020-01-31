@@ -1,7 +1,10 @@
 <template>
   <div class="main">
 	<Topbar></Topbar>
-	<router-view></router-view>
+	 <div class="main__wrap">
+		<div class="main__left__bar">대시보드</div>
+		<router-view></router-view>
+	</div>
   </div>
 </template>
 
@@ -23,5 +26,12 @@ export default {
 	.main{
 		display:flex;
 		flex-direction: column;
+	}
+	.main__wrap{
+		display:flex;
+		height:100%;
+	}
+	.main__left__bar{
+		width:350px;
 	}
 </style>

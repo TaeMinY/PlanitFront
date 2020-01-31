@@ -39,4 +39,4 @@ Planit(플래닛)은 나의 새해 목표를 다른 사람들과 공유하고, �
 - 단일 플래너 기능만 지원하는 것이 아니라, 다양한 기능을 체계적으로 지원함.
 
 ### 사용하는 기술 스택
-Vue.js + Vuetify + Node.js + MongoDB + TypeScript
+Vue.js + Node.js + MongoDB + TypeScript

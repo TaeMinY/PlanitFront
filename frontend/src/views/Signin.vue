@@ -10,7 +10,7 @@
                         <input type="email" class="input-email" placeholder="Email" v-model="email"  />
                         <input  type="password" class="input-password" placeholder="Password" v-model="password" />
                         <div class="error">{{error}}</div>
-                        <input type="submit" class="input-login" value="Login" @click="submit()"/>
+                        <input type="submit" class="input-login" value="Sign In" @click="submit()"/>
                     </div>
 					
 					<div @click="signupgo()" class="input-signup">Sign Up</div>
@@ -96,14 +96,6 @@ export default {
 .background-2 {
     background-color: #ffffff;
 }
-.background__left {
-    flex: 1;
-    background-color: #a1c8fe;
-}
-.background__right {
-    flex: 1;
-    background-color: #323565;
-}
 .signin__main {
     position: absolute;
     top: 0;
@@ -148,7 +140,7 @@ export default {
     border: 1px solid #adb5bd;
     margin: 5px auto;
 	padding: 5px 10px;
-	font-family: "ProductSansR";
+	font-family: "ProductSansR", "NanumSRB";
 
 }
 .input-email::placeholder {
@@ -189,7 +181,7 @@ export default {
 	     box-sizing: content-box;
 }
 .input-signup {
-	/*border: 1px solid #6C63FF;*/
+	border: 1px solid #6C63FF;
 	border-radius: 3px;
 	font-family: "ProductSansR";
 	cursor:pointer;
@@ -199,7 +191,7 @@ export default {
     height: 30px;
     text-align: center;
     font-size: 14px;
-    padding: 5px 10px;
+    padding: 3px 10px;
     color: #6C63FF;
     background-color: #ffffff;
 	min-width: 300px;
@@ -221,6 +213,7 @@ export default {
     text-align: center;
 }
 .logo-2 {
+	/*padding: 36px;*/
     width: 100%;
     height: 100%;
 	min-width:300px;

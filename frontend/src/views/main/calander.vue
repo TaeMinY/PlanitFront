@@ -1,6 +1,8 @@
 <template>
   <div class="calander">
-	  calander
+	  <p class="calander_title">calander</p>
+	  <div class="calander_main">
+		</div>
   </div>
 </template>
 
@@ -9,10 +11,10 @@ export default {
   name: "calander",
   components: {
   },
-	created(){
-	},
-	methods:{
-	}
+  created(){
+  },
+  methods:{
+  }
 };
 </script>
 <style scoped>
@@ -20,5 +22,16 @@ export default {
 		width:100%;
 		height:100%;
 		background-color:#f1f3f5;
+	}
+	.calander_title{
+        font-size: 40px;
+        font-style: normal;
+        color: #000000;
+		text-align: left;
+		margin-left: 10px;
+    	margin-top: 10px;
+		margin-right: 0;
+		margin-bottom: 0;
+		padding: 0;
 	}
 </style>

@@ -9,9 +9,12 @@
         class="arrow"
         @click="back()"
       />
-      <h1 class="signup_title">Get Started</h1>
+      <!--<h1 class="signup_title">Get Started</h1>-->
+	  <label>  
+	     <img id="image_section" src="../assets/undraw_social_ideas_e8rj.svg" alt="" width="100px" height="100px" />
+		<input type="file" ref="profile"  id="bin" accept="image/*" @change="myImage(this)" style="display:none" />
+	  </label>
 
-      <input type="file" ref="profile"  id="bin" accept="image/*"/>
       <div class="signup_text">
         <input
           type="text"
@@ -41,7 +44,7 @@
         <input
           type="submit"
           class="input-login"
-          value="Signup"
+          value="Sign Up"
           @click="submit()"
         />
       </div>
@@ -56,6 +59,12 @@
   </div>
 </template>
 <style lang="css">
+	#image_section{
+		border-radius:100%;
+		background-color: #eaf3fe;
+		cursor: pointer;
+		
+	}
 .error {
   font-size: 14px;
   color: red;
@@ -76,14 +85,6 @@
 .background-2 {
   background-color: #ffffff;
 }
-.background__left {
-  flex: 1;
-  background-color: #a1c8fe;
-}
-.background__right {
-  flex: 1;
-  background-color: #323565;
-}
 .signup__main {
   position: absolute;
   top: 0;
@@ -95,10 +96,11 @@
   align-items: center;
 }
 .signup_text {
+  margin-top: 42px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-itmes: center;
+  align-items: center;
 }
 .input_div {
   background-color: white;
@@ -120,50 +122,65 @@
   font-size: 36px;
 }
 .input-username {
-  min-width: 300px;
-  width: 330px;
-  height: 30px;
-  border: 1px solid black;
-  margin: 5px auto;
-  padding: 5px 10px;
+  border-radius: 3px;
+    min-width: 300px;
+		width: 330px;
+    height: 30px;
+    margin: 5px auto;
+	border: 1px solid #adb5bd;
+	padding: 5px 10px;
+	font-family: "ProductSansR", "NanumSRB";
 }
 .input-username::placeholder {
+	color: #adb5bd;
   font-size: 14px;
+	font-family: "ProductSansR";
 }
 .input-email {
-  min-width: 300px;
-  width: 330px;
-  height: 30px;
-  border: 1px solid black;
-  margin: 5px auto;
-  padding: 5px 10px;
+  border-radius: 3px;
+    min-width: 300px;
+		width: 330px;
+    height: 30px;
+    margin: 5px auto;
+	border: 1px solid #adb5bd;
+	padding: 5px 10px;
+	font-family: "ProductSansR", "NanumSRB";
 }
 .input-email::placeholder {
+	color: #adb5bd;
   font-size: 14px;
+	font-family: "ProductSansR";
 }
 .input-password {
-  min-width: 300px;
-  width: 330px;
-  height: 30px;
-  margin: 5px auto;
-  border: 1px solid black;
-  padding: 5px 10px;
+  border-radius: 3px;
+    min-width: 300px;
+		width: 330px;
+    height: 30px;
+    margin: 5px auto;
+	border: 1px solid #adb5bd;
+	padding: 5px 10px;
+	font-family: "ProductSansR";
 }
 .input-password::placeholder {
+	color: #adb5bd;
   font-size: 14px;
+	font-family: "ProductSansR";
 }
 .input-login {
-  height: 30px;
-  margin: 5px auto;
-  border: 0;
-  text-align: center;
-  font-size: 14px;
-  padding: 5px 10px;
-  color: #ffffff;
-  background-color: blue;
-  min-width: 300px;
-  width: 330px;
-  box-sizing: content-box;
+  border-radius: 3px;
+	font-family: "ProductSansR";
+	cursor:pointer;
+    height: 30px;
+    margin: 5px auto;
+    border: 0;
+    text-align: center;
+    font-size: 14px;
+    padding: 5px 10px;
+    color: #ffffff;
+    background-color: #6C63FF;
+	min-width: 300px;
+	width: 330px;
+	box-sizing: content-box;
 }
 .image_div {
   width: 40vw;
@@ -180,6 +197,7 @@
   text-align: center;
 }
 .logo-2 {
+  /*padding: 36px;*/
   text-align: center;
   width: 94%;
   height: 94%;
@@ -223,6 +241,16 @@
 export default {
   name: "signup",
   methods: {
+	myImage(input){
+ 		if (document.getElementById("bin").files[0]) {
+  			var reader = new FileReader();
+  
+  			reader.onload = function (e) {
+   				document.getElementById("image_section").src = e.target.result;
+  			}
+  			reader.readAsDataURL(document.getElementById("bin").files[0]);
+  		}
+	},
     signupgo() {
       this.$router.push("/account/signup");
     },
@@ -231,9 +259,7 @@ export default {
       this.$router.push("/account/signin");
     },
     submit() {
-      const formData = new FormData();
-      formData.append("profile", this.profile);
-      formData.append("name", this.email);
+	if(document.getElementById("bin").files[0]){
       this.$store
         .dispatch("signup", {
           email: this.email,
@@ -270,6 +296,9 @@ export default {
         .catch(e => {
           console.log("에러");
         });
+	}else{
+		this.errorMes = "프로필을 넣어주세요"
+	}
     }
   },
   data() {

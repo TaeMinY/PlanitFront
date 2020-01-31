@@ -6,6 +6,9 @@
 			Planit
 		</div>
 	</div>
+	<div class="topbar_icon_item">TEST</div>
+	<div class="topbar_icon_item">TEST2</div>
+	<div class="topbar_icon_item">TEST3</div>
 	<div class="topbar__nav">
 		<div class="nonecolor2" @click="logout()">로그아웃</div>
 	</div>
@@ -61,5 +64,9 @@ export default {
 	}
 	.topbar__logo__title{
 		font-size:32px;
+	}
+	.topbar_icon_item{
+		text-align: center;
+		margin: 0;
 	}
 </style>

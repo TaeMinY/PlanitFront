@@ -35,11 +35,11 @@
 }
 .background__left {
     flex: 1;
-    background-color: #a1c8fe;
+    background-color: #eaf3fe;
 }
 .background__right {
     flex: 1;
-    background-color: #323565;
+    background-color: #eaf3fe;/*#323565;*/
 }
 .signup,
 .find-password {
@@ -67,7 +67,6 @@
     box-shadow: 0px 5px 16px 0.2px #868E96;
 	width: 100%;
     height: 100%;
-	flex-decoration:column;
 }
 </style>
 <script>

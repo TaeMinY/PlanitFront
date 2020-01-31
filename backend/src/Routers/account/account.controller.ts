@@ -2,6 +2,8 @@ import * as bcrypt from 'bcrypt-nodejs';
 import {Request, Response} from 'express';
 import User from '../../Model/account';
 import Send from '../../Module/Send';
+import * as path from 'path';
+import * as multer from 'multer';
 import * as jwt from 'jsonwebtoken';
 const jwtpassword = 'oiwjoiefinsajd@%&SD@23Tsa&*saf';
 const passwordRule = /^.*(?=^.{6,15}$)(?=.*\d)(?=.*[a-zA-Z]).*$/;

@@ -11,7 +11,7 @@
       />
       <h1 class="signup_title">Get Started</h1>
 
-      <input type="file" ref="profile" @change="fileSelect" id="bin" accept="image/*"/>
+      <input type="file" ref="profile"  id="bin" accept="image/*"/>
       <div class="signup_text">
         <input
           type="text"
@@ -37,7 +37,7 @@
           placeholder="Confirm Password"
           v-model="password2"
         />
-        <div class="error">{{ error }}</div>
+        <div class="error">{{errorMes}}</div>
         <input
           type="submit"
           class="input-login"
@@ -222,7 +222,6 @@
 <script>
 export default {
   name: "signup",
-  logo: "https://kr.vuejs.org/images/logo.png",
   methods: {
     signupgo() {
       this.$router.push("/account/signup");
@@ -231,7 +230,6 @@ export default {
       this.$store.state.transtionStatus = "bottom";
       this.$router.push("/account/signin");
     },
-
     submit() {
       const formData = new FormData();
       formData.append("profile", this.profile);
@@ -245,29 +243,29 @@ export default {
           username: this.username
         })
         .then(response => {
-          if (response) {
-            console.log(response);
+          if (response.data.result) {
             const fd = new FormData();
-
-            fd.append("name", this.email+'png');
+            fd.append("name", this.email);
             fd.append("bin", document.getElementById("bin").files[0]);
-
             this.$store.dispatch("profile", fd).then(response => {
               //받기
               if (response.data.result == true) {
-                (this.email = ""),
-                  (this.password = ""),
-                  (this.password2 = ""),
-                  (this.username = ""),
-                  (this.error = ""),
-                  (this.profile_image = "ss");
+				  console.log("프로필 받음")
+                this.email = "",
+                  this.password = "",
+                  this.password2 = "",
+                  this.username = "",
+                  this.errorMes = "",
+                  this.profile_image = "ss";
                 this.$store.state.transtionStatus = "bottom";
                 this.$router.push("/account/signin");
-              } else {
-                this.error = response.data.mes;
+              }else {
+				  this.errorMes = response.data.mes
               }
             });
-          }
+          }else{
+				this.errorMes = response.data.mes
+		  }
         })
         .catch(e => {
           console.log("에러");
@@ -278,11 +276,9 @@ export default {
     return {
       email: "",
       password: "",
-      error: "",
+	  errorMes:' ',
       username: "",
       password2: "",
-      profile_image: "ss",
-      profileImage
     };
   }
 };

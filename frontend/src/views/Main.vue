@@ -1,6 +1,7 @@
 <template>
   <div class="main">
-		<Topbar></Topbar>
+	<Topbar></Topbar>
+	<router-view></router-view>
   </div>
 </template>
 
@@ -19,5 +20,8 @@ export default {
 };
 </script>
 <style scoped>
-
+	.main{
+		display:flex;
+		flex-direction: column;
+	}
 </style>

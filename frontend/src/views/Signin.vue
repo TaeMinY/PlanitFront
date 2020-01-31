@@ -8,7 +8,7 @@
 						
 						
                         <input type="email" class="input-email" placeholder="Email" v-model="email"  />
-                        <input  type="password" class="input-password" placeholder="Password" v-model="password"/>
+                        <input  type="password" class="input-password" placeholder="Password" v-model="password" />
                         <div class="error">{{error}}</div>
                         <input type="submit" class="input-login" value="Login" @click="submit()"/>
                     </div>

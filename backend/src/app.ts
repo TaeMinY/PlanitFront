@@ -19,7 +19,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json({ limit: "30mb" }));
 app.use(express.static("public"));
-app.use('/uploadImg', express.static('upload'));
+app.use(express.static('upload'));
 app.use("/", Router);
 app.get("/", (req: express.Request, res: express.Response) => {
 	res.send("Hello World!!!!");

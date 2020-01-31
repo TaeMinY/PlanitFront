@@ -1,9 +1,9 @@
 <template>
-  <div id="app">
+  <v-app id="inspire">
     <transition :name="$store.state.transtionStatus">
       <router-view class="router-view" />
     </transition>
-  </div>
+  </v-app>
 </template>
 <script>
 export default {
@@ -49,7 +49,7 @@ export default {
   background: #6c63ff;
   border-radius: 30px;
 }
-#app {
+#inspire {
   font-family: "NanumSR", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -66,6 +66,7 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
+	
 @font-face {
   font-family: "NanumSR";
   src: url("./assets/font/NanumSquareR.ttf") format("truetype");

@@ -33,11 +33,13 @@ export default {
 	.main{
 		display:flex;
 		flex-direction: column;
+		box-sizing:border-box;
 	}
 	.main__wrap{
 		display:flex;
 		width:100%;
 		height:100%;
+		overflow-y:auto;
 	}
 	.main__left__bar{
 		width:350px;
@@ -47,9 +49,10 @@ export default {
 		align-items:center;
 		padding:30px 30px;
 		flex-direction:column;
+		box-sizing:border-box;
 	}
 	.main__left__bar > * {
-		margin:10px;
+		margin:7px;
 	}
 	.main__dashboards{
 		background-color:white;

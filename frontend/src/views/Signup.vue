@@ -44,7 +44,7 @@
           v-model="password2"
 			   v-on:keyup.enter="submit"
         />
-        <div class="error">{{errorMes}}</div>
+        <div class="errorMes">{{errorMes}}</div>
         <input
           type="submit"
           class="input-login"
@@ -67,12 +67,12 @@
 		border-radius:100%;
 		background-color: #eaf3fe;
 		cursor: pointer;
-		
 	}
-.error {
+.errorMes {
   font-size: 14px;
   color: red;
   margin: 5px 0px;
+	background-color:white;
 }
 .signup {
   width: 100%;
@@ -106,6 +106,10 @@
   justify-content: center;
   align-items: center;
 }
+	
+	.signup_text > *{
+		box-sizing:content-box !important;
+	}
 .input_div {
   background-color: white;
   width: 40vw;
@@ -226,6 +230,7 @@
   position: absolute;
   top: 30px;
   left: 30px;
+	box-sizing:content-box;
 }
 .forgot__password {
   text-decoration: none;

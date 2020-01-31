@@ -32,7 +32,7 @@ export default {
 	}
 	.topbar{
 		width:100%;
-		height: 80px;
+		min-height: 80px;
 		background-color: white;
 		z-index:99999;
 		display:flex;

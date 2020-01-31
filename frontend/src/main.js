@@ -4,6 +4,8 @@ import router from './router'
 import store from './store'
 import AOS from "aos";
 import "aos/dist/aos.css";
+import vuetify from './plugins/vuetify';
+
 Vue.config.productionTip = false
 AOS.init();
 new Vue({
@@ -12,5 +14,6 @@ new Vue({
   },
   router,
   store,
+	  vuetify,
   render: h => h(App)
 }).$mount('#app')

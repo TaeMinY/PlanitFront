@@ -26,7 +26,7 @@
           v-model="password"
           v-on:keyup.enter="submit"
         />
-        <div class="error">{{ error }}</div>
+        <div class="errorMes">{{ error }}</div>
         <input
           type="submit"
           class="input-login"
@@ -97,10 +97,14 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.error {
+	.signin_text > *{
+		box-sizing:content-box !important;
+	}
+.errorMes {
   font-size: 14px;
   color: red;
   margin: 5px 0px;
+		background-color:white;
 }
 .signin {
   width: 100%;
@@ -115,6 +119,8 @@ export default {
   position: absolute;
   top: 30px;
   left: 30px;
+		box-sizing:content-box;
+
 }
 .background {
   width: 100%;

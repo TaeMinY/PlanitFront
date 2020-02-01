@@ -9,6 +9,11 @@ const routes = [
     	component: () => import("../views/Landing.vue"),
   	},
 	{
+    	path: '/community',
+    	name: 'Community',
+    	component: () => import("../views/community.vue"),
+  	},
+	{
     	path: '/main',
     	name: 'Main',
     	component: () => import("../views/Main.vue"),

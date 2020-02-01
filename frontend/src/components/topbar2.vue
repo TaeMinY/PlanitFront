@@ -6,6 +6,14 @@
 			Planit
 		</div>
 	</div>
+	<div class="topbar__center">
+		<div>
+			plans
+		</div>
+		<div>
+			community
+		</div>
+	</div>
 	<div class="topbar__nav">
 		<div class="nonecolor2" @click="logout()">로그아웃</div>
 	</div>
@@ -42,7 +50,12 @@ export default {
 		box-sizing:border-box;
 		
 	}
-	
+	.topbar__center{
+		display:flex
+	}
+	.topbar__center > * {
+		margin:20px;
+	}
 	.topbar__nav{
 		display:flex;
 		font-family: "NanumSR";

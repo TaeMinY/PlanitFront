@@ -30,6 +30,9 @@ export default {
 };
 </script>
 <style scoped>
+	*{
+		box-sizing:border-box; 
+	}
 	.main{
 		display:flex;
 		flex-direction: column;
@@ -40,6 +43,7 @@ export default {
 		width:100%;
 		height:100%;
 		overflow-y:auto;
+		box-sizing:border-box;
 	}
 	.main__left__bar{
 		width:350px;

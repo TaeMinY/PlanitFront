@@ -8,7 +8,7 @@
 <script>
 export default {
   created() {
-	
+	q
     if (
       !localStorage.getItem("token") &&
       window.location.pathname != "/" &&
@@ -25,7 +25,6 @@ export default {
         })
         .then(response => {
           if (response.data.result) {
-            	this.$router.push("/main");
           }else{
 			  this.$router.push("/");
 		  }
@@ -49,7 +48,7 @@ export default {
   background: #6c63ff;
   border-radius: 30px;
 }
-#inspire {
+#app {
   font-family: "NanumSR", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

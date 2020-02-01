@@ -9,16 +9,12 @@ const routes = [
     	component: () => import("../views/Landing.vue"),
   	},
 	{
-    	path: '/community',
-    	name: 'Community',
-    	component: () => import("../views/community.vue"),
-  	},
-	{
     	path: '/main',
     	name: 'Main',
     	component: () => import("../views/Main.vue"),
 		children: [
       	{ path: "", name: "calander", component: () => import("../views/main/calander.vue") },
+		{ path: "todo", name : "todo", component: () => import("../views/main/todo.vue")}
     	]
   	},
 	{

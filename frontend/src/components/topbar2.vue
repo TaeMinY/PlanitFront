@@ -8,10 +8,10 @@
 	</div>
 	<div class="topbar__center">
 		<div>
-			plans
+			Plans
 		</div>
 		<div>
-			community
+			Community
 		</div>
 	</div>
 	<div class="topbar__nav">
@@ -54,7 +54,8 @@ export default {
 		display:flex
 	}
 	.topbar__center > * {
-		margin:20px;
+		margin:0 20px;
+		font-family: "ProductSansM";
 	}
 	.topbar__nav{
 		display:flex;

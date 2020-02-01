@@ -1,21 +1,16 @@
 <template>
 	<div class="memo">
+		<h1>Sticker Memo Test</h1>
 		<div class="memo__title">Sticker Memo</div>
 	</div>
-</template>
-
+	<div class="memo_main">
+		<div class="memo">
+			test
+		</div>
+	</div>
 <script>
-  export default {
-    data: () => ({
-    }),
-    computed: {
-    },
-    mounted () {
-    },
-    methods: {
-		
-	}
-  }
+export default {
+
 </script>
 <style scoped>
 .memo {
@@ -43,5 +38,8 @@
 .memo__main {
 	height : 80%;
 	overflow-x:hidden;
+}
+.memo {
+	background-color: #6C63FF;		
 }
 </style>

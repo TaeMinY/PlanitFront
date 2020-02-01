@@ -1,15 +1,13 @@
 <template>
   <div class="todo">
     <div class="todo__title">
-		<div>Task</div>
-		<img @click="create()" alt="create" src="../../assets/playlist_add-24px.svg" width="100px" height="150px" />
+		<div>Plans</div>
+		<img @click="create()" alt="create" src="../../assets/playlist_add-24px.svg" width="42px" 
+			 style="cursor: pointer;" />
 	</div>
     <div class="todo__main">
-		<div class="todo__box"></div>
-				<div class="todo__box"></div>
-				<div class="todo__box"></div>
-						<div class="todo__box"></div>
-
+		<div class="todo__box" v-for="(value,index) in [1,2,3,4,5,6,7]" :key=index></div>
+			
     </div>
 	</div>
 </template>

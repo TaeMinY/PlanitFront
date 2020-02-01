@@ -15,7 +15,11 @@ const userSchema = new Schema({
     profile_image : {
         type: String,
         required:true
-    }
+    },
+	userdata:{
+		type: Object,
+		required:true
+	}
 });
 export interface UserDocument extends Document {
     username: string;
@@ -23,6 +27,7 @@ export interface UserDocument extends Document {
     enckey: string;
     email: string;
     profile_image : string;
+	userdata: any;
 }
 const User: Model<UserDocument> = model('user', userSchema);
 export default User;

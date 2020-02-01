@@ -189,7 +189,9 @@
             color: this.colors[this.rnd(0, this.colors.length - 1)],
           })
         }
-		  this.title = start.date
+		  
+		  
+		  this.title = start.date.slice(0,4);
         this.start = start
         this.end = end
       },

@@ -10,7 +10,7 @@
 				</div>
 				<div @click="todo()" class="dashboard__item">
 					<img src="../assets/list-24px.svg" alt="calendar" class="dashboard__icon"/>
-					Todo
+					Plans
 				</div>
 				<div @click="memo()" style="width:fit-content; text-align:left" class="dashboard__item">
 					<img src="../assets/note-24px.svg" alt="calendar" class="dashboard__icon"/>

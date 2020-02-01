@@ -39,6 +39,11 @@ export const Signup = async (req: Request, res: Response) => {
           password: hash,
           username: username,
           profile_image: "test",
+		  userdata: {
+			  todo:[],
+			  memo:[],
+			  reminder:[]
+		  }
         });
         user.save().then(data => {
           return Send(res, 200, '회원가입에 성공했습니다!', true);
@@ -76,6 +81,7 @@ export const Signin = (req: Request, res: Response) => {
             username: result.username,
             email: result.email,
             profile_image: result.profile_image,
+			userdata : result.userdata
           });
         } else {
           Send(res, 200, '비밀번호가 일치하지 않습니다.', false);
@@ -98,3 +104,20 @@ export const Token = (req: Request, res: Response) => {
     }
   });
 };
+export const TodoCreate = (req:Request,res:Response)=>{
+	const {token,title,text,startDay,endDay} = req.body;
+	  let decoded = jwt.verify(token, jwtpassword);
+
+	User.findOne({email:decoded.email},function(err,result){
+		result.userdata.todo.push({title:title,text:text,startDay:startDay,endDay:endDay});
+		Send(res,200,'저장성공',true,token,result.userdata);
+	})
+}
+export const DataFind = (req:Request,res:Response)=>{
+	const {token} = req.body;
+	  let decoded = jwt.verify(token, jwtpassword);
+
+	User.findOne({email:decoded.email},function(err,result){
+		Send(res,200,'찾기성공',true,token,result.userdata);
+	})
+}

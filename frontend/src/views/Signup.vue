@@ -10,8 +10,9 @@
         @click="back()"
       />
       <!--<h1 class="signup_title">Get Started</h1>-->
-	  <label>  
+	  <label class="profile_container">  
 	     <img id="image_section" src="../assets/undraw_social_ideas_e8rj.svg" alt="" width="100px" height="100px" />
+		 <div class="overlay">Edit Profile</div>
 		<input type="file" ref="profile"  id="bin" accept="image/*" @change="myImage(this)" style="display:none" />
 	  </label>
 
@@ -100,7 +101,7 @@
   align-items: center;
 }
 .signup_text {
-  margin-top: 42px;
+  margin-top: 16px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -245,6 +246,22 @@
   box-shadow: 0px 5px 16px 0.2px #868e96;
   border-radius: 30px;
 }
+.profile_container:hover .overlay {
+  opacity: 1;
+}
+	
+.overlay {
+  background: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  width: 100%;
+  transition: .5s ease;
+  opacity:0;
+  color: white;
+  font-size: 12px;
+  font-family: "ProductSansR";
+  padding: 4px;
+  text-align: center;
+}
 </style>
 <script>
 export default {
@@ -306,7 +323,7 @@ export default {
           console.log("에러");
         });
 	}else{
-		this.errorMes = "프로필을 넣어주세요"
+		this.errorMes = "프로필 이미지를 선택해 주세요."
 	}
     }
   },

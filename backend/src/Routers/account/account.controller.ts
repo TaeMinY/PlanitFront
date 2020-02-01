@@ -5,6 +5,7 @@ import Send from '../../Module/Send';
 import * as path from 'path';
 import * as multer from 'multer';
 import * as jwt from 'jsonwebtoken';
+import * as shortid from 'shortid';
 const jwtpassword = 'oiwjoiefinsajd@%&SD@23Tsa&*saf';
 const passwordRule = /^.*(?=^.{6,15}$)(?=.*\d)(?=.*[a-zA-Z]).*$/;
 const emailRule = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
@@ -107,13 +108,14 @@ export const Token = (req: Request, res: Response) => {
 export const TodoCreate = (req:Request,res:Response)=>{
 	const {token,title,text,startDay,endDay,progress} = req.body;
 	  let decoded = jwt.verify(token, jwtpassword);
-
 	if (!title || !text) {
     return Send(res, 200, '빈칸을 모두 입력해 주세요.', false);
   }
+		const random: string = shortid.generate();
+
 	User.findOne({email:decoded.email},function(err,result){
 		const R = result.userdata;
-		R.todo.push({title:title,text:text,startDay:startDay,endDay:endDay,progress:progress})
+		R.todo.push({id:random,title:title,text:text,startDay:startDay,endDay:endDay,progress:progress})
 			console.log("값",result.userdata,R)
 		
 		User.findOneAndUpdate({email: decoded.email},{$set : {
@@ -122,13 +124,40 @@ export const TodoCreate = (req:Request,res:Response)=>{
 		.exec(function (err, r) {
 			console.log(r)
 		})
-		User.findOne({email:decoded.email},function(err,result){
-		})
+	
 		Send(res,200,'저장성공',true,token,result.userdata);
 	})
 	
 
 }
+export const TodoDelete = (req:Request,res:Response)=>{
+	const {token,id} = req.body;
+	  let decoded = jwt.verify(token, jwtpassword);
+
+	
+	User.findOne({email:decoded.email},function(err,result){
+		var R = result.userdata.todo;
+		var Re = R.filter(e=>e.id != id);
+		result.userdata.todo = Re;
+		console.log("a",Re);
+		console.log(result.userdata.todo)
+		
+		User.findOneAndUpdate({email: decoded.email},{$set : {
+			userdata : result.userdata
+		}},{new : true})
+		.exec(function (err, r) {
+			console.log(r)
+		})
+		
+		Send(res,200,'삭제성공',true,token,result.userdata);
+
+	})
+	
+
+}
+
+			
+
 export const DataFind = (req:Request,res:Response)=>{
 	const {token} = req.body;
 	  let decoded = jwt.verify(token, jwtpassword);

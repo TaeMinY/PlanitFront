@@ -82,6 +82,20 @@ export default new Vuex.Store({
 			  })
 		  })
 	  },
+	  TODO__DELETE({commit,state},data){
+		  return new Promise((resolve,reject)=>{
+			  console.log(data);
+			  axios
+				  .post("http://nulllove-rgobq.run.goorm.io/api/account/tododelete",data)
+				  .then(value=>{
+				  	console.log(value);
+				  	resolve(value);
+			  	  })
+			  .catch(err=>{
+				  reject(err);
+			  })
+		  })
+	  },
 	   FIND__DATA({ctodocreateommit,state},data){
 		  return new Promise((resolve,reject)=>{
 			  console.log(data);

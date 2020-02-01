@@ -10,29 +10,43 @@
 		<input type="text" placeholder="세부 실천 내용" class="todocreate__input" v-model="text" />
 		<div class="todocreate__section">달성 기간</div>
 		<input type="date" value="2020-12-31" class="todocreate__input" style="font-size:14px" v-model="endDay"/>
-		<div>{{errorMes}}</div>
+        <div class="errorMes">{{ errorM }}</div>
 		<input type="submit" value="Add to Plan" class="todocreate__submit" @click="submit()"/>
-		
     </div>
 	</div>
 </template>
 
 <script>
+	
+
   export default {
     data(){
 		return{
 			endDay,
 			title,
 			text,
-			errorMes:"",
+			errorM:"",
 			send:false,
 		}
 	},
     computed: {
     },
     mounted () {
+		
     },
     methods: {
+		dateDiff(_date1, _date2) {
+    var diffDate_1 = _date1 instanceof Date ? _date1 : new Date(_date1);
+    var diffDate_2 = _date2 instanceof Date ? _date2 : new Date(_date2);
+
+    diffDate_1 = new Date(diffDate_1.getFullYear(), diffDate_1.getMonth()+1, diffDate_1.getDate());
+    diffDate_2 = new Date(diffDate_2.getFullYear(), diffDate_2.getMonth()+1, diffDate_2.getDate());
+
+    var diff = Math.abs(diffDate_2.getTime() - diffDate_1.getTime());
+    diff = Math.ceil(diff / (1000 * 3600 * 24));
+
+    return diff;
+		} ,
 		submit(){
 			var today = new Date();
 			var dd = today.getDate();
@@ -64,25 +78,45 @@
 					}else{
 						//실패
 						this.send = false;
+						this.errorM = "기간을 다시 정해주세요"
+
 					}
 				}else{
 					//실패
 					this.send = false;
+					this.errorM = "기간을 다시 정해주세요"
 				}
 			}else{
 				//실패
 				this.send = false;
+				this.errorM = "기간을 다시 정해주세요"
+				console.log("Dd")
 			}
 			
 			if(this.send == true){
-				
-				
-				
-				
+				this.$store
+        			.dispatch("TODO__CREATE", {
+          				title: this.title,
+          				text: this.text,
+          				startDay: today,
+          				endDay: this.endDay,
+						progress : this.dateDiff(today,this.endDay),
+          				token: localStorage.getItem("token")
+        			})
+        			.then(response => {
+						if(response.data.result == true){
+							this.title = ""
+							this.text =""
+							this.startDay = ""
+							this.endDay = ""
+							this.$router.push("/main/todo")
+						}else{
+							this.errorM = response.data.mes;
+						}
+					}).catch(e=>{console.log(e);this.errorM = "서버에 저장하지 못하였습니다"})
 				this.send = false;
 			}
 			
-			console.log(this.title,this.text,today,this.endDay)
 		}
 		
 	}
@@ -121,6 +155,12 @@
   margin:8px 0px;
   background-color:white;
   border-radius:30px;
+}
+.errorMes {
+  font-size: 14px;
+  color: red;
+  margin: 5px 0px;
+  background-color:white;
 }
 .todocreate__input {
   box-sizing: content-box;

@@ -24,6 +24,11 @@ export default {
         })
         .then(response => {
           if (response.data.result) {
+			    if(window.location.pathname == "/"){
+      this.$router.push("/main");
+
+				}
+
           }else{
 			  this.$router.push("/");
 		  }

@@ -1,16 +1,16 @@
 <template>
 	<div class="memo">
-		<h1>Sticker Memo Test</h1>
 		<div class="memo__title">Sticker Memo</div>
-	</div>
-	<div class="memo_main">
-		<div class="memo">
-			test
+		<div class="memo__main">
+			<div class="memo_plus">
+				<button class="plus_button" @click="handle_toggle">메모 추가하기</button>	
+			</div>
 		</div>
 	</div>
+</template>
 <script>
 export default {
-
+}
 </script>
 <style scoped>
 .memo {
@@ -39,7 +39,19 @@ export default {
 	height : 80%;
 	overflow-x:hidden;
 }
-.memo {
-	background-color: #6C63FF;		
+.memo_plus{
+	width: 150px;
+	height: 100px;
+}
+.plus_button{
+	width: 300px;
+	height: 200px;
+	border: 1px solid #6C63FF;
+	border-radius: 8px;
+	background-color: #6C63FF;
+	font-size: 20px;
+	text-align: center;
+	color: #f8f9fa;
+	
 }
 </style>

@@ -68,6 +68,32 @@ export default new Vuex.Store({
 					});
 			});
 		},
+	  TODO__CREATE({commit,state},data){
+		  return new Promise((resolve,reject)=>{
+			  console.log(data);
+			  axios
+				  .post("http://nulllove-rgobq.run.goorm.io/api/account/todocreate",data)
+				  .then(value=>{
+				  	console.log(value);
+				  	resolve(value);
+			  	  })
+			  .catch(err=>{
+				  reject(err);
+			  })
+		  })
+	  },
+	   FIND__DATA({ctodocreateommit,state},data){
+		  return new Promise((resolve,reject)=>{
+			  console.log(data);
+			  axios.post("http://nulllove-rgobq.run.goorm.io/api/account/DataFind",data).then(value=>{
+				  console.log(value);
+				  resolve(value);
+			  })
+			  .catch(err=>{
+				  reject(err);
+			  })
+		  })
+	  }
   },
   modules: {
   }

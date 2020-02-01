@@ -105,13 +105,29 @@ export const Token = (req: Request, res: Response) => {
   });
 };
 export const TodoCreate = (req:Request,res:Response)=>{
-	const {token,title,text,startDay,endDay} = req.body;
+	const {token,title,text,startDay,endDay,progress} = req.body;
 	  let decoded = jwt.verify(token, jwtpassword);
 
+	if (!title || !text) {
+    return Send(res, 200, '빈칸을 모두 입력해 주세요.', false);
+  }
 	User.findOne({email:decoded.email},function(err,result){
-		result.userdata.todo.push({title:title,text:text,startDay:startDay,endDay:endDay});
+		const R = result.userdata;
+		R.todo.push({title:title,text:text,startDay:startDay,endDay:endDay,progress:progress})
+			console.log("값",result.userdata,R)
+		
+		User.findOneAndUpdate({email: decoded.email},{$set : {
+			userdata : result.userdata,
+		}},{new : true})
+		.exec(function (err, r) {
+			console.log(r)
+		})
+		User.findOne({email:decoded.email},function(err,result){
+		})
 		Send(res,200,'저장성공',true,token,result.userdata);
 	})
+	
+
 }
 export const DataFind = (req:Request,res:Response)=>{
 	const {token} = req.body;

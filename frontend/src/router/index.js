@@ -13,8 +13,11 @@ const routes = [
     	name: 'Main',
     	component: () => import("../views/Main.vue"),
 		children: [
-      	{ path: "", name: "calander", component: () => import("../views/main/calander.vue") },
-		{ path: "todo", name : "todo", component: () => import("../views/main/todo.vue")}
+      	{ path: "", name: "calendar", component: () => import("../views/main/calendar.vue") },
+		{ path: "todo", name : "todo", component: () => import("../views/main/todo.vue")},
+		{ path: "todocreate", name : "todocreate", component: () => import("../views/main/todocreate.vue")},
+		{ path: "memo", name : "meno", component: () => import("../views/main/memo.vue")}
+
     	]
   	},
 	{

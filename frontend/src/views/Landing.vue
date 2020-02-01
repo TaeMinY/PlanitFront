@@ -7,7 +7,7 @@
         <h1>Planit</h1>
         <div
           style="minwidth:300px;width:440px; text-align:start;font-family:NanumSR; line-height:24px;">
-			새해 목표, 이젠 "함께" 달성해 보세요! </br>
+			새해 목표, 이젠 "함께" 달성해 보세요! <br/>
 			Planit - 플래닛은 나의 새해 목표를 다른 사람들과 공유하고, 함께 달성해 나가며 동기를 얻을 수 있는 서비스입니다.</div>
         <div class="landing__button" @click="start()">
           <span>시작하기</span>
@@ -25,7 +25,7 @@
             <div class="planner__title">강력한 플래너 기능 제공</div>
             <div style="margin: 5% 0px 3% 0px;" class="planner__text">단순한 "플래너 기능"만을 제공하는 서비스는 이제 지겹습니다. </div>
             <div class="planner__text">플래닛에서는 사용자의 체계적인 새해 목표 달성을 위해,<br>
-				<span style="font-family:NanumSB; ">캘린더/플래너/리마인더/스티커</span> 메모 등 다양하고 강력한 기능들을 한번에 제공합니다.</div>
+				<span style="font-family:NanumSB; ">캘린더/플래너/리마인더/스티커 메모</span> 등 다양하고 강력한 기능들을 한번에 제공합니다.</div>
         </div>
     </div>
 	<div class="wrap2">

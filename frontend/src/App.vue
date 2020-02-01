@@ -8,7 +8,6 @@
 <script>
 export default {
   created() {
-	q
     if (
       !localStorage.getItem("token") &&
       window.location.pathname != "/" &&
@@ -48,7 +47,7 @@ export default {
   background: #6c63ff;
   border-radius: 30px;
 }
-#app {
+#inspire {
   font-family: "NanumSR", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -56,7 +55,6 @@ export default {
   color: #2c3e50;
   width: 100vw;
   height: 100vh;
-  overflow-y: hidden;
 }
 html {
 }
@@ -64,6 +62,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+	background-color:#f1f3f5;
 }
 	
 @font-face {

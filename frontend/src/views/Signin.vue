@@ -163,7 +163,8 @@ export default {
   font-family: "ProductSansM";
   color: black;
   text-align: center;
-  margin-top: 3%;
+ 
+	margin-bottom: 2%;
   font-size: 36px;
 }
 .input-email {

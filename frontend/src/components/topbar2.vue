@@ -2,26 +2,36 @@
   <div class="topbar">
 	<div class="topbar__logo">
 		<img src="../assets/logo.svg" alt="로고" width="48px"/>
-		<div class="topbar__logo__title">
+		<div class="topbar__logo__title" @click="title()">
 			Planit
 		</div>
 	</div>
 	<div class="topbar__center">
-		<div @click="plans()">
-			Plans
+		<div @click="plans()" class="topbar__selector" >
+			<img src="../assets/undraw_booking_33fn.svg" alt="calendar" class="topbar__selector__icon" />
+			Planner
 		</div>
-		<div @click="community()">
+		<div @click="community()" class="topbar__selector">
+			<img src="../assets/undraw_chat_1wo5.svg" alt="calendar" class="topbar__selector__icon" />
 			Community
 		</div>
 	</div>
 	<div class="topbar__nav">
-		<div class="nonecolor2" @click="logout()">로그아웃</div>
+		<div class="color2" @click="profile()" id="MyAccount" >My Account</div>
+		<div class="nonecolor2" @click="logout()" id="SignOut" >Sign Out</div>
 	</div>
   </div>
 </template>
 <script>
 export default {
-  name: 'topbar',
+  name: 'topbar2',
+  created(){
+	
+  },
+	data(){
+		return{
+		}
+	},
   methods:{
 	  logout(){
 		  localStorage.removeItem('token');
@@ -36,15 +46,55 @@ export default {
 	  community(){
 		  	 this.$store.state.wrap = "left"
 		  this.$router.push("/wrap/community");
+	  },
+	  title(){
+		  this.$store.state.wrap = "right"
+		  this.$router.push("/wrap/main");
+	  },
+	  profile(){
+		  this.$store.state.wrap = "left"
+		  this.$router.push("/wrap/profile");
 	  }
   }
 }
 </script>
 <style scoped lang="scss">
+	.place{
+		background:#E3E1FF important;
+	}
+	.color2{
+		text-decoration: none;
+		color:black;
+		cursor: pointer;
+		border: 1px solid #6c63ff;
+  		border-radius: 3px;
+  		font-family: "ProductSansR";
+		display: flex;
+  		align-items: center;
+  		justify-content: center;
+  		height: 30px;
+  		font-size: 14px;
+  		padding: 2px 8px;
+  		color: #ffffff;
+  		background-color: #6c63ff;
+  		box-sizing: content-box;
+	}
 	.nonecolor2{
 		text-decoration: none;
 		color:black;
 		cursor: pointer;
+		border: 1px solid #6c63ff;
+  		border-radius: 3px;
+  		font-family: "ProductSansR";
+		display: flex;
+  		align-items: center;
+  		justify-content: center;
+  		height: 30px;
+  		font-size: 14px;
+  		padding: 2px 8px;
+  		color: #6c63ff;
+  		background-color: #ffffff;
+  		box-sizing: content-box;
 	}
 	.topbar{
 		width:100%;
@@ -69,9 +119,8 @@ export default {
 		display:flex;
 		font-family: "NanumSR";
 	}
-	.topbar__nav > .nonecolor{
+	.topbar__nav > .nonecolor2{
 		margin: 0 5px;
-		color:white;
 	}
 	.topbar__logo{
 		cursor: pointer;
@@ -83,5 +132,22 @@ export default {
 	}
 	.topbar__logo__title{
 		font-size:32px;
+	}
+	.topbar__selector{
+		padding: 6px;
+  		border-radius: 4px;
+  		font-size:18px;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content:center;
+	}
+	.topbar__selector__icon{
+		width: 42px;
+		margin-right:6px;
+	}
+	.topbar__selector:hover {
+  		transition: 0.2s;
+  		background-color: #E3E1FF;
 	}
 </style>

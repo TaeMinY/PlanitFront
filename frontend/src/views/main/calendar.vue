@@ -191,7 +191,7 @@ export default {
         });
       }
 
-      this.title = start.date.slice(0, 4);
+      this.title = start.date.slice(0, 7);
       this.start = start;
       this.end = end;
     },

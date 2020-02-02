@@ -24,7 +24,10 @@ export default {
         })
         .then(response => {
           if (response.data.result) {
-            if (window.location.pathname == "/") {
+		  		this.$store.state.userdata = response.data.userdata
+
+			  if (window.location.pathname == "/") {
+				
               this.$router.push("/wrap/main");
             }
           } else {

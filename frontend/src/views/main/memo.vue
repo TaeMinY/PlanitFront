@@ -1,19 +1,47 @@
 <template>
-  <div class="memo">
-    <div class="memo__title">Sticker Memo</div>
-    <div class="memo__main">
-      <div class="memo_plus">
-        <img src="../../assets/plus.svg" alt="추가하기" class="memo_plus_image" @cl />
-      </div>
-      <div class="memo_input">
-        <textarea class="memo_input_text" placeholder="오늘은 무슨 일이 일어나고 무슨 생각을 할까요?"></textarea>
-        <input type="button" class="memo_save" placeholder="Save" value="Save" />
-      </div>
-    </div>
-  </div>
+	<div class="memo">
+		<h1 class="memo__title">Memo</h1>
+
+	</div>
 </template>
 <script>
-export default {};
+	export default {
+    name: 'app',
+    methods: {
+      addTodo(e) {
+        e.preventDefault();
+        const todo = {
+          text: document.querySelector('input.input-todo').value,
+          completed: false
+        };
+        this.todos.push(todo);
+      },
+      compeleteTodo(index) {
+        this.todos[index].completed = !this.todos[index].completed;
+      },
+      deleteTodo(index) {
+        this.todos.splice(index, 1);
+      }
+    },
+    data() {
+      return {
+        todos: [
+          {
+            text: 'test-todo1',
+            completed: false
+          },
+          {
+            text: 'test-todo2',
+            completed: true
+          },
+          {
+            text: 'test-todo3',
+            completed: false
+          }
+        ]
+      }
+    }
+  }
 </script>
 <style scoped>
 .memo {
@@ -38,48 +66,19 @@ export default {};
   margin-bottom: 0;
   padding: 0;
 }
-.memo__main {
-  height: 80%;
-  overflow-x: hidden;
+.memo_text{
+	width: 250px;
+	height: 30px;
+	resize: none;
+	border: 1px solid #6C63FF;
+	margin: 10px auto;
+    border-radius: 10px;
 }
-.memo_input {
-  width: 250px;
-  height: 260px;
-  background-color: #6c63ff;
-}
-.memo_input_text {
-  width: 250px;
-  height: 230px;
-  border: 0;
-  border-radius: 5px;
-  text-align: left;
-  float: left;
-  resize: none;
-  color: #f8f9fa;
-}
-.memo_input_text::placeholder {
-  font-size: 17px;
-  font-style: normal;
-  padding-left: 3px;
-  padding-top: 3px;
-  color: #f8f9fa;
-}
-.memo_plus {
-  width: 25px;
-  height: 25px;
-  text-align: right;
-  float: right;
-}
-.memo_plus_image {
-  width: 25px;
-  height: 25px;
-  text-align: right;
-  float: right;
-}
-.memo_save {
-  width: 250px;
-  height: 30px;
-  color: #f8f9fa;
-  border-top: 1px solid #f8f9fa;
+.save_button{
+	width: 130px;
+	height: 30px;
+	border: 1px solid #6C63FF;
+	background-color: #6C63FF;
+	color: #f8f9fa;
 }
 </style>

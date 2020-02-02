@@ -1,0 +1,85 @@
+import {Request, Response} from 'express';
+import User from '../../Model/account';
+import Comment from '../../Model/comment';
+import Post from '../../Model/post';
+
+import Send from '../../Module/Send';
+import * as jwt from 'jsonwebtoken';
+import * as shortid from 'shortid';
+
+const jwtpassword = 'oiwjoiefinsajd@%&SD@23Tsa&*saf';
+
+export const PostCreate = (req: Request, res: Response) => {
+		const {token, data, text ,time} = req.body;
+		let decoded = jwt.verify(token, jwtpassword);
+		
+		User.findOne({email:decoded.email} ,function(err,result){
+			const post: any = new Post({
+          	email: decoded.email,
+          	data: data,
+          	text: text,
+          	like:0,
+		  	like_users:[],
+		  	time: time,
+		  	name: result.username
+        });
+        post.save().then(data => {
+          	return Send(res, 200, '포스트에 저장을 성공하셨습니다!', true);
+        });		
+	})
+}
+export const PostFind = (req:Request,res:Response)=>{
+	Post.find({}, function(err, result) {
+    if (err){
+		console.log(err);
+	}
+		return Send(res, 200, '성공', true, req.body.token, result);
+	})
+}	
+export const FindMyPost = (req:Request,res:Response)=>{
+		const {token} = req.body;
+		let decoded = jwt.verify(token, jwtpassword);
+			
+		Post.find({email:decoded.email},function(err,result){
+			if (err){
+				console.log(err);
+			}
+			return Send(res, 200, '성공', true, req.body.token, result);
+		})
+}	
+export const CommentCreate = (req:Request,res:Response)=>{
+		const {token, text ,time, _id} = req.body;
+		let decoded = jwt.verify(token, jwtpassword);
+		
+		User.findOne({email:decoded.email} ,function(err,result){
+			const comment: any = new Comment({
+          	email: decoded.email,
+		  	time: time,
+			text: text,
+			post_id: _id,
+			name : result.username
+        });
+        comment.save().then(data => {
+          	return Send(res, 200, '포스트에 저장을 성공하셨습니다!', true);
+        });		
+	})
+}
+export const CommentFind = (req:Request,res:Response)=>{
+		const {token, _id } = req.body;
+		let decoded = jwt.verify(token, jwtpassword);
+		
+		Comment.find({post_id:_id},function(err,result){
+			if (err){
+				console.log(err);
+			}
+			return Send(res, 200, '성공', true, req.body.token, result);
+	})
+}
+export const CommentFindAll = (req:Request,res:Response)=>{
+		Comment.find({},function(err,result){
+			if (err){
+				console.log(err);
+			}
+			return Send(res, 200, '성공', true, req.body.token, result);
+	})
+}

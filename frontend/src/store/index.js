@@ -97,7 +97,7 @@ export default new Vuex.Store({
 			  })
 		  })
 	  },
-	   FIND__DATA({ctodocreateommit,state},data){
+	   FIND__DATA({commit,state},data){
 		  return new Promise((resolve,reject)=>{
 			  console.log(data);
 			  axios.post("http://nulllove-rgobq.run.goorm.io/api/account/DataFind",data).then(value=>{
@@ -108,7 +108,79 @@ export default new Vuex.Store({
 				  reject(err);
 			  })
 		  })
-	  }
+	  },
+	   POST__CREATE({commit,state},data){
+		  return new Promise((resolve,reject)=>{
+			  console.log(data);
+			  axios.post("http://nulllove-rgobq.run.goorm.io/api/post/postcreate",data).then(value=>{
+				  console.log(value);
+				  resolve(value);
+			  })
+			  .catch(err=>{
+				  reject(err);
+			  })
+		  })
+	  },
+	  FIND__POST({commit,state},data){
+		  return new Promise((resolve,reject)=>{
+			  console.log(data);
+			  axios.post("http://nulllove-rgobq.run.goorm.io/api/post/postfind",data).then(value=>{
+				  console.log("요청들어옴");
+				  resolve(value);
+			  })
+			  .catch(err=>{
+				  reject(err);
+			  })
+		  })
+	  },
+	  FIND__MY__POST({commit,state},data){
+		  return new Promise((resolve,reject)=>{
+			  console.log(data);
+			  axios.post("http://nulllove-rgobq.run.goorm.io/api/post/findmypost",data).then(value=>{
+				  console.log("요청들어옴");
+				  resolve(value);
+			  })
+			  .catch(err=>{
+				  reject(err);
+			  })
+		  })
+	  },
+	  FIND__COMMENT({commit,state},data){
+		  return new Promise((resolve,reject)=>{
+			  console.log(data);
+			  axios.post("http://nulllove-rgobq.run.goorm.io/api/post/commentfind",data).then(value=>{
+				  console.log("요청들어옴");
+				  resolve(value);
+			  })
+			  .catch(err=>{
+				  reject(err);
+			  })
+		  })
+	  },
+	  CREATE__COMMENT({commit,state},data){
+		  return new Promise((resolve,reject)=>{
+			  console.log(data);
+			  axios.post("http://nulllove-rgobq.run.goorm.io/api/post/commentcreate",data).then(value=>{
+				  console.log("요청들어옴");
+				  resolve(value);
+			  })
+			  .catch(err=>{
+				  reject(err);
+			  })
+		  })
+	  },
+	  FIND__COMMENT__ALL({commit,state},data){
+		  return new Promise((resolve,reject)=>{
+			  console.log(data);
+			  axios.post("http://nulllove-rgobq.run.goorm.io/api/post/commentfindall",data).then(value=>{
+				  console.log("요청들어옴");
+				  resolve(value);
+			  })
+			  .catch(err=>{
+				  reject(err);
+			  })
+		  })
+	  },
   },
   modules: {
   }

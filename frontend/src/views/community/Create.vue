@@ -1,41 +1,114 @@
 <template>
   <div class="create">
     <div class="create__title">
-      <div>Post Create</div>
-	
+      <div>Share Plans</div>
     </div>
-	<div class="create__text">
-		 <img src="../../assets/undraw_scrum_board_cesn.svg" alt="새로운 목표" width="200px" />
+    <div class="create__text">
+				<img src="../../assets/arrow_back.svg" alt="" width="30px" class="arrow" @click="arrow_back"/>
+      <img src="../../assets/undraw_upload_87y9.svg" alt="새로운 목표" width="200px" />
 
-      <div class="create__section">목표 선정</div>
-		<select class="create__input" value="goal" name="">
-			<option value>sss</option>
-			<option>ss</option>
-			<option>ssaas</option>
-		</select>
-      <div class="create__section">내용</div>
-      <textarea 
-        name = "text"
+      <div class="create__section">공유할 목표 선택</div>
+      <select class="create__input" name id="selectBox">
+        <option v-for="(value,index) in todoData" :key="index" :value="value.id">{{ value.title }}</option>
+      </select>
+      <div class="create__section">게시물 내용</div>
+      <textarea
+        name="text"
         class="create__input"
         style="font-size:14px;height:60px"
-			  rows="5" 
+        rows="5"
+        v-model="textMes"
       />
       <div class="errorMes">{{ errorM }}</div>
-      <input type="submit" value="Add to Plan" class="create__submit" @click="submit()" />
-	</div>
-	<div></div>
+      <input type="submit" value="Share My Plan" class="create__submit" @click="submit()" />
+    </div>
+    <div></div>
   </div>
 </template>
 
 <script>
 export default {
   name: "Create",
+  data() {
+    return {
+      todoData: [],
+      goal: {},
+      textMes: "",
+      errorM: ""
+    };
+  },
   components: {},
-  created() {},
-  methods: {}
+  created() {
+    this.$store
+      .dispatch("FIND__DATA", {
+        token: localStorage.getItem("token")
+      })
+      .then(response => {
+        console.log(response);
+        if (response.data.result == true) {
+          this.todoData = response.data.userdata.todo;
+          console.log(this.todoData);
+        } else {
+        }
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  },
+  methods: {
+	arrow_back(){
+		this.$router.push("/wrap/community");	
+	},
+    submit() {
+      var target = document.getElementById("selectBox");
+      var Array = this.todoData.filter(
+        e => target.options[target.selectedIndex].value == e.id
+      );
+      var d = new Date();
+      var nowDate =
+        d.getFullYear() +
+        "-" +
+        (d.getMonth() + 1) +
+        "-" +
+        d.getDate() +
+        "-" +
+        d.getHours() +
+        "-" +
+        d.getMinutes() +
+        "-" +
+        d.getSeconds();
+      if (Array[0]) {
+        this.$store
+          .dispatch("POST__CREATE", {
+            token: localStorage.getItem("token"),
+            data: Array[0],
+            text: this.textMes,
+            time: nowDate
+          })
+          .then(response => {
+            if (response.data.result == true) {
+              this.$router.push("/wrap/community");
+            } else {
+              this.errorM = response.data.mes;
+            }
+          })
+          .catch(e => {
+            console.log(e);
+            this.errorM = "서버에 저장하지 못하였습니다";
+          });
+      } else {
+        this.errorM = "먼저 목표를 추가하고 올려주세요";
+      }
+    }
+  }
 };
 </script>
 <style scoped>
+	.arrow{
+		position:absolute;
+		top:35px;
+		left:30px;
+	}
 .create {
   width: 100%;
   height: 100%;
@@ -64,6 +137,12 @@ export default {
   flex-direction: column;
   justify-content: space-between;
 }
+.errorMes {
+  font-size: 14px;
+  color: red;
+  margin: 5px 0px;
+  background-color: white;
+}
 .create__title {
   font-size: 40px;
   font-style: normal;
@@ -76,17 +155,18 @@ export default {
   margin-bottom: 0;
   padding: 0;
 }
-	.create__text{
-		width:100%;
-		height:100%;
-		background-color:white;
-		display:flex;
-		justify-content:center;
-		align-items:center;
-		flex-direction:column;
-		border-radius:30px;
-		height:85%;
-	}
+.create__text {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 30px;
+  height: 85%;
+  position:relative;
+}
 .create__main {
   display: flex;
   flex-direction: column;

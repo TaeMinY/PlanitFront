@@ -26,8 +26,6 @@ export default {
 }
 .router__transtion {
   transition: 1s cubic-bezier(0.175, 0.885, 0.32, 1);
-  width: 100%;
-  height: 100%;
 }
 
 .wrap {

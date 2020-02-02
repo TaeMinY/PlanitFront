@@ -39,9 +39,9 @@
       <div
         style=" display:flex; flex-direction:column; width:100%; margin: 10px auto 0px auto; align-items: center;"
       >
-        <div class="forgot__password" style="margin-top:16px;">
+        <!--<div class="forgot__password" style="margin-top:16px;">
           Forgot password?
-        </div>
+        </div>-->
       </div>
     </div>
     <div class="image_div">

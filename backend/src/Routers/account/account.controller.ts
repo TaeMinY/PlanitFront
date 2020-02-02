@@ -81,7 +81,6 @@ export const Signin = (req: Request, res: Response) => {
           Send(res, 200, '로그인에 성공하였습니다!', true, token, {
             username: result.username,
             email: result.email,
-            profile_image: result.profile_image,
 			userdata : result.userdata
           });
         } else {
@@ -99,7 +98,7 @@ export const Token = (req: Request, res: Response) => {
   console.log(decoded);
   User.findOne({email: decoded.email}, function(err, result) {
     if (result) {
-      Send(res, 200, '인증성공.', true);
+      Send(res, 200, '인증성공.', true,token,{username:result.username,email:result.email,userdata:result.userdata});
     } else {
       Send(res, 200, '인증실패.', false);
     }
@@ -150,14 +149,8 @@ export const TodoDelete = (req:Request,res:Response)=>{
 		})
 		
 		Send(res,200,'삭제성공',true,token,result.userdata);
-
 	})
-	
-
 }
-
-			
-
 export const DataFind = (req:Request,res:Response)=>{
 	const {token} = req.body;
 	  let decoded = jwt.verify(token, jwtpassword);

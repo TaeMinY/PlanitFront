@@ -10,7 +10,7 @@
         style="cursor: pointer;"
       />
     </div>
-    <div class="todo__main">
+    <div class="todo__main" v-if="(todoData.length != 0)">
       <div class="todo__box" v-for="(value,index) in todoData" :key="index">
 		  
 		<div class="todo__box__article">
@@ -25,19 +25,25 @@
           <div class="todo__box__endday">{{value.endDay}}</div>
         </div>
         <progress
-          :value="100/*dayBetween(value.startDay, value.endDay)-day(value.endDay)*/"
+          :value="dayBetween(value.startDay, value.endDay)-day(value.endDay)"
           :max="dayBetween(value.startDay, value.endDay)"
           class="todo__box__progress"
         />
-        <div class="todo__delete" @click="remove(value)">삭제</div>
+        <div class="todo__delete" @click="remove(value)">×</div>
       </div>
     </div>
-  </div>
+	<div v-else class="todoed">
+		<div class="todoed__title">새로운 목표를 추가해보세요</div>
+		<img src="../../assets/undraw_empty_xct9.svg" alt="사진" width="350px" height="350px" />
+		<div class="todoed__button" @click="add()"><span>추가하기</span></div>
+		
+	</div>
+	</div>
 </template>
 
 <script>
 export default {
-  data() {
+	data() {
     return {
       todoData: [],
       valueDeterminate: 50
@@ -141,6 +147,9 @@ export default {
 
       return diff;
     },
+	  add(){
+		this.$router.push("/wrap/main/todocreate")  
+	  },
     create() {
       this.$router.push("/wrap/main/todocreate");
     }
@@ -166,11 +175,49 @@ export default {
 };
 </script>
 <style>
-
+	
+	.todoed__title{
+		font-size:36px;
+		font-family:"NanumSB";
+		color:black;
+	}
+	.todoed__button{
+		cursor:pointer;
+		font-family:"NanumSR";
+		background-color:#6c63ff;
+		color:white;
+		width:180px;
+		height:45px;
+		display:flex;
+		justify-content:center;
+		align-items:center;
+		border-radius:30px;
+		
+	}
+	.todoed{
+		height:100%;
+		display:flex;
+		justify-content:center;
+		align-items:center;
+		flex-direction:column;
+		overflow-x: hidden;
+  		margin: 8px 0px;
+  		background-color: white;
+  		border-radius: 30px;
+		position:relative;
+	}
+	.todoed > *{
+		margin:10px;
+	}
 .todo__delete {
+  cursor:pointer;
+  padding: 4px;
+  font-size: 24px;
   position: absolute;
-  top: 20px;
-  right: 40px;
+  top: 10%;
+  right: 5%;
+  font-family: "ProductSansR";
+  color: #f03434;
 }
 
 .todo {
@@ -184,6 +231,7 @@ export default {
   justify-content: flex-start;
 }
 .todo__main{
+	margin-top:16px;
 	max-height:100%;
 	overflow-y:auto;
 }
@@ -210,7 +258,7 @@ export default {
 .todo__box {
   width: 100%;
   min-height: 200px;
-  margin: 16px 0px;
+  margin-bottom: 20px;
   background-color: white;
   border-radius: 30px;
   box-sizing: border-box;
@@ -251,7 +299,7 @@ export default {
   width: 80%;
   display:inline;
   padding: 8px 15px;
-  border-radius: 8px;
+  border-radius: 14px;
   color: white;
   font-family: "ProductSansR";
   font-size: 16px;

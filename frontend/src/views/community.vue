@@ -28,6 +28,7 @@ export default {
   background-color: #f1f3f5;
   position: relative;
   flex: 1 1;
+  overflow:auto;
 }
 .community__title {
   font-size: 40px;

@@ -20,26 +20,44 @@ const routes = [
         children: [
           {
             path: "",
-            name: "calendar",
-            component: () => import("../views/main/calendar.vue")
-          },
-          {
-            path: "todo",
             name: "todo",
             component: () => import("../views/main/todo.vue")
           },
-          {
+		  {
             path: "todocreate",
             name: "todocreate",
             component: () => import("../views/main/todocreate.vue")
           },
           {
+            path: "calendar",
+            name: "calendar",
+            component: () => import("../views/main/calendar.vue")
+          },
+          
+          {
             path: "memo",
-            name: "meno",
+            name: "memo",
             component: () => import("../views/main/memo.vue")
           }
         ]
       },
+	  {
+    path: "profile",
+    name: "profile",
+    component: () => import("../views/profile.vue"),
+    children: [
+      {
+        path: "",
+        name: "",
+        component: () => import("../views/profile/profile.vue")
+      },
+      // {
+      //   path: "edit",
+      //   name: "edit",
+      //   component: () => import("../views/edit.vue")
+      // }
+    ]
+  },  
 	  {
 		  path: 'community',
 		  name: 'community',
@@ -75,7 +93,8 @@ const routes = [
         component: () => import("../views/Signup.vue")
       }
     ]
-  }
+  },
+  
 ];
 
 const router = new VueRouter({

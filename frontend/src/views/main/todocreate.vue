@@ -2,7 +2,8 @@
   <div class="todocreate">
     <div class="todocreate__title">Add Plan</div>
     <div class="todocreate__main">
-      <img src="../../assets/undraw_scrum_board_cesn.svg" alt="새로운 목표" width="200px" />
+		<img src="../../assets/arrow_back.svg" alt="" width="25px" class="arrow" @click="arrow_back"/>
+      <img src="../../assets/undraw_scrum_board_cesn.svg" alt="새로운 목표" width="15%" />
 
       <div class="todocreate__section">목표 설정</div>
       <input type="text" placeholder="목표 이름" class="todocreate__input" v-model="title" />
@@ -35,6 +36,9 @@ export default {
   computed: {},
   mounted() {},
   methods: {
+	arrow_back(){
+		this.$router.push("/wrap/main");	
+	},
     dateDiff(_date1, _date2) {
       var diffDate_1 = _date1 instanceof Date ? _date1 : new Date(_date1);
       var diffDate_2 = _date2 instanceof Date ? _date2 : new Date(_date2);
@@ -116,7 +120,7 @@ export default {
               this.text = "";
               this.startDay = "";
               this.endDay = "";
-              this.$router.push("/wrap/main/todo");
+              this.$router.push("/wrap/main");
             } else {
               this.errorM = response.data.mes;
             }
@@ -132,6 +136,12 @@ export default {
 };
 </script>
 <style scoped>
+	.arrow{
+		cursor:pointer;
+		position:absolute;
+		top:35px;
+		left:30px;
+	}
 .todocreate {
   width: 100%;
   height: 100%;
@@ -164,6 +174,7 @@ export default {
   margin: 8px 0px;
   background-color: white;
   border-radius: 30px;
+	position:relative;
 }
 .errorMes {
   font-size: 14px;
@@ -175,7 +186,7 @@ export default {
   box-sizing: content-box;
   border-radius: 3px;
   min-width: 300px;
-  width: 500px;
+  width: 50%;
   height: 30px;
   border: 1px solid #adb5bd;
   margin: 5px auto;
@@ -201,12 +212,12 @@ export default {
   color: #ffffff;
   background-color: #6c63ff;
   min-width: 300px;
-  width: 500px;
+  width: 50%;
   box-sizing: content-box;
 }
 .todocreate__section {
   min-width: 300px;
-  width: 510px;
+  width: 51%;
   margin-top: 24px;
   font-size: 18px;
   font-family: "NanumSB";

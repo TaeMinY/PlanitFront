@@ -13,12 +13,15 @@
     <div class="todo__main">
       <div class="todo__box" v-for="(value,index) in todoData" :key="index">
         <div>D-DAY {{day(value.endDay)}}</div>
+		<div>Timeline {{dayBetween(value.startDay, value.endDay)}}</div>
         <div class="todo__box__title">{{value.title}}</div>
         <div class="todo__box__text">{{value.text}}</div>
         <div class="todo__box__day">
           <div>시작일자 : {{value.startDay}}</div>
           <div>목표일 : {{value.endDay}}</div>
         </div>
+		  <progress :value="dayBetween(value.startDay, value.endDay)" 
+					:max="dayBetween(value.startDay, value.endDay)"/>
         <div class="todo__delete" @click="remove(value)">삭제</div>
       </div>
     </div>
@@ -96,6 +99,41 @@ export default {
 
       return diff;
     },
+	dayBetween(startDay, endDay) {
+      var today = new Date(startDay);
+		
+      var dd = today.getDate();
+      var mm = today.getMonth() + 1; //January is 0!
+      var yyyy = today.getFullYear();
+
+      if (dd < 10) {
+        dd = "0" + dd;
+      }
+
+      if (mm < 10) {
+        mm = "0" + mm;
+      }
+
+      today = yyyy + "-" + mm + "-" + dd;
+      var diffDate_1 = today instanceof Date ? today : new Date(today);
+      var diffDate_2 = endDay instanceof Date ? endDay : new Date(endDay);
+
+      diffDate_1 = new Date(
+        diffDate_1.getFullYear(),
+        diffDate_1.getMonth() + 1,
+        diffDate_1.getDate()
+      );
+      diffDate_2 = new Date(
+        diffDate_2.getFullYear(),
+        diffDate_2.getMonth() + 1,
+        diffDate_2.getDate()
+      );
+
+      var diff = Math.abs(diffDate_2.getTime() - diffDate_1.getTime());
+      diff = Math.ceil(diff / (1000 * 3600 * 24));
+
+      return diff;
+    },  
     create() {
       this.$router.push("/wrap/main/todocreate");
     }
@@ -141,7 +179,7 @@ export default {
   justify-content: flex-start;
 }
 .todo__title {
-  font-size: 40px;
+ font-size: 40px;
   min-height: 60px;
   font-style: normal;
   font-family: ProductSansM;

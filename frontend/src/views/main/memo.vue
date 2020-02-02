@@ -3,7 +3,6 @@
 		<div class="memo__title">Sticker Memo</div>
 		<div class="memo__main">
 			<div class="memo_plus">
-				<button class="plus_button" @click="handle_toggle">메모 추가하기</button>	
 			</div>
 		</div>
 	</div>

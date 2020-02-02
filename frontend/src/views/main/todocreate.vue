@@ -109,7 +109,7 @@
 							this.text =""
 							this.startDay = ""
 							this.endDay = ""
-							this.$router.push("/main/todo")
+							this.$router.push("/wrap/main/todo")
 						}else{
 							this.errorM = response.data.mes;
 						}

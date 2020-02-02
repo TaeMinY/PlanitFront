@@ -8,6 +8,7 @@ export default new Vuex.Store({
   state: {
 	  transtionStatus: "bottom",
 	  userdata:{},
+	  wrap : 'left'
   },
   mutations: {
   },

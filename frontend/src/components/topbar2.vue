@@ -7,10 +7,10 @@
 		</div>
 	</div>
 	<div class="topbar__center">
-		<div>
+		<div @click="plans()">
 			Plans
 		</div>
-		<div>
+		<div @click="community()">
 			Community
 		</div>
 	</div>
@@ -28,6 +28,14 @@ export default {
 		  this.$store.state.transtionStatus = "bottom"
 		  this.$store.state.userdata = {};
 		  this.$router.push("/");
+	  },
+	  plans(){
+		  this.$store.state.wrap = "right"
+		  this.$router.push("/wrap/main");
+	  },
+	  community(){
+		  	 this.$store.state.wrap = "left"
+		  this.$router.push("/wrap/community");
 	  }
   }
 }

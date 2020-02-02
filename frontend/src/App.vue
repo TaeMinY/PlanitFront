@@ -25,8 +25,7 @@ export default {
         .then(response => {
           if (response.data.result) {
 			    if(window.location.pathname == "/"){
-      this.$router.push("/main");
-
+      				this.$router.push("/wrap/main");
 				}
 
           }else{
@@ -62,6 +61,7 @@ export default {
   height: 100vh;
 }
 html {
+
 }
 body {
   margin: 0;

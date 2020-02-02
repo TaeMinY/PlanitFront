@@ -1,6 +1,5 @@
 <template>
   <div class="community">
-	<Topbar></Topbar>
 	 <div class="community__wrap">
 		test
 	</div>
@@ -22,13 +21,14 @@ export default {
 </script>
 <style scoped>
 	.community{
-		
+		width:100%;
+		height:100%;
 	}
 	.community__wrap{
 		display:flex;
 		width:100%;
 		height:100%;
-		overflow-y:auto;
 		box-sizing:border-box;
-	}
+		background-color:#f1f3f5;
+		 	}
 </style>

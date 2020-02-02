@@ -1,7 +1,6 @@
 <template>
-  <div class="main">
-	<Topbar></Topbar>
-	 <div class="main__wrap">
+<div style="display:flex; width:100%;">
+	
 		<div class="main__left__bar">
 			<div class="main__dashboards">
 				<div @click="calendar()" class="dashboard__item">
@@ -26,8 +25,8 @@
 			<router-view></router-view>
 		</transition>
 		</div>
+	
 	</div>
-  </div>
 </template>
 
 <script>
@@ -42,13 +41,13 @@ export default {
 	},
 	methods:{
 		calendar(){
-			this.$router.push("/main")
+			this.$router.push("/wrap/main")
 		},
 		todo(){
-			this.$router.push("/main/todo");
+			this.$router.push("/wrap/main/todo");
 		},
 		memo(){
-			this.$router.push("/main/memo")
+			this.$router.push("/wrap/main/memo")
 		}
 	}
 };

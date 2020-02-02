@@ -97,7 +97,7 @@ export default {
       return diff;
     },
     create() {
-      this.$router.push("/main/todocreate");
+      this.$router.push("/wrap/main/todocreate");
     }
   },
   created() {

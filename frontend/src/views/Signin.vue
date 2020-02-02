@@ -83,7 +83,7 @@ export default {
               (this.password = ""),
               (this.error = ""),
               (this.$store.state.transtionStatus = "bottom");
-            this.$router.push("/main");
+            this.$router.push("/wrap/main");
           } else {
             this.error = response.data.mes;
           }

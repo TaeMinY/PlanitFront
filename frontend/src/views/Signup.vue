@@ -10,11 +10,24 @@
         @click="back()"
       />
       <!--<h1 class="signup_title">Get Started</h1>-->
-	  <label class="profile_container">  
-	     <img id="image_section" src="../assets/undraw_social_ideas_e8rj.svg" alt="" width="100px" height="100px" />
-		 <div class="overlay">Edit Profile</div>
-		<input type="file" ref="profile"  id="bin" accept="image/*" @change="myImage(this)" style="display:none" />
-	  </label>
+      <label class="profile_container">
+        <img
+          id="image_section"
+          src="../assets/undraw_social_ideas_e8rj.svg"
+          alt
+          width="100px"
+          height="100px"
+        />
+        <div class="overlay">Edit Profile</div>
+        <input
+          type="file"
+          ref="profile"
+          id="bin"
+          accept="image/*"
+          @change="myImage(this)"
+          style="display:none"
+        />
+      </label>
 
       <div class="signup_text">
         <input
@@ -22,58 +35,49 @@
           class="input-username"
           placeholder="Username"
           v-model="username"
-		  v-on:keyup.enter="submit"
+          v-on:keyup.enter="submit"
         />
         <input
           type="email"
           class="input-email"
           placeholder="Email"
           v-model="email"
-			   v-on:keyup.enter="submit"
+          v-on:keyup.enter="submit"
         />
         <input
           type="password"
           class="input-password"
           placeholder="Password"
           v-model="password"
-			   v-on:keyup.enter="submit"
+          v-on:keyup.enter="submit"
         />
         <input
           type="password"
           class="input-password"
           placeholder="Confirm Password"
           v-model="password2"
-			   v-on:keyup.enter="submit"
+          v-on:keyup.enter="submit"
         />
         <div class="errorMes">{{errorMes}}</div>
-        <input
-          type="submit"
-          class="input-login"
-          value="Sign Up"
-          @click="submit()"
-        />
+        <input type="submit" class="input-login" value="Sign Up" @click="submit()" />
       </div>
     </div>
     <div class="image_div">
-      <img
-        src="../assets/undraw_post_online_dkuk.svg"
-        alt="로고"
-        class="logo-2"
-      />
+      <img src="../assets/undraw_post_online_dkuk.svg" alt="로고" class="logo-2" />
     </div>
   </div>
 </template>
 <style lang="css">
-	#image_section{
-		border-radius:100%;
-		background-color: #eaf3fe;
-		cursor: pointer;
-	}
+#image_section {
+  border-radius: 100%;
+  background-color: #eaf3fe;
+  cursor: pointer;
+}
 .errorMes {
   font-size: 14px;
   color: red;
   margin: 5px 0px;
-	background-color:white;
+  background-color: white;
 }
 .signup {
   width: 100%;
@@ -107,10 +111,10 @@
   justify-content: center;
   align-items: center;
 }
-	
-	.signup_text > *{
-		box-sizing:content-box !important;
-	}
+
+.signup_text > * {
+  box-sizing: content-box !important;
+}
 .input_div {
   background-color: white;
   width: 40vw;
@@ -132,64 +136,64 @@
 }
 .input-username {
   border-radius: 3px;
-    min-width: 300px;
-		width: 330px;
-    height: 30px;
-    margin: 5px auto;
-	border: 1px solid #adb5bd;
-	padding: 5px 10px;
-	font-family: "ProductSansR", "NanumSRB";
+  min-width: 300px;
+  width: 330px;
+  height: 30px;
+  margin: 5px auto;
+  border: 1px solid #adb5bd;
+  padding: 5px 10px;
+  font-family: "ProductSansR", "NanumSRB";
 }
 .input-username::placeholder {
-	color: #adb5bd;
+  color: #adb5bd;
   font-size: 14px;
-	font-family: "ProductSansR";
+  font-family: "ProductSansR";
 }
 .input-email {
   border-radius: 3px;
-    min-width: 300px;
-		width: 330px;
-    height: 30px;
-    margin: 5px auto;
-	border: 1px solid #adb5bd;
-	padding: 5px 10px;
-	font-family: "ProductSansR", "NanumSRB";
+  min-width: 300px;
+  width: 330px;
+  height: 30px;
+  margin: 5px auto;
+  border: 1px solid #adb5bd;
+  padding: 5px 10px;
+  font-family: "ProductSansR", "NanumSRB";
 }
 .input-email::placeholder {
-	color: #adb5bd;
+  color: #adb5bd;
   font-size: 14px;
-	font-family: "ProductSansR";
+  font-family: "ProductSansR";
 }
 .input-password {
   border-radius: 3px;
-    min-width: 300px;
-		width: 330px;
-    height: 30px;
-    margin: 5px auto;
-	border: 1px solid #adb5bd;
-	padding: 5px 10px;
-	font-family: "ProductSansR";
+  min-width: 300px;
+  width: 330px;
+  height: 30px;
+  margin: 5px auto;
+  border: 1px solid #adb5bd;
+  padding: 5px 10px;
+  font-family: "ProductSansR";
 }
 .input-password::placeholder {
-	color: #adb5bd;
+  color: #adb5bd;
   font-size: 14px;
-	font-family: "ProductSansR";
+  font-family: "ProductSansR";
 }
 .input-login {
   border-radius: 3px;
-	font-family: "ProductSansR";
-	cursor:pointer;
-    height: 30px;
-    margin: 5px auto;
-    border: 0;
-    text-align: center;
-    font-size: 14px;
-    padding: 5px 10px;
-    color: #ffffff;
-    background-color: #6C63FF;
-	min-width: 300px;
-	width: 330px;
-	box-sizing: content-box;
+  font-family: "ProductSansR";
+  cursor: pointer;
+  height: 30px;
+  margin: 5px auto;
+  border: 0;
+  text-align: center;
+  font-size: 14px;
+  padding: 5px 10px;
+  color: #ffffff;
+  background-color: #6c63ff;
+  min-width: 300px;
+  width: 330px;
+  box-sizing: content-box;
 }
 .image_div {
   width: 40vw;
@@ -231,7 +235,7 @@
   position: absolute;
   top: 30px;
   left: 30px;
-	box-sizing:content-box;
+  box-sizing: content-box;
 }
 .forgot__password {
   text-decoration: none;
@@ -249,13 +253,13 @@
 .profile_container:hover .overlay {
   opacity: 1;
 }
-	
+
 .overlay {
   background: rgba(0, 0, 0, 0.5);
   color: #f1f1f1;
   width: 100%;
-  transition: .5s ease;
-  opacity:0;
+  transition: 0.5s ease;
+  opacity: 0;
   color: white;
   font-size: 12px;
   font-family: "ProductSansR";
@@ -267,16 +271,16 @@
 export default {
   name: "signup",
   methods: {
-	myImage(input){
- 		if (document.getElementById("bin").files[0]) {
-  			var reader = new FileReader();
-  
-  			reader.onload = function (e) {
-   				document.getElementById("image_section").src = e.target.result;
-  			}
-  			reader.readAsDataURL(document.getElementById("bin").files[0]);
-  		}
-	},
+    myImage(input) {
+      if (document.getElementById("bin").files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+          document.getElementById("image_section").src = e.target.result;
+        };
+        reader.readAsDataURL(document.getElementById("bin").files[0]);
+      }
+    },
     signupgo() {
       this.$router.push("/account/signup");
     },
@@ -285,55 +289,55 @@ export default {
       this.$router.push("/account/signin");
     },
     submit() {
-	if(document.getElementById("bin").files[0]){
-      this.$store
-        .dispatch("signup", {
-          email: this.email,
-          password: this.password,
-          password2: this.password2,
-          profile_image: this.profile_image,
-          username: this.username
-        })
-        .then(response => {
-          if (response.data.result) {
-            const fd = new FormData();
-            fd.append("name", this.email);
-            fd.append("bin", document.getElementById("bin").files[0]);
-            this.$store.dispatch("profile", fd).then(response => {
-              //받기
-              if (response.data.result == true) {
-				  console.log("프로필 받음")
-                this.email = "",
-                  this.password = "",
-                  this.password2 = "",
-                  this.username = "",
-                  this.errorMes = "",
-                  this.profile_image = "ss";
-                this.$store.state.transtionStatus = "bottom";
-                this.$router.push("/account/signin");
-              }else {
-				  this.errorMes = response.data.mes
-              }
-            });
-          }else{
-				this.errorMes = response.data.mes
-		  }
-        })
-        .catch(e => {
-          console.log("에러");
-        });
-	}else{
-		this.errorMes = "프로필 이미지를 선택해 주세요."
-	}
+      if (document.getElementById("bin").files[0]) {
+        this.$store
+          .dispatch("signup", {
+            email: this.email,
+            password: this.password,
+            password2: this.password2,
+            profile_image: this.profile_image,
+            username: this.username
+          })
+          .then(response => {
+            if (response.data.result) {
+              const fd = new FormData();
+              fd.append("name", this.email);
+              fd.append("bin", document.getElementById("bin").files[0]);
+              this.$store.dispatch("profile", fd).then(response => {
+                //받기
+                if (response.data.result == true) {
+                  console.log("프로필 받음");
+                  (this.email = ""),
+                    (this.password = ""),
+                    (this.password2 = ""),
+                    (this.username = ""),
+                    (this.errorMes = ""),
+                    (this.profile_image = "ss");
+                  this.$store.state.transtionStatus = "bottom";
+                  this.$router.push("/account/signin");
+                } else {
+                  this.errorMes = response.data.mes;
+                }
+              });
+            } else {
+              this.errorMes = response.data.mes;
+            }
+          })
+          .catch(e => {
+            console.log("에러");
+          });
+      } else {
+        this.errorMes = "프로필 이미지를 선택해 주세요.";
+      }
     }
   },
   data() {
     return {
       email: "",
       password: "",
-	  errorMes:' ',
+      errorMes: " ",
       username: "",
-      password2: "",
+      password2: ""
     };
   }
 };

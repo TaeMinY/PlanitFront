@@ -2,136 +2,145 @@
   <div class="todocreate">
     <div class="todocreate__title">Add Plan</div>
     <div class="todocreate__main">
-		
-		<img src="../../assets/undraw_scrum_board_cesn.svg" alt="새로운 목표" width="200px"/>
-		
-		<div class="todocreate__section">목표 설정</div>
-		<input type="text" placeholder="목표 이름" class="todocreate__input" v-model="title" />
-		<input type="text" placeholder="세부 실천 내용" class="todocreate__input" v-model="text" />
-		<div class="todocreate__section">달성 기간</div>
-		<input type="date" value="2020-12-31" class="todocreate__input" style="font-size:14px" v-model="endDay"/>
-        <div class="errorMes">{{ errorM }}</div>
-		<input type="submit" value="Add to Plan" class="todocreate__submit" @click="submit()"/>
+      <img src="../../assets/undraw_scrum_board_cesn.svg" alt="새로운 목표" width="200px" />
+
+      <div class="todocreate__section">목표 설정</div>
+      <input type="text" placeholder="목표 이름" class="todocreate__input" v-model="title" />
+      <input type="text" placeholder="세부 실천 내용" class="todocreate__input" v-model="text" />
+      <div class="todocreate__section">달성 기간</div>
+      <input
+        type="date"
+        value="2020-12-31"
+        class="todocreate__input"
+        style="font-size:14px"
+        v-model="endDay"
+      />
+      <div class="errorMes">{{ errorM }}</div>
+      <input type="submit" value="Add to Plan" class="todocreate__submit" @click="submit()" />
     </div>
-	</div>
+  </div>
 </template>
 
 <script>
-	
+export default {
+  data() {
+    return {
+      endDay,
+      title,
+      text,
+      errorM: "",
+      send: false
+    };
+  },
+  computed: {},
+  mounted() {},
+  methods: {
+    dateDiff(_date1, _date2) {
+      var diffDate_1 = _date1 instanceof Date ? _date1 : new Date(_date1);
+      var diffDate_2 = _date2 instanceof Date ? _date2 : new Date(_date2);
 
-  export default {
-    data(){
-		return{
-			endDay,
-			title,
-			text,
-			errorM:"",
-			send:false,
-		}
-	},
-    computed: {
+      diffDate_1 = new Date(
+        diffDate_1.getFullYear(),
+        diffDate_1.getMonth() + 1,
+        diffDate_1.getDate()
+      );
+      diffDate_2 = new Date(
+        diffDate_2.getFullYear(),
+        diffDate_2.getMonth() + 1,
+        diffDate_2.getDate()
+      );
+
+      var diff = Math.abs(diffDate_2.getTime() - diffDate_1.getTime());
+      diff = Math.ceil(diff / (1000 * 3600 * 24));
+
+      return diff;
     },
-    mounted () {
-		
-    },
-    methods: {
-		dateDiff(_date1, _date2) {
-    var diffDate_1 = _date1 instanceof Date ? _date1 : new Date(_date1);
-    var diffDate_2 = _date2 instanceof Date ? _date2 : new Date(_date2);
+    submit() {
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth() + 1; //January is 0!
+      var yyyy = today.getFullYear();
 
-    diffDate_1 = new Date(diffDate_1.getFullYear(), diffDate_1.getMonth()+1, diffDate_1.getDate());
-    diffDate_2 = new Date(diffDate_2.getFullYear(), diffDate_2.getMonth()+1, diffDate_2.getDate());
+      if (dd < 10) {
+        dd = "0" + dd;
+      }
 
-    var diff = Math.abs(diffDate_2.getTime() - diffDate_1.getTime());
-    diff = Math.ceil(diff / (1000 * 3600 * 24));
+      if (mm < 10) {
+        mm = "0" + mm;
+      }
 
-    return diff;
-		} ,
-		submit(){
-			var today = new Date();
-			var dd = today.getDate();
-			var mm = today.getMonth()+1; //January is 0!
-			var yyyy = today.getFullYear();
+      today = yyyy + "-" + mm + "-" + dd;
+      var endDay = this.endDay.split("-");
 
-			if(dd<10) {
-  			  dd='0'+dd
-			} 
+      if (endDay[0] > yyyy) {
+        //성공
+        this.send = true;
+      } else if (endDay[0] == yyyy) {
+        if (endDay[1] > mm) {
+          //성공
+          this.send = true;
+        } else if (endDay[1] == mm) {
+          if (endDay[2] > dd) {
+            //성공
+            this.send = true;
+          } else {
+            //실패
+            this.send = false;
+            this.errorM = "기간을 다시 정해주세요";
+          }
+        } else {
+          //실패
+          this.send = false;
+          this.errorM = "기간을 다시 정해주세요";
+        }
+      } else {
+        //실패
+        this.send = false;
+        this.errorM = "기간을 다시 정해주세요";
+        console.log("Dd");
+      }
 
-			if(mm<10) {
-   			  mm='0'+mm
-			} 
-
-			today = yyyy + '-' + mm+'-'+dd;
-			var endDay = this.endDay.split('-');
-			
-			if(endDay[0] > yyyy){
-				//성공
-				this.send = true;
-			}else if(endDay[0] == yyyy){
-				if(endDay[1] > mm){
-					//성공
-					this.send = true;
-				}else if(endDay[1] == mm){
-					if(endDay[2] > dd){
-						//성공
-						this.send = true;
-					}else{
-						//실패
-						this.send = false;
-						this.errorM = "기간을 다시 정해주세요"
-
-					}
-				}else{
-					//실패
-					this.send = false;
-					this.errorM = "기간을 다시 정해주세요"
-				}
-			}else{
-				//실패
-				this.send = false;
-				this.errorM = "기간을 다시 정해주세요"
-				console.log("Dd")
-			}
-			
-			if(this.send == true){
-				this.$store
-        			.dispatch("TODO__CREATE", {
-          				title: this.title,
-          				text: this.text,
-          				startDay: today,
-          				endDay: this.endDay,
-						progress : this.dateDiff(today,this.endDay),
-          				token: localStorage.getItem("token")
-        			})
-        			.then(response => {
-						if(response.data.result == true){
-							this.title = ""
-							this.text =""
-							this.startDay = ""
-							this.endDay = ""
-							this.$router.push("/wrap/main/todo")
-						}else{
-							this.errorM = response.data.mes;
-						}
-					}).catch(e=>{console.log(e);this.errorM = "서버에 저장하지 못하였습니다"})
-				this.send = false;
-			}
-			
-		}
-		
-	}
+      if (this.send == true) {
+        this.$store
+          .dispatch("TODO__CREATE", {
+            title: this.title,
+            text: this.text,
+            startDay: today,
+            endDay: this.endDay,
+            progress: this.dateDiff(today, this.endDay),
+            token: localStorage.getItem("token")
+          })
+          .then(response => {
+            if (response.data.result == true) {
+              this.title = "";
+              this.text = "";
+              this.startDay = "";
+              this.endDay = "";
+              this.$router.push("/wrap/main/todo");
+            } else {
+              this.errorM = response.data.mes;
+            }
+          })
+          .catch(e => {
+            console.log(e);
+            this.errorM = "서버에 저장하지 못하였습니다";
+          });
+        this.send = false;
+      }
+    }
   }
+};
 </script>
 <style scoped>
 .todocreate {
   width: 100%;
-  	height:100%;
+  height: 100%;
   background-color: #f1f3f5;
   padding: 30px;
-	box-sizing:border-box;
-	display:flex;
-	flex-direction:column;
-	  justify-content: space-between;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .todocreate__title {
   font-size: 40px;
@@ -150,17 +159,17 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height : 85%;
-  overflow-x:hidden;
-  margin:8px 0px;
-  background-color:white;
-  border-radius:30px;
+  height: 85%;
+  overflow-x: hidden;
+  margin: 8px 0px;
+  background-color: white;
+  border-radius: 30px;
 }
 .errorMes {
   font-size: 14px;
   color: red;
   margin: 5px 0px;
-  background-color:white;
+  background-color: white;
 }
 .todocreate__input {
   box-sizing: content-box;
@@ -184,7 +193,7 @@
   font-family: "ProductSansR";
   cursor: pointer;
   height: 30px;
-  
+
   border: 0;
   text-align: center;
   font-size: 14px;
@@ -195,14 +204,13 @@
   width: 500px;
   box-sizing: content-box;
 }
-.todocreate__section{
-  min-width:300px;
-  width:510px;
+.todocreate__section {
+  min-width: 300px;
+  width: 510px;
   margin-top: 24px;
   font-size: 18px;
   font-family: "NanumSB";
   color: black;
-  text-align:left;
+  text-align: left;
 }
-	
 </style>

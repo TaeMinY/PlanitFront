@@ -13,24 +13,23 @@ export default {
       window.location.pathname != "/" &&
       window.location.pathname != "/account/signin" &&
       window.location.pathname != "/account/signup"
-    ){
+    ) {
       this.$router.push("/");
     }
     if (localStorage.getItem("token")) {
-		console.log("토큰인증")
+      console.log("토큰인증");
       this.$store
         .dispatch("token", {
-         token :localStorage.getItem("token")
+          token: localStorage.getItem("token")
         })
         .then(response => {
           if (response.data.result) {
-			    if(window.location.pathname == "/"){
-      				this.$router.push("/wrap/main");
-				}
-
-          }else{
-			  this.$router.push("/");
-		  }
+            if (window.location.pathname == "/") {
+              this.$router.push("/wrap/main");
+            }
+          } else {
+            this.$router.push("/");
+          }
         })
         .catch(e => {
           console.log("에러");
@@ -51,6 +50,7 @@ export default {
   background: #6c63ff;
   border-radius: 30px;
 }
+
 #inspire {
   font-family: "NanumSR", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -61,15 +61,14 @@ export default {
   height: 100vh;
 }
 html {
-
 }
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-	background-color:#f1f3f5;
+  background-color: #f1f3f5;
 }
-	
+
 @font-face {
   font-family: "NanumSR";
   src: url("./assets/font/NanumSquareR.ttf") format("truetype");

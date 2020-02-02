@@ -1,11 +1,11 @@
 <template>
   <div class="wrap">
-	<Topbar></Topbar>
-	 <div class="wrap__wrap">
-	  <transition :name="$store.state.wrap">
-		<router-view class="router__transtion"></router-view>
-	  </transition>
-	 </div>
+    <Topbar></Topbar>
+    <div class="wrap__wrap">
+      <transition :name="$store.state.wrap">
+        <router-view class="router__transtion"></router-view>
+      </transition>
+    </div>
   </div>
 </template>
 
@@ -16,36 +16,32 @@ export default {
   components: {
     Topbar
   },
-	created(){
-	},
-	methods:{
-	}
+  created() {},
+  methods: {}
 };
 </script>
 <style scoped>
-	
-	*{
-		box-sizing:border-box;
-	}
-	.router__transtion{
-		transition: 1s cubic-bezier(0.175, 0.885, 0.32, 1);
-  		width: 100%;
-  		height: 100%;
-	}
-	
-	.wrap{
-		display:flex;
-		flex-direction: column;
-		box-sizing:border-box;
-			background-color:#f1f3f5;
+* {
+  box-sizing: border-box;
+}
+.router__transtion {
+  transition: 1s cubic-bezier(0.175, 0.885, 0.32, 1);
+  width: 100%;
+  height: 100%;
+}
 
-	}
-	.wrap__wrap{
-		display:flex;
-		width:100%;
-		height:100%;
-	}
-	.fade-enter-active,
+.wrap {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  background-color: #f1f3f5;
+}
+.wrap__wrap {
+  display: flex;
+  width: 100%;
+  height: 90%;
+}
+.fade-enter-active,
 .fade-leave-active {
   transition: 0.5s;
   position: absolute;
@@ -60,18 +56,17 @@ export default {
   opacity: 1;
   transform: scale(1);
 }
-	.left-enter {
+.left-enter {
   transform: translateX(100%);
 }
 .left-enter-to {
-  transform: translateX(0px) ;
+  transform: translateX(0px);
 }
 .left-leave {
   transform: translateX(0px);
 }
 .left-leave-to {
   transform: translateX(-100%);
-	
 }
 .right-enter {
   transform: translateX(-100%);
@@ -85,12 +80,12 @@ export default {
 .right-leave-to {
   transform: translateX(100%);
 }
-.right-leave-active, .left-leave-active {
+.right-leave-active,
+.left-leave-active {
   position: absolute;
   top: 80px;
   left: 0;
   transition: 1s cubic-bezier(0.175, 0.885, 0.32, 1);
   overflow-y: hidden !important;
 }
-	
 </style>

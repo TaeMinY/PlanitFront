@@ -1,32 +1,28 @@
 <template>
-<div style="display:flex; width:100%;">
-	
-		<div class="main__left__bar">
-			<div class="main__dashboards">
-				<div @click="calendar()" class="dashboard__item">
-					<img src="../assets/calendar_today-24px.svg" alt="calendar" class="dashboard__icon"/>
-					Calendar
-				</div>
-				<div @click="todo()" class="dashboard__item">
-					<img src="../assets/list-24px.svg" alt="calendar" class="dashboard__icon"/>
-					Plans
-				</div>
-				<div @click="memo()" style="width:fit-content; text-align:left" class="dashboard__item">
-					<img src="../assets/note-24px.svg" alt="calendar" class="dashboard__icon"/>
-					Sticker Memo
-				</div>
-			</div>
-			<div class="main__nofitications">
-	
-			</div>
-		</div>
-		 <div style="width:100%;height:100%; position:relative; background-color:#f1f3f5">
-		 <transition name="fade">
-			<router-view></router-view>
-		</transition>
-		</div>
-	
-	</div>
+  <div style="display:flex; width:100%;">
+    <div class="main__left__bar">
+      <div class="main__dashboards">
+        <div @click="calendar()" class="dashboard__item">
+          <img src="../assets/calendar_today-24px.svg" alt="calendar" class="dashboard__icon" />
+          Calendar
+        </div>
+        <div @click="todo()" class="dashboard__item">
+          <img src="../assets/list-24px.svg" alt="calendar" class="dashboard__icon" />
+          Plans
+        </div>
+        <div @click="memo()" style="width:fit-content; text-align:left" class="dashboard__item">
+          <img src="../assets/note-24px.svg" alt="calendar" class="dashboard__icon" />
+          Memo
+        </div>
+      </div>
+      <div class="main__nofitications"></div>
+    </div>
+    <div style="width:100%;height:100%; position:relative; background-color:#f1f3f5">
+      <transition name="fade">
+        <router-view></router-view>
+      </transition>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -36,82 +32,83 @@ export default {
   components: {
     Topbar
   },
-	created(){
-		console.log(this.$store.state.token)	
-	},
-	methods:{
-		calendar(){
-			this.$router.push("/wrap/main")
-		},
-		todo(){
-			this.$router.push("/wrap/main/todo");
-		},
-		memo(){
-			this.$router.push("/wrap/main/memo")
-		}
-	}
+  created() {
+    console.log(this.$store.state.token);
+  },
+  methods: {
+    calendar() {
+      this.$router.push("/wrap/main");
+    },
+    todo() {
+      this.$router.push("/wrap/main/todo");
+    },
+    memo() {
+      this.$router.push("/wrap/main/memo");
+    }
+  }
 };
 </script>
 <style scoped>
-	*{
-		box-sizing:border-box;
-	}
-	.main{
-		display:flex;
-		flex-direction: column;
-		box-sizing:border-box;
-	}
-	.main__wrap{
-		display:flex;
-		width:100%;
-		height:100%;
-	}
-	.main__left__bar{
-		width:350px;
-		height:100%;
-		background-color:#f1f3f5;
-		display:flex;
-		justify-content:flex-start;
-		align-items:center;
-		padding:30px 30px;
-		flex-direction:column;
-	}
-	.main__left__bar > * {
-		margin:7px;
-	}
-	.main__dashboards{
-		background-color:white;
-		width:85%;
-		height:30vh;
-		border-radius:20px;
-		display:flex;
-		justify-content:space-around;
-		align-items:flex-start;
-		flex-direction:column;
-		padding: 20% 10%;
-		box-sizing:border-box;
-	}
-	.main__dashboards > * {
-		font-size:18px;
-		font-family:ProductSansM;
-	}
-	.main__nofitications{
-		background-color:white;
-		width:85%;
-		height:50Vh;
-		border-radius:20px;
-	}
-	.dashboard__item{
-		cursor:pointer;
-		display: flex; 
-		align-items: center; 
-		justify-content:center;
-	}
-	.dashboard__icon{
-		margin-right: 8px;
-		fill: red;
-	}
-	.fade-enter-active,
+* {
+  box-sizing: border-box;
+}
+.main {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+.main__wrap {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+.main__left__bar {
+  width: 350px;
+  height: 100%;
+  background-color: #f1f3f5;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 30px 30px;
+  flex-direction: column;
+}
+.main__left__bar > * {
+  margin: 7px;
+}
+.main__dashboards {
+  background-color: white;
+  width: 85%;
+  height: 30vh;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 20% 10%;
+  box-sizing: border-box;
+}
+.main__dashboards > * {
+  font-size: 18px;
+  font-family: ProductSansM;
+}
+.main__nofitications {
+  background-color: white;
+  width: 85%;
+  height: 50vh;
+  border-radius: 20px;
+}
+.dashboard__item {
+  color: black;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dashboard__icon {
+  margin-right: 8px;
+  fill: red;
+}
+.fade-enter-active,
 .fade-leave-active {
   transition: 0.5s;
   position: absolute;

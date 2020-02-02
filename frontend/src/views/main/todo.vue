@@ -12,16 +12,23 @@
     </div>
     <div class="todo__main">
       <div class="todo__box" v-for="(value,index) in todoData" :key="index">
-        <div>D-DAY {{day(value.endDay)}}</div>
-		<div>Timeline {{dayBetween(value.startDay, value.endDay)}}</div>
-        <div class="todo__box__title">{{value.title}}</div>
-        <div class="todo__box__text">{{value.text}}</div>
+		  
+		<div class="todo__box__article">
+			<div class="todo__box__dday">D - {{day(value.endDay)}}</div>
+        	<div class="todo__box__title">{{value.title}}</div>
+        	<div class="todo__box__text">{{value.text}}</div> 
+		</div>
+        
+
         <div class="todo__box__day">
-          <div>시작일자 : {{value.startDay}}</div>
-          <div>목표일 : {{value.endDay}}</div>
+          <div class="todo__box__startday">{{value.startDay}}</div>
+          <div class="todo__box__endday">{{value.endDay}}</div>
         </div>
-		  <progress :value="dayBetween(value.startDay, value.endDay)" 
-					:max="dayBetween(value.startDay, value.endDay)"/>
+        <progress
+          :value="100/*dayBetween(value.startDay, value.endDay)-day(value.endDay)*/"
+          :max="dayBetween(value.startDay, value.endDay)"
+          class="todo__box__progress"
+        />
         <div class="todo__delete" @click="remove(value)">삭제</div>
       </div>
     </div>
@@ -99,9 +106,9 @@ export default {
 
       return diff;
     },
-	dayBetween(startDay, endDay) {
+    dayBetween(startDay, endDay) {
       var today = new Date(startDay);
-		
+
       var dd = today.getDate();
       var mm = today.getMonth() + 1; //January is 0!
       var yyyy = today.getFullYear();
@@ -133,7 +140,7 @@ export default {
       diff = Math.ceil(diff / (1000 * 3600 * 24));
 
       return diff;
-    },  
+    },
     create() {
       this.$router.push("/wrap/main/todocreate");
     }
@@ -158,10 +165,8 @@ export default {
   }
 };
 </script>
-<style >
-* > * {
-  overflow-y: hidden !imporatnt;
-}
+<style>
+
 .todo__delete {
   position: absolute;
   top: 20px;
@@ -178,8 +183,12 @@ export default {
   flex-direction: column;
   justify-content: flex-start;
 }
+.todo__main{
+	max-height:100%;
+	overflow-y:auto;
+}
 .todo__title {
- font-size: 40px;
+  font-size: 40px;
   min-height: 60px;
   font-style: normal;
   font-family: ProductSansM;
@@ -201,27 +210,74 @@ export default {
 .todo__box {
   width: 100%;
   min-height: 200px;
-  margin: 8px 0px;
+  margin: 16px 0px;
   background-color: white;
   border-radius: 30px;
   box-sizing: border-box;
-  padding: 20px;
+  padding: 64px 18px;
   position: relative;
 }
 .todo__box__title {
+  margin-top: 22px;
   font-size: 28px;
-  font-family: "ProductSansR", "NanumSRB";
+  font-family: "ProductSansR", "NanumSB";
 }
 .todo__box__text {
-  font-size: 20px;
-  font-family: "ProductSansR", "NanumSRB";
+  font-size: 18px;
+  font-family: "ProductSansR", "NanumSR";
+  margin-bottom: 16px;
 }
 .todo__box__day {
-  width: 100%;
+  font-family: "ProductSansR";
+  width: 90%;
   display: flex;
   justify-content: center;
+  margin: auto;
 }
+.todo__box__startday {
+  width: 50%;
+  text-align: left;
+}
+.todo__box__endday {
+  width: 50%;
+  text-align: right;
+}
+.todo__box__progress {
+  width: 90%;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.todo__box__dday {
+  width: 80%;
+  display:inline;
+  padding: 8px 15px;
+  border-radius: 8px;
+  color: white;
+  font-family: "ProductSansR";
+  font-size: 16px;
+  background: rgb(52, 148, 230);
+  background: linear-gradient(
+    130deg,
+    rgba(52, 148, 230, 1) 0%,
+    rgba(236, 110, 173, 1) 100%
+  );
+}
+progress::-webkit-progress-bar {
+  background-color: #eee;
+  border-radius: 4px;
+}
+progress::-webkit-progress-value {
+  background-image: -webkit-linear-gradient(
+      -45deg,
+      transparent 33%,
+      rgba(0, 0, 0, 0.1) 33%,
+      rgba(0, 0, 0, 0.1) 66%,
+      transparent 66%
+    ),
+    -webkit-linear-gradient(top, rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0.25)),
+    -webkit-linear-gradient(left, rgba(52, 148, 230, 1), rgba(236, 110, 173, 1));
 
-.todo__main {
+  border-radius: 4px;
+  background-size: 35px 20px, 100% 100%, 100% 100%;
 }
 </style>

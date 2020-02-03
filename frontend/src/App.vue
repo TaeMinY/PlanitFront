@@ -12,7 +12,8 @@ export default {
       !localStorage.getItem("token") &&
       window.location.pathname != "/" &&
       window.location.pathname != "/account/signin" &&
-      window.location.pathname != "/account/signup"
+      window.location.pathname != "/account/signup"&&
+      window.location.pathname != "/account/find"
     ) {
       this.$router.push("/");
     }

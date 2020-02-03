@@ -39,9 +39,9 @@
       <div
         style=" display:flex; flex-direction:column; width:100%; margin: 10px auto 0px auto; align-items: center;"
       >
-        <!--<div class="forgot__password" style="margin-top:16px;">
+        <div class="forgot__password" style="margin-top:16px;" @click="findPassword()">
           Forgot password?
-        </div>-->
+        </div>
       </div>
     </div>
     <div class="image_div">
@@ -71,6 +71,9 @@ export default {
       this.$store.state.transtionStatus = "bottom";
       this.$router.push("/");
     },
+	   findPassword(){
+		        this.$router.push("/account/find");
+	  },
     submit() {
       this.$store
         .dispatch("signin", { email: this.email, password: this.password })

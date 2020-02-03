@@ -33,7 +33,8 @@ export const PostFind = (req:Request,res:Response)=>{
     if (err){
 		console.log(err);
 	}
-		return Send(res, 200, '성공', true, req.body.token, result);
+	 var r = result.reverse()
+		return Send(res, 200, '성공', true, req.body.token, r);
 	})
 }	
 export const FindMyPost = (req:Request,res:Response)=>{

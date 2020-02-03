@@ -21,6 +21,9 @@
               class="see__article__image"
               :src="'http://nulllove-rgobq.run.goorm.io/api/'+value.email+'.png'"
               alt="profile"
+				 width="42px"
+				 height="42px"
+				style="object-fit:cover"
             />
             <div class="see__article__name">{{value.name}}</div>
 		  </div>
@@ -43,7 +46,10 @@
             />
             <input type="submit" value="등록" class="see__article__comment__submit" @click="submit(value._id)" />
           </div>
-          <div v-for="(d,index) in commentData" :key="index" v-if="d.post_id == value._id">
+		  <div @click="status(index)" v-if="(value.status != true)">댓글보기</div>
+			<div @click="status(index)" v-else>댓글닫기</div>
+			<div v-if="(value.status == true)">
+          <div v-for="(d,index) in commentData" :key="index" v-if="(d.post_id == value._id)">
 		   <div class="see__comment">
 			<div class="see__article__name">{{d.name}}</div>
 			<div> : </div>
@@ -51,6 +57,7 @@
 		   </div>
 		  </div>
         </div>
+	</div>
       </div>
     </div>
   </div>
@@ -63,6 +70,7 @@ export default {
     return {
       data: [],
       commentData: [],
+	  commentStatus : []
     };
   },
   components: {},
@@ -75,7 +83,8 @@ export default {
       .then(response => {
         console.log("요청을 보냄");
         if (response.data.result == true) {
-          this.data = response.data.userdata;
+			var fal = {status : false}
+			this.data = response.data.userdata.map(v => Object.assign(v, fal))
         } else {
         }
       })
@@ -88,7 +97,7 @@ export default {
       .then(response => {
         console.log("요청을 보냄");
         if (response.data.result == true) {
-          this.commentData = response.data.userdata;
+		  this.commentData = response.data.userdata;
         } else {
         }
       })
@@ -97,9 +106,10 @@ export default {
       });
   },
   methods: {
-	  test(e){
-		console.log(e)  
-	  },
+	 status(e){
+		 console.log(e)
+		 this.data[e].status = !this.data[e].status
+	 },
     create() {
       this.$router.push("/wrap/community/create");
     },
@@ -133,7 +143,7 @@ export default {
         		})
         		.then(response => {
           			if (response.data.result == true) {
-            		 	this.commentData = response.data.userdata
+            		 	 this.commentData = response.data.userdata;
           			} else {
           		}
         	})

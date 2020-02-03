@@ -4,19 +4,18 @@
       <div>Profile</div>
     </div>
     <div class="profile__box">
-      <img src="../../assets/arrow_back.svg" alt width="25px" class="arrow" @click="arrow_back" />
-	<img :src="'http://nulllove-rgobq.run.goorm.io/api/' + $store.state.userdata.email + '.png'" class="profile__image"/>
+      <img src="../../assets/arrow_back.svg" alt width="25px" class="arrow" @click="arrow_back"  />
+	<img :src="'http://nulllove-rgobq.run.goorm.io/api/' + $store.state.userdata.email + '.png'" class="profile__image" style="object-fit: cover;"/>
 	  <div class="profile__hello">안녕하세요, {{$store.state.userdata.username}}님!</div>
 	  <div class="profile__email">{{$store.state.userdata.email}}</div>
 	  <img src="../../assets/undraw_new_decade_n4qd.svg" alt="2020" style="width:20%;margin-top:36px;"/>
 		
 		<div v-for="(value,index) in postdata" :key="index">
 			<div class="profile__article__box">
-				{{value[index].data.title}}
+				{{value.data.title}}
 			</div>
 	</div>
 		
-		{{postdata}}
     </div>
   </div>
 </template>

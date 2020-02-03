@@ -17,6 +17,7 @@
           alt
           width="100px"
           height="100px"
+		  style="object-fit:cover"	 
         />
         <div class="overlay">Edit Profile</div>
         <input
@@ -60,6 +61,7 @@
         />
         <div class="errorMes">{{errorMes}}</div>
         <input type="submit" class="input-login" value="Sign Up" @click="submit()" />
+		 
       </div>
     </div>
     <div class="image_div">
@@ -288,6 +290,7 @@ export default {
       this.$store.state.transtionStatus = "bottom";
       this.$router.push("/account/signin");
     },
+	 
     submit() {
       if (document.getElementById("bin").files[0]) {
         this.$store

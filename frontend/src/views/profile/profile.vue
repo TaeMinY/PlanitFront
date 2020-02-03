@@ -9,6 +9,14 @@
 	  <div class="profile__hello">안녕하세요, {{$store.state.userdata.username}}님!</div>
 	  <div class="profile__email">{{$store.state.userdata.email}}</div>
 	  <img src="../../assets/undraw_new_decade_n4qd.svg" alt="2020" style="width:20%;margin-top:36px;"/>
+		
+		<div v-for="(value,index) in postdata" :key="index">
+			<div class="profile__article__box">
+				{{value[index].data.title}}
+			</div>
+	</div>
+		
+		{{postdata}}
     </div>
   </div>
 </template>

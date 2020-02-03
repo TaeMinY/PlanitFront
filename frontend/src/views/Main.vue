@@ -21,7 +21,7 @@
       <div class="main__nofitications">
 			<img :src="'http://nulllove-rgobq.run.goorm.io/api/' + $store.state.userdata.email + '.png'" class="main__nofitications__img"/>
 		  <div>안녕하세요, <span style="font-family: NanumSB;" >{{$store.state.userdata.username}}님!</span></div>
-		  	<div style="word-break:keep-all">환영합니다!</div>
+		  	<div style="word-break:keep-all; font-size: 24px; font-family:NanumSB;">환영합니다!</div>
 		</div>
     </div>
     <div style="width:100%;height:100%; position:relative; background-color:#f1f3f5">

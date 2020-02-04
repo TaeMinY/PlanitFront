@@ -73,7 +73,8 @@ export const CommentFind = (req: Request, res: Response) => {
     if (err) {
       console.log(err);
     }
-    return Send(res, 200, "성공", true, req.body.token, result);
+	      var r = result.reverse();
+    return Send(res, 200, "성공", true, req.body.token, r);
   });
 };
 export const CommentFindAll = (req: Request, res: Response) => {
@@ -81,7 +82,9 @@ export const CommentFindAll = (req: Request, res: Response) => {
     if (err) {
       console.log(err);
     }
-    return Send(res, 200, "성공", true, req.body.token, result);
+	var r = result.reverse();
+
+    return Send(res, 200, "성공", true, req.body.token, r);
   });
 };
 export const PostLike = (req: Request, res: Response) => {

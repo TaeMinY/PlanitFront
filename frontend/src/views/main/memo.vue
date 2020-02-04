@@ -2,24 +2,33 @@
 	<div class="memo">
 		<div class="memo_top">
 			<h1 class="memo_title">Sticker Memo</h1>
-			<img src="../../assets/plus.svg" class="plus_image" v-on:click="toggle()" alt="메모 추가하기"> 
+			<img src="../../assets/plus.svg" class="plus_image" @click="add" alt="메모 추가하기"> 
 		</div>
 		<div class="memo_text" id="memo_text">
 			<div class="memo_main" id="memo_main">
-				<input type="text" class="plus_button" placeholder="메모를 입력해 주세요." v-for="i in cnt">
+				<component v-for="item in buttons" :is="item"></component><br>
 			</div>
 		</div>
 	</div>
 </template>
 <script>
+	component('my-button2', {
+		template: `<button @click="nice_fun()">개수확인</button>`
+		,methods:{
+			nice_fun:function(){
+				app2.nice = '버튼추가 개수:'+app2.buttons.length;
+			}
+		}
+	})
 	export default {
-		 data: function(){
-  			return {
-  			}
+		template: `<button @click="nice_fun()">개수확인</button>`,
+		 data: {
+			buttons: [],
+			 nice: ''
 		},
 		methods: {
-			plus: function(){
-				cnt+=1
+			add() {
+				this.buttons.push('my-button2')
 			}
 		}
 	}

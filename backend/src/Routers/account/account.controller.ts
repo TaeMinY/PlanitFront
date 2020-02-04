@@ -206,8 +206,38 @@ export const PasswordFind = (req:Request,res:Response)=>{
   });
 
 }
+export const ChangePassword = (req: Request, res: Response) => {
+  const {email, password,password2} = req.body;
+  if (!password || !password2) {
+    return Send(res, 200, '빈칸을 모두 입력해 주세요.', false);
+  }
+  if(password != password2){
+	  return Send(res, 200, '비밀번호가 일치하지 않습니다.', false);
+  }
+  User.findOne({email: email}, function(err, result) {
+    if (err) throw err;
+    if (result != null) {
+		    bcrypt.hash(password, null, null, function(err, hash){
+				 User.findOneAndUpdate(
+        			{ email: result.email },
+        			{
+          				$set: {
+            			password: hash
+          			}
+        			},
+        			{ new: true }
+      				).exec(function(err, r) {
+        				console.log(r);
+     				 });
+          		Send(res, 200, '정상적으로 비밀번호를 변경하였습니다', true);
+			})
 
-
+          
+    } else {
+      Send(res, 200, '아이디가 존재하지 않습니다.', false);
+    }
+  });
+};
 
 
 

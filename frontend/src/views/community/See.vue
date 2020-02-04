@@ -67,7 +67,7 @@
 		  
 		<div class="see__right">
 			<img class="see__article__undraw"
-				 :src="'/img/undraw_article_'+(Math.floor(Math.random() * 5)+1)+'.svg'"
+				 :src="require(`@/assets/article_images/undraw_article_${(index%4+1)}.svg`)"
 				 alt="article image"/>
 			
 		</div>
@@ -368,7 +368,7 @@
     padding: 6px;
     width: 100%;
     margin-top: 24px;
-    margin-bottom: 36px;
+    margin-bottom: 8px;
     background-color: #f5f4ff;
     color: black;
     text-align: left;
@@ -504,7 +504,8 @@
     object-fit: cover;
   }
 	.see__article__undraw{
-		width:55%;
-		height:55%;
+		margin-left:10%;
+		width:50%;
+		height:50%;
 	}
 </style>

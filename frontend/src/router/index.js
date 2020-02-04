@@ -100,7 +100,7 @@ const routes = [
 		{
         path: "changepwd/:_id",
         name: "changepwd",
-        component: () => import("../views/Changepwd.vue")
+        component: () => import("../views/changepwd.vue")
       },
     ]
   },

@@ -203,6 +203,16 @@ export default new Vuex.Store({
 				  reject(err);
 			  })
 		  })
+	  },
+	  CHANGE__PASSWORD({commit,state},data){
+		  return new Promise((resolve,reject)=>{
+			  axios.post("http://nulllove-rgobq.run.goorm.io/api/account/changepassword",data).then(value=>{
+				  resolve(value);
+			  })
+			  .catch(err=>{
+				  reject(err);
+			  })
+		  })
 	  }
   },
   modules: {

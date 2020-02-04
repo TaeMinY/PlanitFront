@@ -41,12 +41,17 @@ export default {
   },
 	data(){
 	return{
-		imageurl:"http://nulllove-rgobq.run.goorm.io/"+$store.state.userdata.email+'.png'
+		imageurl:"http://nulllove-rgobq.run.goorm.io/"+this.$store.state.userdata.email+'.png'
 	}	
 	},
   created() {
-    console.log(this.$store.state.token);
+	this.$store.state.status.planner = true;
+	this.$store.state.status.community = false;
   },
+	beforeDestory(){
+		this.$store.state.status.planner = false;
+		this.$store.state.status.community = false;
+	},
   methods: {
 	todo() {
 	  console.log(this);

@@ -13,69 +13,68 @@
 
     <div v-for="(value,index) in data" :key="index">
       <div class="see__box">
-		  <div style="display:flex;align-items:center;">
-        <div class="see__left">
-          <div class="see__article__profile">
-            <div style="display:flex; align-items:center">
-              <img
-                class="see__article__image"
-                :src="'http://nulllove-rgobq.run.goorm.io/api/'+value.email+'.png'"
-                alt="profile"
-                width="42px"
-                height="42px"
-                style="object-fit:cover"
+        <div style="display:flex;align-items:center;">
+          <div class="see__left">
+            <div class="see__article__profile">
+              <div style="display:flex; align-items:center">
+                <img
+                  class="see__article__image"
+                  :src="'http://nulllove-rgobq.run.goorm.io/api/'+value.email+'.png'"
+                  alt="profile"
+                  width="42px"
+                  height="42px"
+                  style="object-fit:cover"
+                />
+                <div class="see__article__name">{{value.name}}</div>
+              </div>
+              <div
+                class="see__article__unlike"
+                @click="like(value)"
+                v-if="checkLike(value)"
+              >
+                응원중 {{value.like}}
+              </div>
+              <div class="see__article__like" @click="like(value)" v-else>
+                응원해요 {{value.like}}
+              </div>
+            </div>
+
+            <div class="see__article__title">{{value.data.title}}</div>
+            <div class="see__article__subtitle">{{value.data.text}}</div>
+
+            <div class="see__article__date">
+              {{value.data.startDay}} ~ {{value.data.endDay}}
+            </div>
+
+            <div class="see__article__text">{{value.text}}</div>
+
+            <div class="see__article__comment">
+              <input
+                type="text"
+                placeholder="댓글 달기"
+                class="see__article__comment__input"
+                v-on:keyup.enter="submit(value._id,index)"
+                :id="value._id"
               />
-              <div class="see__article__name">{{value.name}}</div>
-            </div>
-            <div
-              class="see__article__unlike"
-              @click="like(value)"
-              v-if="checkLike(value)"
-            >
-              응원중 {{value.like}}
-            </div>
-            <div class="see__article__like" @click="like(value)" v-else>
-              응원해요 {{value.like}}
+              <input
+                type="submit"
+                value="등록"
+                class="see__article__comment__submit"
+                @click="submit(value._id,index)"
+              />
             </div>
           </div>
 
-          <div class="see__article__title">{{value.data.title}}</div>
-          <div class="see__article__subtitle">{{value.data.text}}</div>
-
-          <div class="see__article__date">
-            {{value.data.startDay}} ~ {{value.data.endDay}}
-          </div>
-
-          <div class="see__article__text">{{value.text}}</div>
-			
-			<div class="see__article__comment">
-            <input
-              type="text"
-              placeholder="댓글 달기"
-              class="see__article__comment__input"
-              v-on:keyup.enter="submit(value._id,index)"
-              :id="value._id"
-            />
-            <input
-              type="submit"
-              value="등록"
-              class="see__article__comment__submit"
-              @click="submit(value._id,index)"
+          <div class="see__right">
+            <img
+              class="see__article__undraw"
+              :src="require(`@/assets/article_images/undraw_article_${(index%4+1)}.svg`)"
+              alt="article image"
             />
           </div>
-		</div>
-		  
-		<div class="see__right">
-			<img class="see__article__undraw"
-				 :src="require(`@/assets/article_images/undraw_article_${(index%4+1)}.svg`)"
-				 alt="article image"/>
-			
-		</div>
-			  
-			  </div>
-		  
-		<div class="see__left">
-			
+        </div>
+
+        <div class="see__left">
           <div v-if="statusif(value._id)">
             <div
               class="see__article__comment__enable"
@@ -110,12 +109,14 @@
                 </div>
                 <div style="display:flex;align-items:center;">
                   <div class="see__comment__time">{{d.time}}</div>
-                  <div class="see__comment__delete">×</div>
+                  <div class="see__comment__delete" @click="deletecomment(d)" v-if="d.email == userdata.email">
+                    ×
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-		</div>  
+        </div>
       </div>
     </div>
   </div>
@@ -179,6 +180,29 @@
         });
     },
     methods: {
+      deletecomment(e) {
+        console.log(e);
+
+        this.$store
+          .dispatch("DELETE__COMMENT", {
+            token: localStorage.getItem("token"),
+            _id: e._id
+          })
+          .then(response => {
+            this.$store
+              .dispatch("FIND__COMMENT__ALL", {})
+              .then(response => {
+                console.log("요청을 보냄");
+                if (response.data.result == true) {
+                  this.commentData = response.data.userdata;
+                } else {
+                }
+              })
+              .catch(e => {
+                console.log(e);
+              });
+          });
+      },
       checkLike(e) {
         for (let i = 0; i < e.like_users.length; i++) {
           if (e.like_users[i] == this.userdata.email) {
@@ -308,7 +332,7 @@
   }
   .see__box {
     display: flex;
-	flex-direction:column;
+    flex-direction: column;
     width: 100%;
     min-height: 200px;
     margin-top: 24px;
@@ -323,9 +347,9 @@
     width: 65%;
   }
   .see__right {
-	display:flex;
-	align-items:top;
-	justify-content:center;
+    display: flex;
+    align-items: top;
+    justify-content: center;
     width: 35%;
   }
   .see__article__profile {
@@ -503,9 +527,9 @@
     height: 36px;
     object-fit: cover;
   }
-	.see__article__undraw{
-		margin-left:10%;
-		width:50%;
-		height:50%;
-	}
+  .see__article__undraw {
+    margin-left: 10%;
+    width: 50%;
+    height: 50%;
+  }
 </style>

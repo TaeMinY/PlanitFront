@@ -7,11 +7,11 @@
 		</div>
 	</div>
 	<div class="topbar__center">
-		<div @click="plans()" class="topbar__selector" >
+		<div @click="plans()" :class="{topbar__selector:!$store.state.status.planner, topbar__selector__click:$store.state.status.planner}" >
 			<img src="../assets/undraw_booking_33fn.svg" alt="calendar" class="topbar__selector__icon" />
 			Planner
 		</div>
-		<div @click="community()" class="topbar__selector">
+		<div @click="community()" :class="{topbar__selector:!$store.state.status.community, topbar__selector__click:$store.state.status.community}"   >
 			<img src="../assets/undraw_chat_1wo5.svg" alt="calendar" class="topbar__selector__icon" />
 			Community
 		</div>
@@ -32,6 +32,8 @@ export default {
 		return{
 		}
 	},
+  computed: {
+  },
   methods:{
 	  logout(){
 		  localStorage.removeItem('token');
@@ -149,5 +151,15 @@ export default {
 	.topbar__selector:hover {
   		transition: 0.2s;
   		background-color: #E3E1FF;
+	}
+	.topbar__selector__click{
+		padding: 6px;
+  		border-radius: 4px;
+  		font-size:18px;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		background-color: #E3E1FF;
+		justify-content:center;
 	}
 </style>

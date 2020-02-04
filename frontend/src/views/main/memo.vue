@@ -6,32 +6,13 @@
 		</div>
 		<div class="memo_text" id="memo_text">
 			<div class="memo_main" id="memo_main">
-				<component v-for="item in buttons" :is="item"></component><br>
+				<memo_plus v-for="item in buttons" :is="item"></memo_plus><br>
 			</div>
 		</div>
 	</div>
 </template>
 <script>
-	component('my-button2', {
-		template: `<button @click="nice_fun()">개수확인</button>`
-		,methods:{
-			nice_fun:function(){
-				app2.nice = '버튼추가 개수:'+app2.buttons.length;
-			}
-		}
-	})
-	export default {
-		template: `<button @click="nice_fun()">개수확인</button>`,
-		 data: {
-			buttons: [],
-			 nice: ''
-		},
-		methods: {
-			add() {
-				this.buttons.push('my-button2')
-			}
-		}
-	}
+
 </script>
 <style scoped>
 	.memo{

@@ -11,7 +11,14 @@
 <script>
 export default {
   components: {},
-  created() {},
+  created() {
+	this.$store.state.status.planner = false;
+	this.$store.state.status.community = true;
+  },
+	beforeDestory(){
+		this.$store.state.status.planner = false;
+		this.$store.state.status.community = false;
+	},
   methods: {}
 };
 </script>

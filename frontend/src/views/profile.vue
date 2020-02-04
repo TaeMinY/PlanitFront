@@ -11,7 +11,11 @@
 <script>
 export default {
   components: {},
-  created() {},
+  created() {
+	  this.$store.state.status.planner = false;
+	  this.$store.state.status.community = false;
+	  console.log("-",this.$store.state.status.planner,this.$store.state.status.community
+)  },
   methods: {}
 };
 </script>

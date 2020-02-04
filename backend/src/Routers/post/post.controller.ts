@@ -142,3 +142,13 @@ export const PostLike = (req: Request, res: Response) => {
     }
   });
 };
+export const DeleteComment = (req: Request, res: Response) => {
+  const { _id,token } = req.body;
+	  let decoded = jwt.verify(token, jwtpassword);
+		
+		 Comment.deleteOne({ _id: _id }, function (err) {
+		});
+	      return Send(res, 200, "성공", true);
+
+	
+};

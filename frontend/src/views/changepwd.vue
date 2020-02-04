@@ -29,7 +29,7 @@
     </div>
     <div class="image_div">
       <img
-        src="../assets/undraw_authentication_fsn5.svg"
+        src="../assets/undraw_maker_launch_crhe.svg"
         alt="로고"
         class="logo-2"
       />

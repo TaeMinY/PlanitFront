@@ -8,7 +8,11 @@ export default new Vuex.Store({
   state: {
 	  transtionStatus: "bottom",
 	  userdata:{},
-	  wrap : 'left'
+	  wrap : 'left',
+	  status : {
+		  planner:true,
+		  community:false
+	  },
   },
   mutations: {
   },
@@ -186,6 +190,18 @@ export default new Vuex.Store({
 		  return new Promise((resolve,reject)=>{
 			  console.log(data);
 			  axios.post("http://nulllove-rgobq.run.goorm.io/api/post/commentfindall",data).then(value=>{
+				  console.log("요청들어옴");
+				  resolve(value);
+			  })
+			  .catch(err=>{
+				  reject(err);
+			  })
+		  })
+	  },
+	  DELETE__COMMENT({commit,state},data){
+		  return new Promise((resolve,reject)=>{
+			  console.log(data);
+			  axios.post("http://nulllove-rgobq.run.goorm.io/api/post/deletecomment",data).then(value=>{
 				  console.log("요청들어옴");
 				  resolve(value);
 			  })

@@ -250,8 +250,7 @@ export default {
 }
 .logo-2 {
   /*padding: 36px;*/
-  width: 100%;
-  height: 100%;
+  width: 80%;
   min-width: 300px;
   text-align: center;
 }
@@ -269,6 +268,7 @@ export default {
   margin: 0px 3px;
 }
 .forgot__password {
+  cursor:pointer;
   font-size: 14px;
   font-family: "ProductSansR";
   text-decoration: none;

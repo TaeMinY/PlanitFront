@@ -181,6 +181,16 @@ export default new Vuex.Store({
 			  })
 		  })
 	  },
+	  POST__LIKE({commit,state},data){
+		  return new Promise((resolve,reject)=>{
+			  axios.post("http://nulllove-rgobq.run.goorm.io/api/post/postlike",data).then(value=>{
+				  resolve(value);
+			  })
+			  .catch(err=>{
+				  reject(err);
+			  })
+		  })
+	  }
   },
   modules: {
   }

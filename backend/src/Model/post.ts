@@ -13,7 +13,7 @@ const postSchema = new Schema({
         required: true
     },
 	like_users: {
-        type: Array,
+        type: [String],
         required: true
     },
 	time: {
@@ -33,7 +33,7 @@ const postSchema = new Schema({
 export interface PostDocument extends Document {
     data: any;
     text: string;
-    like: number;
+    like: any;
     like_users: any;
     time : string;
 	email: string;

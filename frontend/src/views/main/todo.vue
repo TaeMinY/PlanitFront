@@ -14,7 +14,8 @@
       <div class="todo__box" v-for="(value,index) in todoData" :key="index">
 		  
 		<div class="todo__box__article">
-			<div class="todo__box__dday">D - {{day(value.endDay)}}</div>
+			<div class="todo__box__dday" v-if="day(value.endDay)<=0">Complete!</div>
+			<div class="todo__box__dday" v-else>D - {{day(value.endDay)}}</div>
         	<div class="todo__box__title">{{value.title}}</div>
         	<div class="todo__box__text">{{value.text}}</div> 
 		</div>
@@ -34,7 +35,7 @@
     </div>
 	<div v-else class="todoed">
 		<div class="todoed__title">새로운 목표를 추가해보세요</div>
-		<img src="../../assets/undraw_empty_xct9.svg" alt="사진" width="350px" height="350px" />
+		<img src="../../assets/undraw__todo.svg" alt="사진" width="350px" height="350px" />
 		<div class="todoed__button" @click="add()"><span>추가하기</span></div>
 		
 	</div>

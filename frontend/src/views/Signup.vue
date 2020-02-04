@@ -212,10 +212,8 @@
   text-align: center;
 }
 .logo-2 {
-  /*padding: 36px;*/
   text-align: center;
-  width: 94%;
-  height: 94%;
+  width: 70%;
   min-width: 300px;
 }
 .signup,

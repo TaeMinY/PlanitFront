@@ -10,7 +10,7 @@
         @click="back()"
       />
       <img src="../assets/logo.svg" alt="로고" class="title_logo" />
-      <h1 class="find_title">비밀번호 찾기</h1>
+      <h1 class="find_title">Forgot Password</h1>
       <div class="find_text">
         <input
           type="email"
@@ -23,14 +23,14 @@
         <input
           type="submit"
           class="input-login"
-          value="보내기"
+          value="Send Email"
           @click="submit()"
         />
       </div>
     </div>
     <div class="image_div">
       <img
-        src="../assets/undraw_authentication_fsn5.svg"
+        src="../assets/undraw_my_password_d6kg.svg"
         alt="로고"
         class="logo-2"
       />
@@ -144,6 +144,7 @@ export default {
   margin: 5px auto;
   padding: 5px 10px;
   font-family: "ProductSansR", "NanumSRB";
+  box-sizing:content-box;
 }
 .input-email::placeholder {
   font-size: 14px;
@@ -215,8 +216,7 @@ export default {
 }
 .logo-2 {
   /*padding: 36px;*/
-  width: 100%;
-  height: 100%;
+  width: 70%;
   min-width: 300px;
   text-align: center;
 }

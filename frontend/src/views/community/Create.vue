@@ -4,8 +4,8 @@
       <div>Share Plans</div>
     </div>
     <div class="create__text">
-				<img src="../../assets/arrow_back.svg" alt="" width="30px" class="arrow" @click="arrow_back"/>
-      <img src="../../assets/undraw_upload_87y9.svg" alt="새로운 목표" width="200px" />
+				<img src="../../assets/arrow_back.svg" alt="" width="25px" class="arrow" @click="arrow_back"/>
+      <img src="../../assets/undraw_upload.svg" alt="새로운 목표" width="200px" />
 
       <div class="create__section">공유할 목표 선택</div>
       <select class="create__input" name id="selectBox">
@@ -105,6 +105,7 @@ export default {
 </script>
 <style scoped>
 	.arrow{
+		cursor:pointer;
 		position:absolute;
 		top:35px;
 		left:30px;
@@ -188,7 +189,7 @@ export default {
   box-sizing: content-box;
   border-radius: 3px;
   min-width: 300px;
-  width: 500px;
+  width: 50%;
   height: 30px;
   border: 1px solid #adb5bd;
   margin: 5px auto;
@@ -214,12 +215,12 @@ export default {
   color: #ffffff;
   background-color: #6c63ff;
   min-width: 300px;
-  width: 500px;
+  width: 50%;
   box-sizing: content-box;
 }
 .create__section {
   min-width: 300px;
-  width: 522px;
+  width: 51%;
   margin-top: 24px;
   font-size: 18px;
   font-family: "NanumSB";

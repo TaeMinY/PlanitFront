@@ -2,11 +2,13 @@
 	<div class="memo">
 		<div class="memo_top">
 			<h1 class="memo_title">Sticker Memo</h1>
-			<img class="plus_button_image" src="../../assets/plus.svg" alt="plus" @onclick="addMemo" key=""/>
-		</div>
+			<input type="button" class="plus_button" @onclick="addMemo()" value="+" placeholder="+">
+		</div> 
 		<div class="memo_text" id="memo_text">
 			<div class="memo_main" id="memo_main">
 				<textarea class="memo_textarea" v-mobel="content"></textarea>
+			</div>
+			<div class="memo_text_plus" id="memo_text_plus">
 			</div>
 		</div>
 	</div>
@@ -20,9 +22,15 @@
 		},
 		methods: {
 			addMemo(){
-				var plus_div = ""
-			}
+            	var plus_div = document.createElement('div');
+            	plus_div.innerHTML = document.getElementById('memo_text');
+            	document.getElementById('memo_text_plus').appendChild(plus_div);
+        	},
+        	delMemo(obj){
+            	document.getElementById('memo_main').removeChild(obj.parentNode);
+       		 }
 		}
+		
 	}
 </script>
 <style scoped>

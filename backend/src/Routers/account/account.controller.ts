@@ -136,6 +136,7 @@ export const TodoDelete = (req:Request,res:Response)=>{
 	
 	User.findOne({email:decoded.email},function(err,result){
 		var R = result.userdata.todo;
+		
 		var Re = R.filter(e=>e.id != id);
 		result.userdata.todo = Re;
 		console.log("a",Re);

@@ -96,7 +96,12 @@ const routes = [
         path: "find",
         name: "find",
         component: () => import("../views/FindPassword.vue")
-      }
+      },
+		{
+        path: "changepwd/:_id",
+        name: "changepwd",
+        component: () => import("../views/Changepwd.vue")
+      },
     ]
   },
   

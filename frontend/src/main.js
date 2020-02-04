@@ -6,7 +6,11 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import vuetify from './plugins/vuetify';
 
-Vue.config.productionTip = false
+const VueCookie = require('vue-cookie');
+// 플러그인 사용
+Vue.use(VueCookie);
+
+
 AOS.init();
 new Vue({
   created() {

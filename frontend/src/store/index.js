@@ -13,6 +13,19 @@ export default new Vuex.Store({
   mutations: {
   },
   actions: {
+	 CHECK({ commit, state },data) {
+		return new Promise((resolve, reject) => {
+			console.log(data)
+				axios
+					.post("http://nulllove-rgobq.run.goorm.io/api/account/passwordfind", data)
+					.then(value => {
+						resolve(value);
+					})
+					.catch(err => {
+						reject(err);
+					});
+			});
+		},
 	 signin({ commit, state },data) {
 		return new Promise((resolve, reject) => {
 			console.log(data)

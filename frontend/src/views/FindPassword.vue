@@ -19,7 +19,7 @@
           v-model="email"
           v-on:keyup.enter="submit"
         />
-        <div class="errorMes">{{ error }}</div>
+        <div class="errorMes">{{ errorMes }}</div>
         <input
           type="submit"
           class="input-login"
@@ -43,23 +43,36 @@ export default {
   data() {
     return {
       email: "",
-      error: ""
+      errorMes: ""
     };
   },
+	created(){
+		
+		
+	},
   methods: {
     back() {
       this.$store.state.transtionStatus = "bottom";
       this.$router.push("/account/signin");
     },
     submit() {
-      // this.$store
-      //   .dispatch("signin", { email: this.email, password: this.password })
-      //   .then(response => {
-      //   })
-      //   .catch(err => {
-      //     console.log(err);
-      //   });
-    }
+		if(!this.$cookie.get('passwordfind')){
+			this.$cookie.set('passwordfind', true, { expires: "5m" });
+      this.$store
+        .dispatch("CHECK", { email: this.email })
+        .then(response => {
+		  console.log("ㅇㅇ",response)
+		  if(response.data.result == true){
+			  this.errorMes = "이메일을 확인해주세요."
+		  }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    	}else{
+			 this.errorMes = "연속적으로 보낼 수 없습니다 5분을 기다려주세요."
+		}
+	}
   }
 };
 </script>

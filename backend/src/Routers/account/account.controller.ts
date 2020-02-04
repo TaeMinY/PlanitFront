@@ -2,11 +2,14 @@ import * as bcrypt from 'bcrypt-nodejs';
 import {Request, Response} from 'express';
 import User from '../../Model/account';
 import Send from '../../Module/Send';
+import * as nodemailer from 'nodemailer'
 import * as path from 'path';
 import * as multer from 'multer';
 import * as jwt from 'jsonwebtoken';
 import * as shortid from 'shortid';
 const jwtpassword = 'oiwjoiefinsajd@%&SD@23Tsa&*saf';
+const password = 'oidfsdfsfsdfdsfD@23Tsa&*saf';
+const userpassword =[];
 const passwordRule = /^.*(?=^.{6,15}$)(?=.*\d)(?=.*[a-zA-Z]).*$/;
 const emailRule = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 
@@ -160,3 +163,52 @@ export const DataFind = (req:Request,res:Response)=>{
 		Send(res,200,'찾기성공',true,token,result.userdata);
 	})
 }
+export const Check = (req:Request,res:Response)=>{
+	  let decoded = jwt.verify(req.query.token, password);
+	if(decoded.email == req.query.email){
+		console.log("들어옴");
+		res.redirect(301, "http://nulllove-rgobq.run.goorm.io/account/changepwd/"+req.query.email);
+	}
+}
+export const PasswordFind = (req:Request,res:Response)=>{
+	const {email} = req.body;
+	let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'playplanit@gmail.com',  // gmail 계정 아이디를 입력
+      pass: 'planit2020'          // gmail 계정의 비밀번호를 입력
+    }
+  });
+	let token = jwt.sign(
+            {
+              email: email,
+            },
+            password,
+            {
+              expiresIn: 44640,
+            },
+          );
+	let mailOptions:any = {
+    from: 'playplanit@gmail.com',    // 발송 메일 주소 (위에서 작성한 gmail 계정 아이디)
+    to: email ,                     // 수신 메일 주소
+    subject: '[Planit] 비밀번호 재설정 안내',   // 제목
+     html: '<p>비밀번호를 재설정 하시려면<br />아래의 링크를 클릭해주세요 !</p>' +
+      "<a href='http://nulllove-rgobq.run.goorm.io/api/account/check/?email="+ email +"&token="+token+"'>인증하기</a>"
+  	};
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log(error);
+    }
+    else {
+      console.log('Email sent: ' + info.response);
+		Send(res,200,'전송성공',true);
+    }
+  });
+
+}
+
+
+
+
+
+

@@ -8,13 +8,16 @@
 <script>
 export default {
   created() {
+	  console.log(window.location.pathname.slice(0,17));
     if (
       !localStorage.getItem("token") &&
       window.location.pathname != "/" &&
       window.location.pathname != "/account/signin" &&
       window.location.pathname != "/account/signup"&&
-      window.location.pathname != "/account/find"
+      window.location.pathname != "/account/find"&&
+	  window.location.pathname.slice(0,18) != "/account/changepwd"
     ) {
+		console.log("걸림")
       this.$router.push("/");
     }
     if (localStorage.getItem("token")) {

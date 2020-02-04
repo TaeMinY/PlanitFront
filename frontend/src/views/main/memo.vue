@@ -2,35 +2,26 @@
 	<div class="memo">
 		<div class="memo_top">
 			<h1 class="memo_title">Sticker Memo</h1>
-			<input type="button" class="plus_button" @onclick="addMemo()" value="+" placeholder="+">
-		</div> 
+			<img src="../../assets/plus.svg" class="plus_image" v-on:click="toggle()" alt="메모 추가하기"> 
+		</div>
 		<div class="memo_text" id="memo_text">
 			<div class="memo_main" id="memo_main">
-				<textarea class="memo_textarea" v-mobel="content"></textarea>
-			</div>
-			<div class="memo_text_plus" id="memo_text_plus">
+				<input type="text" class="plus_button" placeholder="메모를 입력해 주세요." v-for="i in cnt">
 			</div>
 		</div>
 	</div>
 </template>
 <script>
 	export default {
-		data() {
-			return{
-				content: ''
-			}
+		 data: function(){
+  			return {
+  			}
 		},
 		methods: {
-			addMemo(){
-            	var plus_div = document.createElement('div');
-            	plus_div.innerHTML = document.getElementById('memo_text');
-            	document.getElementById('memo_text_plus').appendChild(plus_div);
-        	},
-        	delMemo(obj){
-            	document.getElementById('memo_main').removeChild(obj.parentNode);
-       		 }
+			plus: function(){
+				cnt+=1
+			}
 		}
-		
 	}
 </script>
 <style scoped>
@@ -52,7 +43,7 @@
 		float: left;
 	}
 
-	.plus_button_image{
+	.plus_image{
 		float: right;
 		width: 25px;
 		height: 25px; 
@@ -70,9 +61,12 @@
 		border-radius: 20px;
 	}
 	.memo_main{
-		width: 93%;
+		width: 200px;
 		height: auto;
 		text-align: left;
+		margin-left: 20px;
+		margin-top: 15px;
+		right: 30%;
 	}
 	.memo_textarea{
 		background-color: #ced4da;
@@ -82,12 +76,22 @@
 		border-radius: 20px;
 		resize: none;
 		text-align: left;
-		margin-top: 20px;
-		padding-top: 8px;
-		padding-left: 6px;
+		padding-top: 10px;
+		padding-left: 10px;
 		padding-bottom: 8px;
 		padding-right: 6px;
 		float: left;
 		vertical-align: middle;
+	}
+	.button_save{
+		font-size: 15px;
+		font-style: normal;
+		width: 200px;
+		height: 25px;
+		border: 1px solid #6C63FF;
+		border-radius: 8px;
+		background-color: #6C63FF;
+		color: #ffffff;
+		margin-top: 5px;
 	}
 </style>

@@ -9,29 +9,33 @@
           <img src="../assets/list-24px.svg" alt="calendar" class="dashboard__icon" />
           Plans
         </div>
-		<div @click="calendar()":class="{dashboard__item__click:$store.state.status.calendar, dashboard__item:!$store.state.status.calendar}">
+		<div @click="calendar()" :class="{dashboard__item__click:$store.state.status.calendar, dashboard__item:!$store.state.status.calendar}">
           <img src="../assets/calendar_today-24px.svg" alt="calendar" class="dashboard__icon" />
           Calendar
         </div>
-        <div @click="memo()" style="width:fit-content; text-align:left" class="dashboard__item" :class="{dashboard__item__click:$store.state.status.memo, dashboard__item:!$store.state.status.memo}">
+        <div @click="memo()" style="width:fit-content; text-align:left" :class="{dashboard__item__click:$store.state.status.memo, dashboard__item:!$store.state.status.memo}">
           <img src="../assets/note-24px.svg" alt="calendar" class="dashboard__icon" />
           Memo
         </div>
       </div>
       <div class="main__nofitications">
 			<!-- <img :src="'http://nulllove-rgobq.run.goorm.io/api/' + $store.state.userdata.email + '.png'" class="main__nofitications__img"/> -->
-		  	  <div class="main__notification__title">진행중인 목표</div>
-		  		<div class="main__notification__plans">
+		  <div class="dashboard__title">
+			Progress	
+			</div>
+		  <div class="main__notification__plan">
+			  <div class="main__notification__plans">
 					{{$store.state.userdata.userdata.plane_left}}
 				</div>
+			  <div class="main__notification__title">진행중인 목표</div>
 		  		
-		  	  <div class="main__notification__title">달성한 목표</div>
-		  		<div class="main__notification__plans">
+		  		<div class="main__notification__plans" style="margin-top: 20%;">
 					{{$store.state.userdata.userdata.complete}}
 				</div>
+		  	  <div class="main__notification__title">달성한 목표</div>
 		  		
-
 		</div>
+	</div>
     </div>
     <div style="width:100%;height:100%; position:relative; background-color:#f1f3f5">
       <transition name="fade">
@@ -57,6 +61,8 @@ export default {
   created() {
 	this.$store.state.status.planner = true;
 	this.$store.state.status.community = false;
+	  	this.$store.state.status.memo = false;
+
 	 this.$store
       .dispatch("token", {
         token: localStorage.getItem("token")
@@ -75,6 +81,7 @@ export default {
 	beforeDestory(){
 		this.$store.state.status.planner = false;
 		this.$store.state.status.community = false;
+		this.$store.state.status.memo = false;
 	},
   methods: {
 	todo() {
@@ -144,19 +151,21 @@ export default {
   font-family: ProductSansM;
 }
 .main__nofitications {
-	padding: 6px;
+	margin-top:10%;
+	padding: 5% 10% 10% 10%;
   background-color:white;
   width: 85%;
-  height: 50vh;
+  height: 40vh;
   border-radius: 20px;
 	display:flex;
-	justify-content:center;
-	align-items:center;
+	justify-content: center;
+  align-items: flex-start;
 	flex-direction:column;
 }
 .dashboard__title{
 	color: black;
-	font-size: 20px;
+	font-size: 22px;
+	font-family: "ProductSansM";
 	margin-bottom: 12px;
 }
 .dashboard__item {
@@ -174,17 +183,22 @@ export default {
   background-color: #E3E1FF;
 }
 .dashboard__item__click {
+  
   transition: 0.2s;
-  background-color: #E3E1FF;
+  background-color: #6c63ff;
   padding: 4px;
   border-radius: 4px;
   font-size:18px;
-  color: black;
+  color: white;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+	.dashboard__item__click img{
+		transition:0.2s;
+		filter: invert(100%) sepia(100%) saturate(100%) hue-rotate(0deg) brightness(100%) contrast(100%);
+	}
 .dashboard__item.on {
   transition: 0.2s;
   background-color: #E3E1FF;
@@ -207,12 +221,30 @@ export default {
   opacity: 1;
   transform: scale(1);
 }
+	.main__notification__plan{
+		display:flex;
+		flex-direction:column;
+		align-items:left;
+		justify-content:center;
+		height:80%;
+		width:80%;
+		margin-left:4px;
+	}
 .main__notification__title {
-	width:100%;
+	/* background-color: #E3E1FF; */
     color: black;
-    margin-top: 18px;
-    font-size: 16px;
+    margin-top: 4px;
+	margin-bottom:12px;
+    font-size: 18px;
     font-family: "NanumSB";
-    text-align: center;
+    text-align: left;
+	box-sizing:content;
+}
+.main__notification__plans {
+	width:100%;
+    color:#6c63ff;
+    font-size: 42px;
+    font-family: "ProductSansM";
+    text-align: left;
 }
 </style>

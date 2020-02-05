@@ -152,3 +152,25 @@ export const DeleteComment = (req: Request, res: Response) => {
 
 	
 };
+
+export const PostDelete = (req: Request, res: Response) => {
+	  const { _id,token } = req.body;
+  let decoded = jwt.verify(token, jwtpassword);
+
+  Post.find({}, function(err, result) {
+    if (err) {
+      console.log(err);
+    }
+	  Post.deleteOne({ _id: _id }, function (err) {
+		});
+  })
+	Post.find({ email: decoded.email }, function(err, result) {
+    if (err) {
+      console.log(err);
+    }
+	var r = result.reverse();
+	 return Send(res, 200, "성공", true, req.body.token, r);
+
+  })
+
+};

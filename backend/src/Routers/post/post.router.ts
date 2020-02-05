@@ -1,10 +1,11 @@
 import * as express from "express"
-import  { PostCreate,PostFind,FindMyPost,CommentCreate,CommentFind,CommentFindAll,PostLike,DeleteComment} from "./post.controller";
+import  { PostCreate,PostFind,FindMyPost,CommentCreate,CommentFind,CommentFindAll,PostLike,DeleteComment,PostDelete} from "./post.controller";
 const router = express.Router();
 
 
 router.post("/postcreate", PostCreate);
 router.post("/postfind", PostFind);
+router.post("/postdelete", PostDelete);
 router.post("/findmypost",FindMyPost)
 router.post("/commentcreate",CommentCreate)
 router.post("/commentfind",CommentFind)

@@ -277,6 +277,36 @@ export default new Vuex.Store({
 			  })
 		  })
 	  },
+	  POST__DELETE({commit,state},data){
+		  return new Promise((resolve,reject)=>{
+			  axios.post("http://nulllove-rgobq.run.goorm.io/api/post/postdelete",data).then(value=>{
+				  resolve(value);
+			  })
+			  .catch(err=>{
+				  reject(err);
+			  })
+		  })
+	  },
+	  MY__PROFILE__SAVE({commit,state},data){
+		  return new Promise((resolve,reject)=>{
+			  axios.post("http://nulllove-rgobq.run.goorm.io/api/account/profilesave",data).then(value=>{
+				  resolve(value);
+			  })
+			  .catch(err=>{
+				  reject(err);
+			  })
+		  })
+	  },
+	  END({commit,state},data){
+		  return new Promise((resolve,reject)=>{
+			  axios.post("http://nulllove-rgobq.run.goorm.io/api/account/end",data).then(value=>{
+				  resolve(value);
+			  })
+			  .catch(err=>{
+				  reject(err);
+			  })
+		  })
+	  },
   },
   modules: {
   }

@@ -6,7 +6,7 @@
     <div class="profile__box">
       <img
         src="../../assets/arrow_back.svg"
-        alt
+        alt="back"
         width="25px"
         class="arrow"
         @click="arrow_back"
@@ -21,56 +21,63 @@
       </div>
       <div class="profile__email">{{$store.state.userdata.email}}</div>
 
-		<div class="profile__edit" @click="edit()">Edit Profile</div>
+      <div class="profile__edit" @click="edit()">Edit Profile</div>
       <!-- <img
         src="../../assets/undraw_2020.svg"
         alt="2020"
         style="width:20%;margin-top:36px;"
       /> -->
 
-		<div class="profile__myarticle">My Article</div>
+      
+    </div>
+	  
+	  <div class="profile__box" v-if="postdata && postdata.length">
+		  <div class="profile__myarticle">My Article</div>
       <div v-for="(value,index) in postdata" :key="index" style="width:80%">
         <div class="profile__article__box">
-            <div class="profile__article__left">
-              <div class="profile__article__profile">
-                <div style="display:flex; align-items:center">
-                  <img
-                    class="profile__article__image"
-                    :src="'http://nulllove-rgobq.run.goorm.io/api/'+value.email+'.png'"
-                    alt="profile"
-                    width="42px"
-                    height="42px"
-                    style="object-fit:cover"
-                  />
-                  <div class="profile__article__name">
-                    {{postdata[index].name}}
-                  </div>
-                </div>
-                <div class="profile__article__delete">
-                  삭제하기
+          <div class="profile__article__left">
+            <div class="profile__article__profile">
+              <div style="display:flex; align-items:center">
+                <img
+                  class="profile__article__image"
+                  :src="'http://nulllove-rgobq.run.goorm.io/api/'+value.email+'.png'"
+                  alt="profile"
+                  width="42px"
+                  height="42px"
+                  style="object-fit:cover"
+                />
+                <div class="profile__article__name">
+                  {{postdata[index].name}}
                 </div>
               </div>
+              <div
+                class="profile__article__delete"
+                @click="deletePost(value._id)"
+              >
+                삭제하기
+              </div>
+            </div>
 
-              <div class="profile__article__title">
-                {{postdata[index].data.title}}
-              </div>
-              <div class="profile__article__subtitle">
-                {{postdata[index].data.text}}
-              </div>
+            <div class="profile__article__title">
+              {{postdata[index].data.title}}
+            </div>
+            <div class="profile__article__subtitle">
+              {{postdata[index].data.text}}
+            </div>
 
-              <div class="profile__article__date">
-                {{postdata[index].data.startDay}} ~
-                {{postdata[index].data.endDay}}
-              </div>
+            <div class="profile__article__date">
+              {{postdata[index].data.startDay}} ~
+              {{postdata[index].data.endDay}}
+            </div>
 
-              <div class="profile__article__text">
-                {{postdata[index].text}}
-              </div>
+            <div class="profile__article__text">
+              {{postdata[index].text}}
             </div>
           </div>
         </div>
       </div>
-    </div>
+	</div>
+  </div>
 </template>
 
 <script>
@@ -104,9 +111,28 @@
 
         this.$router.push("/wrap/main");
       },
-		edit(){
-			this.$router.push("/wrap/profile/edit")
-		}
+      edit() {
+        this.$router.push("/wrap/profile/edit");
+      },
+      deletePost(e) {
+        console.log(e);
+        this.$store
+          .dispatch("POST__DELETE", {
+            token: localStorage.getItem("token"),
+            _id: e
+          })
+          .then(response => {
+            console.log("요청을 보냄");
+            if (response.data.result == true) {
+              console.log(response.data.userdata);
+              this.postdata = response.data.userdata;
+            } else {
+            }
+          })
+          .catch(e => {
+            console.log(e);
+          });
+      }
     }
   };
 </script>
@@ -196,7 +222,7 @@
     font-size: 18px;
   }
   .profile__article__title {
-	  word-break:break-all;
+    word-break: break-all;
     color: black;
     margin-top: 16px;
     text-align: left;
@@ -204,7 +230,7 @@
     font-size: 28px;
   }
   .profile__article__subtitle {
-	  word-break:break-all;
+    word-break: break-all;
     color: #868e96;
     text-align: left;
     font-family: "ProductSansR", "NanumSR";
@@ -217,7 +243,7 @@
     font-size: 12px;
   }
   .profile__article__text {
-	  word-break:break-all;
+    word-break: break-all;
     border-radius: 4px;
     padding: 6px;
     width: 100%;
@@ -249,9 +275,9 @@
     background-color: #f03434;
   }
   .profile__edit {
-	display:flex;
-	  align-items:center;
-	  justify-content:center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 6px;
     font-family: "ProductSansR";
     cursor: pointer;
@@ -264,11 +290,11 @@
     color: #ffffff;
     background-color: #6c63ff;
   }
-	.profile__myarticle{
-		margin-top:36px;
-		font-size:24px;
-		font-family: "ProductSansM";
-		width:75%;
-		text-align:left;
-	}
+  .profile__myarticle {
+    margin-top: 36px;
+    font-size: 24px;
+    font-family: "ProductSansM";
+    width: 75%;
+    text-align: left;
+  }
 </style>

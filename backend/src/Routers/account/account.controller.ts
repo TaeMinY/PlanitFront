@@ -301,3 +301,27 @@ export const MemoDelete =(req:Request,res:Response)=>{
 		Send(res,200,'성공',true,token,result.userdata);
 	})
 }
+export const ProfileSave =(req:Request,res:Response)=>{
+	const {token,username} = req.body;	
+	let decoded = jwt.verify(token, jwtpassword);
+
+	User.findOne({email:decoded.email},function(err,result){
+		result.username = username;
+		User.findOneAndUpdate({email: decoded.email},{$set : {
+			username : result.username
+		}},{new : true})
+		.exec(function (err, r) {
+			console.log(r)
+		})
+		
+		Send(res,200,'닉네임을 변경하셨습니다',true,token,result.userdata);
+	})
+}
+export const End =(req:Request,res:Response)=>{
+	const {token} = req.body;	
+	let decoded = jwt.verify(token, jwtpassword);
+		 User.deleteOne({ email: decoded.email }, function (err) {
+	})
+			Send(res,200,'회원탈퇴 성공',true);
+
+}

@@ -12,8 +12,14 @@
     </div>
 	<div class="memo__main">
 		<div v-for="(v,i) in memodata" class="memo__box">
-			<img class="memo__setting" src="../../assets/more_vert-24px.svg" @click="modal(i)" />
-			{{v}}
+			<div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+				<div class="memo__text__title">Memo {{i+1}}</div>
+				<img class="memo__setting" src="../../assets/more_vert-24px.svg" @click="modal(i)" />
+			</div>
+			
+			<div class="memo__text">{{v}}</div>
+			
+			
 		</div>
 	</div>
 		<v-dialog v-model="dialog" max-width="600px" style="z-index:100000">
@@ -148,8 +154,17 @@ this.$store
 		text-align: left;
 		float: left;
 	}
+	.memo__main__box{
+		width: 100%;
+  	background-color: white;
+  	border-radius: 30px;
+ 	padding:2%;
+		margin-top:16px;
+	}
 	.memo__main{
-	margin-top:16px;
+	
+  
+	
 	max-height:100%;
 	overflow-y:auto;
 		display:flex;
@@ -159,19 +174,28 @@ this.$store
 		width:200px;
 		min-width:200px;
 		min-height:200px;
-		background-color:#36afff;
+		background-color:#6c63ff;
 		opacity:0.7;
 		border-radius:20px;
 		margin: 15px;
 		position:relative;
+		text-align: left;
+		padding:16px;
+		color: #f8f9fa;
 	}
 	.memo__setting{
-		position:absolute;
-		top:5px;
-		right:5px;
-		width:30px;
-		height:30px;
+		cursor:pointer;
+		border-radius:100%;
+		/* position:absolute;
+		top:7.5%;
+		right:7.5%; */
+		width:25px;
+		height:25px;
 		z-index:100;
+	}
+	.memo__setting:hover{
+		transition: 0.3s;
+		background-color:white;
 	}
 	.memo__title {
   font-size: 40px;
@@ -209,5 +233,19 @@ this.$store
 	.v-card__text{
 		padding: 0px !important;
 		font-family: "NanumSR";
+	}
+	.memo__text__title{
+		color:white;
+		font-size: 18px;
+		font-family: "ProductSansM", "NanumSR";
+		
+		
+	}
+	.memo__text{
+		word-break:break-all;
+		color:white;
+		font-size: 16px;
+		font-family: "ProductSansM", "NanumSR";
+		margin-bottom:6px;
 	}
 </style>

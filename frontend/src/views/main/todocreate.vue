@@ -37,6 +37,20 @@ export default {
 	this.$store.state.status.plans = true;
 	this.$store.state.status.calendar = false;
 	this.$store.state.status.memo = false;  
+	  this.$store
+      .dispatch("token", {
+        token: localStorage.getItem("token")
+      })
+      .then(response => {
+        if (response.data.result == true) {
+			console.log(response)
+			this.$store.state.userdata = response.data.userdata;
+        } else {
+        }
+      })
+      .catch(e => {
+        console.log(e);
+      });
   },
 	beforeDestory(){
   		this.$store.state.status.plans = false;

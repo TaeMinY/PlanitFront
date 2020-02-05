@@ -31,8 +31,11 @@
           Name
         </div>
         <input class="edit__input__username" v-model="username" type="text" />
-        <div class="edit__changepw">비밀번호 변경</div>
-        <div class="edit__save">저장</div>
+		  		 <div>{{errorMes}}</div>
+
+        <div class="edit__changepw" @click="change()">비밀번호 변경</div>
+        <div class="edit__save" @click="save()">저장</div>
+		          <div class="edit__save" @click="end()">회원탈퇴</div>
       </div>
     </div>
   </div>
@@ -43,6 +46,7 @@
     name: "profile",
     data() {
       return {
+		  errorMes: "",
         postdata: [],
         username: "",
         userdata: []
@@ -75,6 +79,69 @@
       this.start();
     },
     methods: {
+	change(){
+		if(!this.$cookie.get('passwordfind')){
+			this.$cookie.set('passwordfind', true, { expires: "5m" });
+      this.$store
+        .dispatch("CHECK", { email: this.$store.state.userdata.email })
+        .then(response => {
+		  					localStorage.removeItem('token');
+		  console.log("ㅇㅇ",response)
+		  if(response.data.result == true){
+			  this.errorMes = "이메일을 확인해주세요."
+		  }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    	}else{
+			 this.errorMes = "연속적으로 보낼 수 없습니다 5분을 기다려주세요."
+		}
+	},
+	save(){
+	this.$store
+        .dispatch("MY__PROFILE__SAVE", {
+          token: localStorage.getItem("token"),
+		  username : this.username
+        })
+        .then(response => {
+				if(response.data.result == true){
+					this.errorMes =response.data.mes;
+					this.$store
+      .dispatch("token", {
+        token: localStorage.getItem("token")
+      })
+      .then(response => {
+        if (response.data.result == true) {
+			console.log(response)
+			this.$store.state.userdata = response.data.userdata;
+        } else {
+        }
+      })
+      .catch(e => {
+        console.log(e);
+      });
+				}
+		})
+	},
+	end(){
+		let st = confirm("회원탈퇴를 하시겠습니까?");
+		if(st){
+		this.$store
+        .dispatch("END", {
+          token: localStorage.getItem("token"),
+        })
+        .then(response => {
+				if(response.data.result == true){
+					this.errorMes = "";
+					localStorage.removeItem('token');
+					this.$store.state.userdata = {},
+					this.$router.push("/");
+					
+				}
+		})
+		}
+	},
       arrow_back() {
         this.$store.state.wrap = "right";
 

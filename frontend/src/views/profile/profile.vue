@@ -168,7 +168,6 @@
     width: 100%;
     margin-top: 24px;
     margin-bottom: 20px;
-    background-color: #fdfdfd;
     border-radius: 30px;
     padding: 45px;
     position: relative;

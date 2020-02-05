@@ -11,7 +11,10 @@ export default new Vuex.Store({
 	  wrap : 'left',
 	  status : {
 		  planner:true,
-		  community:false
+		  community:false,
+		  plans:true,
+		  calendar:false,
+		  memo:false,
 	  },
   },
   mutations: {

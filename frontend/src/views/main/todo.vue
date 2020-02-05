@@ -156,6 +156,9 @@ export default {
     }
   },
   created() {
+	  	this.$store.state.status.plans = true;
+	this.$store.state.status.calendar = false;
+	  	this.$store.state.status.memo = false;
     this.$store
       .dispatch("FIND__DATA", {
         token: localStorage.getItem("token")
@@ -172,7 +175,12 @@ export default {
       .catch(e => {
         console.log(e);
       });
-  }
+  },
+	beforeDestory(){
+  		this.$store.state.status.plans = false;
+		this.$store.state.status.calendar = false;
+	  	this.$store.state.status.memo = false;
+	},
 };
 </script>
 <style>

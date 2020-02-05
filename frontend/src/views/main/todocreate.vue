@@ -33,6 +33,16 @@ export default {
       send: false
     };
   },
+  created(){
+	this.$store.state.status.plans = true;
+	this.$store.state.status.calendar = false;
+	this.$store.state.status.memo = false;  
+  },
+	beforeDestory(){
+  		this.$store.state.status.plans = false;
+		this.$store.state.status.calendar = false;
+	  	this.$store.state.status.memo = false;
+	},
   computed: {},
   mounted() {},
   methods: {

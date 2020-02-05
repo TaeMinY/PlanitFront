@@ -5,15 +5,15 @@
 		<div class="dashboard__title">
 			Dashboards	
 		</div>
-        <div @click="todo()" class="dashboard__item">
+        <div @click="todo()" :class="{dashboard__item__click:$store.state.status.plans, dashboard__item:!$store.state.status.plans}">
           <img src="../assets/list-24px.svg" alt="calendar" class="dashboard__icon" />
           Plans
         </div>
-		<div @click="calendar()" class="dashboard__item">
+		<div @click="calendar()":class="{dashboard__item__click:$store.state.status.calendar, dashboard__item:!$store.state.status.calendar}">
           <img src="../assets/calendar_today-24px.svg" alt="calendar" class="dashboard__icon" />
           Calendar
         </div>
-        <div @click="memo()" style="width:fit-content; text-align:left" class="dashboard__item">
+        <div @click="memo()" style="width:fit-content; text-align:left" class="dashboard__item" :class="{dashboard__item__click:$store.state.status.memo, dashboard__item:!$store.state.status.memo}">
           <img src="../assets/note-24px.svg" alt="calendar" class="dashboard__icon" />
           Memo
         </div>
@@ -148,6 +148,18 @@ export default {
 .dashboard__item:hover {
   transition: 0.2s;
   background-color: #E3E1FF;
+}
+.dashboard__item__click {
+  transition: 0.2s;
+  background-color: #E3E1FF;
+  padding: 4px;
+  border-radius: 4px;
+  font-size:18px;
+  color: black;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .dashboard__item.on {
   transition: 0.2s;

@@ -85,6 +85,9 @@ export default {
         title: ''
     }),
     created() {
+			  	this.$store.state.status.plans = false;
+		this.$store.state.status.calendar = true;
+	  	this.$store.state.status.memo = false;
         this.$store
             .dispatch('FIND__DATA', {
                 token: localStorage.getItem('token')
@@ -146,6 +149,11 @@ export default {
     mounted() {
         // this.$refs.calendar.checkChange()
     },
+	beforeDestory(){
+  		this.$store.state.status.plans = false;
+		this.$store.state.status.calendar = false;
+	  	this.$store.state.status.memo = false;
+	},
     methods: {
         // viewDay ({ date }) {
         //   this.focus = date

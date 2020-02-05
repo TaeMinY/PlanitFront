@@ -12,7 +12,18 @@
 	</div>
 </template>
 <script>
-
+export default {
+	created() {
+	  	this.$store.state.status.plans = false;
+		this.$store.state.status.calendar = false;
+	  	this.$store.state.status.memo = true;
+	},
+	beforeDestory(){
+  		this.$store.state.status.plans = false;
+		this.$store.state.status.calendar = false;
+	  	this.$store.state.status.memo = false;
+	},
+}
 </script>
 <style scoped>
 	.memo{

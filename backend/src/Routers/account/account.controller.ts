@@ -268,3 +268,36 @@ export const TodoComplete = (req:Request,res:Response)=>{
 	})
 }
 
+export const MemoSave =(req:Request,res:Response)=>{
+	const {token,memo} = req.body;	
+	let decoded = jwt.verify(token, jwtpassword);
+
+
+	User.findOne({email:decoded.email},function(err,result){
+		result.userdata.memo = memo;
+		User.findOneAndUpdate({email: decoded.email},{$set : {
+			userdata : result.userdata
+		}},{new : true})
+		.exec(function (err, r) {
+			console.log(r)
+		})
+		
+		Send(res,200,'성공',true,token,result.userdata);
+	})
+}
+export const MemoDelete =(req:Request,res:Response)=>{
+	const {token,memo} = req.body;	
+	let decoded = jwt.verify(token, jwtpassword);
+
+	User.findOne({email:decoded.email},function(err,result){
+		result.userdata.memo = memo;
+		User.findOneAndUpdate({email: decoded.email},{$set : {
+			userdata : result.userdata
+		}},{new : true})
+		.exec(function (err, r) {
+			console.log(r)
+		})
+		
+		Send(res,200,'성공',true,token,result.userdata);
+	})
+}

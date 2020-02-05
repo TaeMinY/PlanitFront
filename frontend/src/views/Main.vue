@@ -19,9 +19,17 @@
         </div>
       </div>
       <div class="main__nofitications">
-			<img :src="'http://nulllove-rgobq.run.goorm.io/api/' + $store.state.userdata.email + '.png'" class="main__nofitications__img"/>
-		  	  <div>현재 등록한 목표 {{$store.state.userdata.userdata.plane_left}}</div>
-		  	  <div>현재 달성한 목표 {{$store.state.userdata.userdata.complete}}</div>
+			<!-- <img :src="'http://nulllove-rgobq.run.goorm.io/api/' + $store.state.userdata.email + '.png'" class="main__nofitications__img"/> -->
+		  	  <div class="main__notification__title">진행중인 목표</div>
+		  		<div class="main__notification__plans">
+					{{$store.state.userdata.userdata.plane_left}}
+				</div>
+		  		
+		  	  <div class="main__notification__title">달성한 목표</div>
+		  		<div class="main__notification__plans">
+					{{$store.state.userdata.userdata.complete}}
+				</div>
+		  		
 
 		</div>
     </div>
@@ -198,5 +206,13 @@ export default {
 .fade-leave {
   opacity: 1;
   transform: scale(1);
+}
+.main__notification__title {
+	width:100%;
+    color: black;
+    margin-top: 18px;
+    font-size: 16px;
+    font-family: "NanumSB";
+    text-align: center;
 }
 </style>

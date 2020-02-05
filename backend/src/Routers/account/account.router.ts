@@ -1,5 +1,5 @@
 import * as express from "express"
-import { Signin,Signup,Token ,TodoCreate,DataFind,TodoDelete,PasswordFind,Check,ChangePassword,TodoComplete} from "./account.controller";
+import { Signin,Signup,Token ,TodoCreate,DataFind,TodoDelete,PasswordFind,Check,ChangePassword,TodoComplete,MemoDelete,MemoSave} from "./account.controller";
 import * as path from 'path';
 import * as multer from 'multer';
 const router = express.Router();
@@ -20,6 +20,10 @@ router.post("/signin", Signin);
 router.get("/check", Check);
 
 router.post("/signup",Signup);
+
+router.post("/memodelete",MemoDelete)
+router.post("/memosave",MemoSave)
+
 router.post("/token",Token);
 router.post("/todocreate",TodoCreate)
 router.post("/datafind",DataFind)

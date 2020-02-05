@@ -158,7 +158,7 @@
         .then(response => {
           console.log("요청을 보냄");
           if (response.data.result == true) {
-            var fal = { status: false };
+            var fal = { status: true };
             this.data = response.data.userdata.map(v => Object.assign(v, fal));
           } else {
           }
@@ -369,6 +369,7 @@
     font-size: 18px;
   }
   .see__article__title {
+	  word-break:break-all;
     color: black;
     margin-top: 16px;
     text-align: left;
@@ -376,6 +377,7 @@
     font-size: 28px;
   }
   .see__article__subtitle {
+	  word-break:break-all;
     color: #868e96;
     text-align: left;
     font-family: "ProductSansR", "NanumSR";
@@ -388,6 +390,9 @@
     font-size: 12px;
   }
   .see__article__text {
+	  word-break:break-all;
+	white-space: normal;
+    word-break:break-all;
     border-radius: 4px;
     padding: 6px;
     width: 100%;
@@ -478,16 +483,22 @@
     font-family: "ProductSansR";
   }
   .see__comment__name {
+	  white-space:nowrap;
     margin-left: 8px;
     font-size: 18px;
     font-family: "NanumSB";
   }
   .see__comment__text {
+	text-align:left;
+	white-space: normal;
+    word-break:break-all;
     margin-left: 6px;
     font-size: 16px;
     font-family: "NanumSR";
   }
   .see__comment__time {
+	  margin-left: 6px;
+	  white-space:nowrap;
     color: #adb5bd;
     font-size: 14px;
     font-family: "NanumSR";

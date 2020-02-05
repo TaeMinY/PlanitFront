@@ -202,7 +202,7 @@ export default {
 
                 events.push({
                     name: this.todoData[i].title,
-                    start: this.todoData[i].startDay + ' 0:00',
+                    start: this.todoData[i].endDay + ' 0:00',
                     end: this.todoData[i].endDay + ' 23:59',
                     color: this.colors[this.rnd(0, this.colors.length - 1)]
                 });

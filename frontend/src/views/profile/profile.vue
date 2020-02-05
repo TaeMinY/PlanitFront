@@ -21,7 +21,7 @@
       </div>
       <div class="profile__email">{{$store.state.userdata.email}}</div>
 
-		<div class="profile__edit">Edit Profile</div>
+		<div class="profile__edit" @click="edit()">Edit Profile</div>
       <!-- <img
         src="../../assets/undraw_2020.svg"
         alt="2020"
@@ -103,7 +103,10 @@
         this.$store.state.wrap = "right";
 
         this.$router.push("/wrap/main");
-      }
+      },
+		edit(){
+			this.$router.push("/wrap/profile/edit")
+		}
     }
   };
 </script>
@@ -193,6 +196,7 @@
     font-size: 18px;
   }
   .profile__article__title {
+	  word-break:break-all;
     color: black;
     margin-top: 16px;
     text-align: left;
@@ -200,6 +204,7 @@
     font-size: 28px;
   }
   .profile__article__subtitle {
+	  word-break:break-all;
     color: #868e96;
     text-align: left;
     font-family: "ProductSansR", "NanumSR";
@@ -212,6 +217,7 @@
     font-size: 12px;
   }
   .profile__article__text {
+	  word-break:break-all;
     border-radius: 4px;
     padding: 6px;
     width: 100%;
@@ -222,35 +228,6 @@
     text-align: left;
     font-family: "ProductSansR", "NanumSR";
     font-size: 16px;
-  }
-  .profile__article__comment {
-    display: flex;
-    width: 100%;
-    align-items: center;
-  }
-  .profile__article__comment__input {
-    width: 100%;
-    font-size: 14px;
-    border-radius: 3px;
-    height: 30px;
-    border: 1px solid #adb5bd;
-    padding: 5px 10px;
-    font-family: "ProductSansR", "NanumSRB";
-    box-sizing: content-box;
-  }
-  .profile__article__comment__submit {
-    border-radius: 3px;
-    font-family: "ProductSansR";
-    cursor: pointer;
-    height: 30px;
-    margin: 5px 0px 5px 5px;
-    border: 0;
-    text-align: center;
-    font-size: 14px;
-    padding: 5px 10px;
-    color: #ffffff;
-    background-color: #6c63ff;
-    box-sizing: content-box;
   }
   .profile__article__delete {
     font-family: "ProductSansR", "NanumSB";
@@ -279,7 +256,7 @@
     font-family: "ProductSansR";
     cursor: pointer;
     height: 30px;
-    margin-top: 12px;
+    margin-top: 24px;
     border: 0;
     text-align: center;
     font-size: 14px;

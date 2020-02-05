@@ -40,8 +40,8 @@
 			v-else
         />
 		  <div style="display:flex;width:100%;align-items:center;justify-content:center;margin-top:32px;">
-				<div class="todo__complete" @click="complete(value)">Complete</div>
-				<div class="todo__delete" @click="remove(value)">Remove</div>
+				<div v-if="(value.iscomplete == false)" class="todo__complete" @click="complete(value)">목표 달성</div>
+				<div class="todo__delete" @click="remove(value)">삭제하기</div>
 		  </div>
 		  
       </div>
@@ -339,11 +339,13 @@ export default {
 		width:100%;
 	}
 .todo__box__title {
+	word-break:break-all;
   margin-top: 22px;
   font-size: 28px;
   font-family: "ProductSansR", "NanumSB";
 }
 .todo__box__text {
+	word-break:break-all;
   font-size: 18px;
   font-family: "ProductSansR", "NanumSR";
   margin-bottom: 16px;
@@ -406,9 +408,9 @@ progress::-webkit-progress-value {
 	align-items:center;
 	justify-content:center;
 	width:12%;
-	margin: auto 8px;
-    border-radius: 8px;
-    font-family: "ProductSansR";
+	margin: auto 6px;
+    border-radius: 6px;
+    font-family: "NanumSR";
     cursor: pointer;
     height: 40px;
     border: 0;
@@ -423,9 +425,9 @@ progress::-webkit-progress-value {
 	align-items:center;
 	justify-content:center;
 	width:12%;
-	margin: auto 8px;
-    border-radius: 8px;
-    font-family: "ProductSansR";
+	margin: auto 6px;
+    border-radius: 6px;
+    font-family: "NanumSR";
     cursor: pointer;
     height: 40px;
     border: 1px solid #6c63ff;

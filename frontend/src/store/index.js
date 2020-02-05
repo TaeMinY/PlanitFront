@@ -257,6 +257,26 @@ export default new Vuex.Store({
 			  })
 		  })
 	  },
+	  MEMO__SAVE({commit,state},data){
+		  return new Promise((resolve,reject)=>{
+			  axios.post("http://nulllove-rgobq.run.goorm.io/api/account/memosave",data).then(value=>{
+				  resolve(value);
+			  })
+			  .catch(err=>{
+				  reject(err);
+			  })
+		  })
+	  },
+	  MEMO__DELETE({commit,state},data){
+		  return new Promise((resolve,reject)=>{
+			  axios.post("http://nulllove-rgobq.run.goorm.io/api/account/memodelete",data).then(value=>{
+				  resolve(value);
+			  })
+			  .catch(err=>{
+				  reject(err);
+			  })
+		  })
+	  },
   },
   modules: {
   }

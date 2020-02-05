@@ -69,13 +69,11 @@ export default {
       })
       .then(response => {
         if (response.data.result == true) {
-			console.log(response)
 			this.$store.state.userdata = response.data.userdata;
         } else {
         }
       })
       .catch(e => {
-        console.log(e);
       });
   },
 	beforeDestory(){
@@ -85,7 +83,6 @@ export default {
 	},
   methods: {
 	todo() {
-	  console.log(this);
       this.$router.push("/wrap/main");
     },
     calendar() {

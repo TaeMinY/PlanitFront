@@ -61,13 +61,12 @@ export default {
       this.$store
         .dispatch("CHECK", { email: this.email })
         .then(response => {
-		  console.log("ㅇㅇ",response)
+
 		  if(response.data.result == true){
 			  this.errorMes = "이메일을 확인해주세요."
 		  }
         })
         .catch(err => {
-          console.log(err);
         });
     	}else{
 			 this.errorMes = "연속적으로 보낼 수 없습니다 5분을 기다려주세요."

@@ -130,33 +130,30 @@
         data: [],
         commentData: [],
         commentStatus: [],
-        userdata: {}
+        userdata: {},
+		enter : false
       };
     },
     computed: {},
     components: {},
     created() {
-      console.log("create see");
       this.$store
         .dispatch("token", {
           token: localStorage.getItem("token")
         })
         .then(response => {
-          console.log("요청을 보냄");
           if (response.data.result == true) {
             this.userdata = response.data.userdata;
           } else {
           }
         })
         .catch(e => {
-          console.log(e);
         });
       this.$store
         .dispatch("FIND__POST", {
           token: localStorage.getItem("token")
         })
         .then(response => {
-          console.log("요청을 보냄");
           if (response.data.result == true) {
             var fal = { status: true };
             this.data = response.data.userdata.map(v => Object.assign(v, fal));
@@ -164,24 +161,20 @@
           }
         })
         .catch(e => {
-          console.log(e);
         });
       this.$store
         .dispatch("FIND__COMMENT__ALL", {})
         .then(response => {
-          console.log("요청을 보냄");
           if (response.data.result == true) {
             this.commentData = response.data.userdata;
           } else {
           }
         })
         .catch(e => {
-          console.log(e);
         });
     },
     methods: {
       deletecomment(e) {
-        console.log(e);
 
         this.$store
           .dispatch("DELETE__COMMENT", {
@@ -192,14 +185,12 @@
             this.$store
               .dispatch("FIND__COMMENT__ALL", {})
               .then(response => {
-                console.log("요청을 보냄");
                 if (response.data.result == true) {
                   this.commentData = response.data.userdata;
                 } else {
                 }
               })
               .catch(e => {
-                console.log(e);
               });
           });
       },
@@ -212,7 +203,6 @@
         return false;
       },
       like(e) {
-        console.log("lik", e);
         this.$store
           .dispatch("POST__LIKE", {
             token: localStorage.getItem("token"),
@@ -224,7 +214,6 @@
                 token: localStorage.getItem("token")
               })
               .then(response => {
-                console.log("요청을 보냄");
                 if (response.data.result == true) {
                   var fal = { status: true };
                   this.data = response.data.userdata.map(v =>
@@ -234,7 +223,6 @@
                 }
               })
               .catch(e => {
-                console.log(e);
               });
           });
       },
@@ -261,6 +249,9 @@
         this.$router.push("/wrap/community/create");
       },
       submit(e, index) {
+		
+		  if(this.enter == false){
+			  this.enter = true
         var d = new Date();
         var nowDate =
           d.getFullYear() +
@@ -291,6 +282,7 @@
                     this.commentData = response.data.userdata;
                     document.getElementById(e).value = "";
                     this.data[index].status = true;
+					  this.enter = false;
                   } else {
                   }
                 })
@@ -305,6 +297,7 @@
           });
       }
     }
+	}
   };
 </script>
 <style scoped>

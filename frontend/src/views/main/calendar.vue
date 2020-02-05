@@ -93,9 +93,7 @@ export default {
                 token: localStorage.getItem('token')
             })
             .then(response => {
-                console.log(response);
                 if (response.data.result == true) {
-                    console.log('11');
                     this.todoData = response.data.userdata.todo;
                     const events = [];
                     for (let i = 0; i < this.todoData.length; i++) {
@@ -111,7 +109,6 @@ export default {
                 }
             })
             .catch(e => {
-                console.log(e);
             });
     },
     computed: {
@@ -207,7 +204,6 @@ export default {
                     color: this.colors[this.rnd(0, this.colors.length - 1)]
                 });
             }
-            console.log(this.todoData.length);
             this.title = start.date.slice(0, 7);
             this.start = start;
             this.end = end;

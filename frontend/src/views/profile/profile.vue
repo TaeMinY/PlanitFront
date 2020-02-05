@@ -95,14 +95,12 @@
           token: localStorage.getItem("token")
         })
         .then(response => {
-          console.log("요청을 보냄");
           if (response.data.result == true) {
             this.postdata = response.data.userdata;
           } else {
           }
         })
         .catch(e => {
-          console.log(e);
         });
     },
     methods: {
@@ -115,22 +113,29 @@
         this.$router.push("/wrap/profile/edit");
       },
       deletePost(e) {
-        console.log(e);
         this.$store
           .dispatch("POST__DELETE", {
             token: localStorage.getItem("token"),
             _id: e
           })
           .then(response => {
-            console.log("요청을 보냄");
             if (response.data.result == true) {
-              console.log(response.data.userdata);
-              this.postdata = response.data.userdata;
+				this.$store
+        .dispatch("FIND__MY__POST", {
+          token: localStorage.getItem("token")
+        })
+        .then(response => {
+          if (response.data.result == true) {
+            this.postdata = response.data.userdata;
+          } else {
+          }
+        })
+        .catch(e => {
+        });
             } else {
             }
           })
           .catch(e => {
-            console.log(e);
           });
       }
     }

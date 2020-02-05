@@ -8,15 +8,14 @@
       <div class="todocreate__section">목표 설정</div>
       <input type="text" placeholder="목표 이름" class="todocreate__input" v-model="title" />
       <input type="text" placeholder="세부 실천 내용" class="todocreate__input" v-model="text" />
-      <div class="todocreate__section">달성 기간</div>
+      <div class="todocreate__section">달성 기간 (오늘~)</div>
       <input
         type="date"
-        value="2020-12-31"
         class="todocreate__input"
         style="font-size:14px"
         v-model="endDay"
       />
-      <div class="errorMes">{{ errorM }}</div>
+      <div class="errorMes">{{ errorMes }}</div>
       <input type="submit" value="Add to Plan" class="todocreate__submit" @click="submit()" />
     </div>
   </div>
@@ -29,7 +28,7 @@ export default {
       endDay,
       title,
       text,
-      errorM: "",
+      errorMes: "",
       send: false
     };
   },
@@ -37,20 +36,6 @@ export default {
 	this.$store.state.status.plans = true;
 	this.$store.state.status.calendar = false;
 	this.$store.state.status.memo = false;  
-	  this.$store
-      .dispatch("token", {
-        token: localStorage.getItem("token")
-      })
-      .then(response => {
-        if (response.data.result == true) {
-			console.log(response)
-			this.$store.state.userdata = response.data.userdata;
-        } else {
-        }
-      })
-      .catch(e => {
-        console.log(e);
-      });
   },
 	beforeDestory(){
   		this.$store.state.status.plans = false;
@@ -113,18 +98,17 @@ export default {
           } else {
             //실패
             this.send = false;
-            this.errorM = "기간을 다시 정해주세요";
+            this.errorMes = "기간을 다시 정해주세요";
           }
         } else {
           //실패
           this.send = false;
-          this.errorM = "기간을 다시 정해주세요";
+          this.errorMes = "기간을 다시 정해주세요";
         }
       } else {
         //실패
         this.send = false;
-        this.errorM = "기간을 다시 정해주세요";
-        console.log("Dd");
+        this.errorMes = "기간을 다시 정해주세요";
       }
 
       if (this.send == true) {
@@ -149,13 +133,12 @@ export default {
       })
       .then(response => {
         if (response.data.result == true) {
-			console.log(response)
 			this.$store.state.userdata = response.data.userdata;
         } else {
+			this.errorMes = response.data.mes
         }
       })
       .catch(e => {
-        console.log(e);
       });
 				
 				
@@ -166,7 +149,6 @@ export default {
             }
           })
           .catch(e => {
-            console.log(e);
             this.errorM = "서버에 저장하지 못하였습니다";
           });
         this.send = false;

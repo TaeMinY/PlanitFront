@@ -44,15 +44,12 @@ export default {
         token: localStorage.getItem("token")
       })
       .then(response => {
-        console.log(response);
         if (response.data.result == true) {
           this.todoData = response.data.userdata.todo;
-          console.log(this.todoData);
         } else {
         }
       })
       .catch(e => {
-        console.log(e);
       });
   },
   methods: {
@@ -93,7 +90,6 @@ export default {
             }
           })
           .catch(e => {
-            console.log(e);
             this.errorM = "서버에 저장하지 못하였습니다";
           });
       } else {

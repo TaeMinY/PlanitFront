@@ -35,7 +35,7 @@
 
         <div class="edit__changepw" @click="change()">비밀번호 변경</div>
         <div class="edit__save" @click="save()">저장</div>
-		          <div class="edit__save" @click="end()">회원탈퇴</div>
+		          <div class="edit__delete" @click="end()">회원탈퇴</div>
       </div>
     </div>
   </div>
@@ -59,7 +59,6 @@
           token: localStorage.getItem("token")
         })
         .then(response => {
-          console.log("요청을 보냄");
           if (response.data.result == true) {
             this.postdata = response.data.userdata;
             this.$store
@@ -74,7 +73,6 @@
           }
         })
         .catch(e => {
-          console.log(e);
         });
       this.start();
     },
@@ -86,13 +84,11 @@
         .dispatch("CHECK", { email: this.$store.state.userdata.email })
         .then(response => {
 		  					localStorage.removeItem('token');
-		  console.log("ㅇㅇ",response)
 		  if(response.data.result == true){
 			  this.errorMes = "이메일을 확인해주세요."
 		  }
         })
         .catch(err => {
-          console.log(err);
         });
     	}else{
 			 this.errorMes = "연속적으로 보낼 수 없습니다 5분을 기다려주세요."
@@ -113,13 +109,11 @@
       })
       .then(response => {
         if (response.data.result == true) {
-			console.log(response)
 			this.$store.state.userdata = response.data.userdata;
         } else {
         }
       })
       .catch(e => {
-        console.log(e);
       });
 				}
 		})
@@ -244,6 +238,22 @@
     height: 40px;
     border: 1px solid #6c63ff;
     background-color: #6c63ff;
+    text-align: center;
+    font-size: 14px;
+    padding: 5px 10px;
+    color: white;
+  }
+	.edit__delete {
+    margin: 8px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    font-family: "NanumSR";
+    cursor: pointer;
+    height: 40px;
+    border: 1px solid #f03434;
+    background-color: #f03434;
     text-align: center;
     font-size: 14px;
     padding: 5px 10px;

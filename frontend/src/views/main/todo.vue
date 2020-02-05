@@ -66,21 +66,23 @@ export default {
   },
   computed: {},
   mounted() {},
- methods: {
+  methods: {
 	  complete(e){
 		   var today = new Date();
       var dd = today.getDate() ;
       var mm = today.getMonth() + 1; //January is 0!
       var yyyy = today.getFullYear();
+
       if (dd < 10) {
         dd = "0" + dd;
       }
+
       if (mm < 10) {
         mm = "0" + mm;
       }
+
       today = yyyy + "-" + mm + "-" + dd;
 			  
-		  console.log(e.complete);
 		  if(e.iscomplete == false){
 		  this.$store
         .dispatch("TODO__COMPLETE", {
@@ -96,13 +98,12 @@ export default {
       })
       .then(response => {
         if (response.data.result == true) {
-			console.log(response)
 			this.$store.state.userdata = response.data.userdata;
         } else {
         }
       })
       .catch(e => {
-        console.log(e);
+
       });
 		  })
 		 }
@@ -119,35 +120,36 @@ export default {
               token: localStorage.getItem("token")
             })
             .then(response => {
-              console.log(response);
               if (response.data.result == true) {
-                console.log("11");
                 this.todoData = response.data.userdata.userdata.todo;
 				  			this.$store.state.userdata = response.data.userdata;
-                console.log(this.todoData);
+
               } else {
               }
             })
             .catch(e => {
-              console.log(e);
             });
         })
-        .catch(e => console.log(e));
+         .catch(e => {});
     },
     day(endDay) {
       var today = new Date();
       var dd = today.getDate();
       var mm = today.getMonth() + 1; //January is 0!
       var yyyy = today.getFullYear();
+
       if (dd < 10) {
         dd = "0" + dd;
       }
+
       if (mm < 10) {
         mm = "0" + mm;
       }
+
       today = yyyy + "-" + mm + "-" + dd;
       var diffDate_1 = today instanceof Date ? today : new Date(today);
       var diffDate_2 = endDay instanceof Date ? endDay : new Date(endDay);
+
       diffDate_1 = new Date(
         diffDate_1.getFullYear(),
         diffDate_1.getMonth() + 1,
@@ -158,24 +160,31 @@ export default {
         diffDate_2.getMonth() + 1,
         diffDate_2.getDate()
       );
+
       var diff = Math.abs(diffDate_2.getTime() - diffDate_1.getTime());
       diff = Math.ceil(diff / (1000 * 3600 * 24));
+
       return diff;
     },
     dayBetween(startDay, endDay) {
       var today = new Date(startDay);
+
       var dd = today.getDate();
       var mm = today.getMonth() + 1; //January is 0!
       var yyyy = today.getFullYear();
+
       if (dd < 10) {
         dd = "0" + dd;
       }
+
       if (mm < 10) {
         mm = "0" + mm;
       }
+
       today = yyyy + "-" + mm + "-" + dd;
       var diffDate_1 = today instanceof Date ? today : new Date(today);
       var diffDate_2 = endDay instanceof Date ? endDay : new Date(endDay);
+
       diffDate_1 = new Date(
         diffDate_1.getFullYear(),
         diffDate_1.getMonth() + 1,
@@ -186,8 +195,10 @@ export default {
         diffDate_2.getMonth() + 1,
         diffDate_2.getDate()
       );
+
       var diff = Math.abs(diffDate_2.getTime() - diffDate_1.getTime());
       diff = Math.ceil(diff / (1000 * 3600 * 24));
+
       return diff;
     },
 	  add(){
@@ -208,12 +219,14 @@ export default {
       .then(response => {
         if (response.data.result == true) {
           this.todoData = response.data.userdata.todo;
+
         } else {
         }
       })
       .catch(e => {
-        console.log(e);
       });
+	  
+	  
   },
 	beforeDestory(){
   		this.$store.state.status.plans = false;
@@ -389,15 +402,15 @@ progress::-webkit-progress-value {
 	display:flex;
 	align-items:center;
 	justify-content:center;
-	width:12%;
+	width:14%;
 	margin: auto 6px;
     border-radius: 6px;
-    font-family: "NanumSR";
+    font-family: "NanumSB";
     cursor: pointer;
     height: 40px;
     border: 0;
     text-align: center;
-    font-size: 14px;
+    font-size: 17px;
     padding: 5px 10px;
     color: #ffffff;
     background-color: #6c63ff;
@@ -406,15 +419,15 @@ progress::-webkit-progress-value {
 	display:flex;
 	align-items:center;
 	justify-content:center;
-	width:12%;
+	width:14%;
 	margin: auto 6px;
     border-radius: 6px;
-    font-family: "NanumSR";
+    font-family: "NanumSB";
     cursor: pointer;
     height: 40px;
     border: 1px solid #6c63ff;
     text-align: center;
-    font-size: 14px;
+    font-size: 17px;
     padding: 5px 10px;
     color: #6c63ff;
   }

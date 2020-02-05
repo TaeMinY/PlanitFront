@@ -12,6 +12,7 @@ const password = 'oidfsdfsfsdfdsfD@23Tsa&*saf';
 const userpassword =[];
 const passwordRule = /^.*(?=^.{6,15}$)(?=.*\d)(?=.*[a-zA-Z]).*$/;
 const emailRule = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+require('dotenv').config();
 
 export const Signup = async (req: Request, res: Response) => {
   const {username, password, password2, email} = req.body;
@@ -180,8 +181,8 @@ export const PasswordFind = (req:Request,res:Response)=>{
 	let transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'playplanit@gmail.com',  // gmail 계정 아이디를 입력
-      pass: 'planit2020'          // gmail 계정의 비밀번호를 입력
+      user: process.env.email,  // gmail 계정 아이디를 입력
+      pass: process.env.password         // gmail 계정의 비밀번호를 입력
     }
   });
 	let token = jwt.sign(

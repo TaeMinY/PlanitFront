@@ -19,7 +19,6 @@
         </div>
       </div>
       <div class="main__nofitications">
-			<!-- <img :src="'http://nulllove-rgobq.run.goorm.io/api/' + $store.state.userdata.email + '.png'" class="main__nofitications__img"/> -->
 		  <div class="dashboard__title">
 			Progress	
 			</div>

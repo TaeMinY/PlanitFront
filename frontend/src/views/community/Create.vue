@@ -4,7 +4,7 @@
       <div>Share Plans</div>
     </div>
     <div class="create__text">
-				<img src="../../assets/arrow_back.svg" alt="" width="25px" class="arrow" @click="arrow_back"/>
+      <img src="../../assets/arrow_back.svg" alt width="25px" class="arrow" @click="arrow_back" />
       <img src="../../assets/undraw_upload.svg" alt="새로운 목표" width="200px" />
 
       <div class="create__section">공유할 목표 선택</div>
@@ -49,13 +49,12 @@ export default {
         } else {
         }
       })
-      .catch(e => {
-      });
+      .catch(e => {});
   },
   methods: {
-	arrow_back(){
-		this.$router.push("/wrap/community");	
-	},
+    arrow_back() {
+      this.$router.push("/wrap/community");
+    },
     submit() {
       var target = document.getElementById("selectBox");
       var Array = this.todoData.filter(
@@ -100,12 +99,12 @@ export default {
 };
 </script>
 <style scoped>
-	.arrow{
-		cursor:pointer;
-		position:absolute;
-		top:35px;
-		left:30px;
-	}
+.arrow {
+  cursor: pointer;
+  position: absolute;
+  top: 35px;
+  left: 30px;
+}
 .create {
   width: 100%;
   height: 100%;
@@ -162,7 +161,7 @@ export default {
   flex-direction: column;
   border-radius: 30px;
   height: 85%;
-  position:relative;
+  position: relative;
 }
 .create__main {
   display: flex;

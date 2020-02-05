@@ -7,11 +7,11 @@ import Send from "../../Module/Send";
 import * as jwt from "jsonwebtoken";
 import * as shortid from "shortid";
 
-const jwtpassword = "oiwjoiefinsajd@%&SD@23Tsa&*saf";
+require("dotenv").config();
 
 export const PostCreate = (req: Request, res: Response) => {
   const { token, data, text, time } = req.body;
-  let decoded = jwt.verify(token, jwtpassword);
+  let decoded = jwt.verify(token, process.env.jwtpassword);
 
   User.findOne({ email: decoded.email }, function(err, result) {
     const post: any = new Post({
@@ -39,7 +39,7 @@ export const PostFind = (req: Request, res: Response) => {
 };
 export const FindMyPost = (req: Request, res: Response) => {
   const { token } = req.body;
-  let decoded = jwt.verify(token, jwtpassword);
+  let decoded = jwt.verify(token, process.env.jwtpassword);
 
   Post.find({ email: decoded.email }, function(err, result) {
     if (err) {
@@ -50,7 +50,7 @@ export const FindMyPost = (req: Request, res: Response) => {
 };
 export const CommentCreate = (req: Request, res: Response) => {
   const { token, text, time, _id } = req.body;
-  let decoded = jwt.verify(token, jwtpassword);
+  let decoded = jwt.verify(token, process.env.jwtpassword);
 
   User.findOne({ email: decoded.email }, function(err, result) {
     const comment: any = new Comment({
@@ -67,13 +67,13 @@ export const CommentCreate = (req: Request, res: Response) => {
 };
 export const CommentFind = (req: Request, res: Response) => {
   const { token, _id } = req.body;
-  let decoded = jwt.verify(token, jwtpassword);
+  let decoded = jwt.verify(token, process.env.jwtpassword);
 
   Comment.find({ post_id: _id }, function(err, result) {
     if (err) {
       console.log(err);
     }
-	      var r = result.reverse();
+    var r = result.reverse();
     return Send(res, 200, "성공", true, req.body.token, r);
   });
 };
@@ -82,14 +82,14 @@ export const CommentFindAll = (req: Request, res: Response) => {
     if (err) {
       console.log(err);
     }
-	var r = result.reverse();
+    var r = result.reverse();
 
     return Send(res, 200, "성공", true, req.body.token, r);
   });
 };
 export const PostLike = (req: Request, res: Response) => {
   const { token, _id } = req.body;
-  let decoded = jwt.verify(token, jwtpassword);
+  let decoded = jwt.verify(token, process.env.jwtpassword);
   Post.findOne({ _id: _id }, function(err, result) {
     var k = result.like_users;
     var Down = result.like - 1;
@@ -143,34 +143,28 @@ export const PostLike = (req: Request, res: Response) => {
   });
 };
 export const DeleteComment = (req: Request, res: Response) => {
-  const { _id,token } = req.body;
-	  let decoded = jwt.verify(token, jwtpassword);
-		
-		 Comment.deleteOne({ _id: _id }, function (err) {
-		});
-	      return Send(res, 200, "성공", true);
+  const { _id, token } = req.body;
+  let decoded = jwt.verify(token, process.env.jwtpassword);
 
-	
+  Comment.deleteOne({ _id: _id }, function(err) {});
+  return Send(res, 200, "성공", true);
 };
 
 export const PostDelete = (req: Request, res: Response) => {
-	  const { _id,token } = req.body;
-  let decoded = jwt.verify(token, jwtpassword);
+  const { _id, token } = req.body;
+  let decoded = jwt.verify(token, process.env.jwtpassword);
 
   Post.find({}, function(err, result) {
     if (err) {
       console.log(err);
     }
-	  Post.deleteOne({ _id: _id }, function (err) {
-		});
-  })
-	Post.find({ email: decoded.email }, function(err, result) {
+    Post.deleteOne({ _id: _id }, function(err) {});
+  });
+  Post.find({ email: decoded.email }, function(err, result) {
     if (err) {
       console.log(err);
     }
-	var r = result.reverse();
-	 return Send(res, 200, "성공", true, req.body.token, r);
-
-  })
-
+    var r = result.reverse();
+    return Send(res, 200, "성공", true, req.body.token, r);
+  });
 };

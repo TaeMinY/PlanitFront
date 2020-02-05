@@ -20,20 +20,11 @@
           v-on:keyup.enter="submit"
         />
         <div class="errorMes">{{ errorMes }}</div>
-        <input
-          type="submit"
-          class="input-login"
-          value="Send Email"
-          @click="submit()"
-        />
+        <input type="submit" class="input-login" value="Send Email" @click="submit()" />
       </div>
     </div>
     <div class="image_div">
-      <img
-        src="../assets/undraw_my_password_d6kg.svg"
-        alt="로고"
-        class="logo-2"
-      />
+      <img src="../assets/undraw_my_password_d6kg.svg" alt="로고" class="logo-2" />
     </div>
   </div>
 </template>
@@ -46,45 +37,40 @@ export default {
       errorMes: ""
     };
   },
-	created(){
-		
-		
-	},
+  created() {},
   methods: {
     back() {
       this.$store.state.transtionStatus = "bottom";
       this.$router.push("/account/signin");
     },
     submit() {
-		if(!this.$cookie.get('passwordfind')){
-			this.$cookie.set('passwordfind', true, { expires: "5m" });
-      this.$store
-        .dispatch("CHECK", { email: this.email })
-        .then(response => {
-
-		  if(response.data.result == true){
-			  this.errorMes = "이메일을 확인해주세요."
-		  }
-        })
-        .catch(err => {
-        });
-    	}else{
-			 this.errorMes = "연속적으로 보낼 수 없습니다 5분을 기다려주세요."
-		}
-	}
+      if (!this.$cookie.get("passwordfind")) {
+        this.$cookie.set("passwordfind", true, { expires: "5m" });
+        this.$store
+          .dispatch("CHECK", { email: this.email })
+          .then(response => {
+            if (response.data.result == true) {
+              this.errorMes = "이메일을 확인해주세요.";
+            }
+          })
+          .catch(err => {});
+      } else {
+        this.errorMes = "연속적으로 보낼 수 없습니다 5분을 기다려주세요.";
+      }
+    }
   }
 };
 </script>
 
 <style scoped>
-	.signin_text > *{
-		box-sizing:content-box !important;
-	}
+.signin_text > * {
+  box-sizing: content-box !important;
+}
 .errorMes {
   font-size: 14px;
   color: red;
   margin: 5px 0px;
-		background-color:white;
+  background-color: white;
 }
 .find {
   width: 100%;
@@ -99,8 +85,7 @@ export default {
   position: absolute;
   top: 30px;
   left: 30px;
-		box-sizing:content-box;
-
+  box-sizing: content-box;
 }
 .background {
   width: 100%;
@@ -143,8 +128,8 @@ export default {
   font-family: "ProductSansM";
   color: black;
   text-align: center;
- 
-	margin-bottom: 2%;
+
+  margin-bottom: 2%;
   font-size: 36px;
 }
 .input-email {
@@ -156,7 +141,7 @@ export default {
   margin: 5px auto;
   padding: 5px 10px;
   font-family: "ProductSansR", "NanumSRB";
-  box-sizing:content-box;
+  box-sizing: content-box;
 }
 .input-email::placeholder {
   font-size: 14px;

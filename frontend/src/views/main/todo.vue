@@ -12,16 +12,13 @@
     </div>
     <div class="todo__main" v-if="(todoData.length != 0)">
       <div class="todo__box" v-for="(value,index) in todoData" :key="index">
-		  
-		<div class="todo__box__article">
-			<div class="todo__box__dday" v-if="value.iscomplete">Complete!</div>
-			<div class="todo__box__dday" v-else-if="day(value.endDay)<=0">Expired</div>
-			<div class="todo__box__dday" v-else>D - {{day(value.endDay)}}</div>
-        	<div class="todo__box__title">{{value.title}}</div>
-        	<div class="todo__box__text">{{value.text}}</div> 
-			
-		</div>
-        
+        <div class="todo__box__article">
+          <div class="todo__box__dday" v-if="value.iscomplete">Complete!</div>
+          <div class="todo__box__dday" v-else-if="day(value.endDay)<=0">Expired</div>
+          <div class="todo__box__dday" v-else>D - {{day(value.endDay)}}</div>
+          <div class="todo__box__title">{{value.title}}</div>
+          <div class="todo__box__text">{{value.text}}</div>
+        </div>
 
         <div class="todo__box__day">
           <div class="todo__box__startday">{{value.startDay}}</div>
@@ -31,34 +28,39 @@
           :value="dayBetween(value.startDay, value.endDay)-day(value.endDay)"
           :max="dayBetween(value.startDay, value.endDay)"
           class="todo__box__progress"
-			v-if="(value.iscomplete == false)"
+          v-if="(value.iscomplete == false)"
         />
-		  <progress
+        <progress
           :value="dayBetween(value.startDay, value.endDay)-day(value.endDay)+1"
           :max="dayBetween(value.startDay, value.endDay)"
           class="todo__box__progress"
-			v-else
+          v-else
         />
-		  <div style="display:flex;width:100%;align-items:center;justify-content:center;margin-top:32px;">
-				<div v-if="(value.iscomplete == false)" class="todo__complete" @click="complete(value)">목표 달성</div>
-				<div class="todo__delete" @click="remove(value)">삭제하기</div>
-		  </div>
-		  
+        <div
+          style="display:flex;width:100%;align-items:center;justify-content:center;margin-top:32px;"
+        >
+          <div
+            v-if="(value.iscomplete == false)"
+            class="todo__complete"
+            @click="complete(value)"
+          >목표 달성</div>
+          <div class="todo__delete" @click="remove(value)">삭제하기</div>
+        </div>
       </div>
-		
     </div>
-	<div v-else class="todoed">
-		<div class="todoed__title">새로운 목표를 추가해보세요</div>
-		<img src="../../assets/undraw__todo.svg" alt="사진" width="350px" height="350px" />
-		<div class="todoed__button" @click="add()"><span>추가하기</span></div>
-		
-	</div>
-	</div>
+    <div v-else class="todoed">
+      <div class="todoed__title">새로운 목표를 추가해보세요</div>
+      <img src="../../assets/undraw__todo.svg" alt="사진" width="350px" height="350px" />
+      <div class="todoed__button" @click="add()">
+        <span>추가하기</span>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-	data() {
+  data() {
     return {
       todoData: [],
       valueDeterminate: 50
@@ -67,9 +69,9 @@ export default {
   computed: {},
   mounted() {},
   methods: {
-	  complete(e){
-		   var today = new Date();
-      var dd = today.getDate() ;
+    complete(e) {
+      var today = new Date();
+      var dd = today.getDate();
       var mm = today.getMonth() + 1; //January is 0!
       var yyyy = today.getFullYear();
 
@@ -82,32 +84,30 @@ export default {
       }
 
       today = yyyy + "-" + mm + "-" + dd;
-			  
-		  if(e.iscomplete == false){
-		  this.$store
-        .dispatch("TODO__COMPLETE", {
-          id: e.id,
-		time:today,
-          token: localStorage.getItem("token")
-        })
-        .then(response => {
-	 		this.todoData = response.data.userdata.todo
-			  this.$store
-      .dispatch("token", {
-        token: localStorage.getItem("token")
-      })
-      .then(response => {
-        if (response.data.result == true) {
-			this.$store.state.userdata = response.data.userdata;
-        } else {
-        }
-      })
-      .catch(e => {
 
-      });
-		  })
-		 }
-	  },
+      if (e.iscomplete == false) {
+        this.$store
+          .dispatch("TODO__COMPLETE", {
+            id: e.id,
+            time: today,
+            token: localStorage.getItem("token")
+          })
+          .then(response => {
+            this.todoData = response.data.userdata.todo;
+            this.$store
+              .dispatch("token", {
+                token: localStorage.getItem("token")
+              })
+              .then(response => {
+                if (response.data.result == true) {
+                  this.$store.state.userdata = response.data.userdata;
+                } else {
+                }
+              })
+              .catch(e => {});
+          });
+      }
+    },
     remove(value) {
       this.$store
         .dispatch("TODO__DELETE", {
@@ -122,15 +122,13 @@ export default {
             .then(response => {
               if (response.data.result == true) {
                 this.todoData = response.data.userdata.userdata.todo;
-				  			this.$store.state.userdata = response.data.userdata;
-
+                this.$store.state.userdata = response.data.userdata;
               } else {
               }
             })
-            .catch(e => {
-            });
+            .catch(e => {});
         })
-         .catch(e => {});
+        .catch(e => {});
     },
     day(endDay) {
       var today = new Date();
@@ -201,17 +199,17 @@ export default {
 
       return diff;
     },
-	  add(){
-		this.$router.push("/wrap/main/todocreate")  
-	  },
+    add() {
+      this.$router.push("/wrap/main/todocreate");
+    },
     create() {
       this.$router.push("/wrap/main/todocreate");
     }
   },
   created() {
-	  	this.$store.state.status.plans = true;
-	this.$store.state.status.calendar = false;
-	  	this.$store.state.status.memo = false;
+    this.$store.state.status.plans = true;
+    this.$store.state.status.calendar = false;
+    this.$store.state.status.memo = false;
     this.$store
       .dispatch("FIND__DATA", {
         token: localStorage.getItem("token")
@@ -219,59 +217,53 @@ export default {
       .then(response => {
         if (response.data.result == true) {
           this.todoData = response.data.userdata.todo;
-
         } else {
         }
       })
-      .catch(e => {
-      });
-	  
-	  
+      .catch(e => {});
   },
-	beforeDestory(){
-  		this.$store.state.status.plans = false;
-		this.$store.state.status.calendar = false;
-	  	this.$store.state.status.memo = false;
-	},
+  beforeDestory() {
+    this.$store.state.status.plans = false;
+    this.$store.state.status.calendar = false;
+    this.$store.state.status.memo = false;
+  }
 };
 </script>
 <style>
-	
-	.todoed__title{
-		font-size:36px;
-		font-family:"NanumSB";
-		color:black;
-	}
-	.todoed__button{
-		cursor:pointer;
-		font-family:"NanumSR";
-		background-color:#6c63ff;
-		color:white;
-		width:180px;
-		height:45px;
-		display:flex;
-		justify-content:center;
-		align-items:center;
-		border-radius:30px;
-		
-	}
-	.todoed{
-		height:100%;
-		display:flex;
-		justify-content:center;
-		align-items:center;
-		flex-direction:column;
-		overflow-x: hidden;
-  		margin: 8px 0px;
-  		background-color: white;
-  		border-radius: 30px;
-		position:relative;
-	}
-	.todoed > *{
-		margin:10px;
-	}
+.todoed__title {
+  font-size: 36px;
+  font-family: "NanumSB";
+  color: black;
+}
+.todoed__button {
+  cursor: pointer;
+  font-family: "NanumSR";
+  background-color: #6c63ff;
+  color: white;
+  width: 180px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+}
+.todoed {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow-x: hidden;
+  margin: 8px 0px;
+  background-color: white;
+  border-radius: 30px;
+  position: relative;
+}
+.todoed > * {
+  margin: 10px;
+}
 .todo__deleteold {
-  cursor:pointer;
+  cursor: pointer;
   padding: 4px;
   font-size: 24px;
   position: absolute;
@@ -291,10 +283,10 @@ export default {
   flex-direction: column;
   justify-content: flex-start;
 }
-.todo__main{
-	margin-top:16px;
-	max-height:100%;
-	overflow-y:auto;
+.todo__main {
+  margin-top: 16px;
+  max-height: 100%;
+  overflow-y: auto;
 }
 .todo__title {
   font-size: 40px;
@@ -317,10 +309,10 @@ export default {
   height: fit-content;
 }
 .todo__box {
-	display:flex;
-	flex-direction:column;
-	justify-content:center;
-	align-items:center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   min-height: 200px;
   margin-bottom: 20px;
@@ -330,17 +322,17 @@ export default {
   padding: 48px 18px;
   position: relative;
 }
-	.todo__box__article{
-		width:100%;
-	}
+.todo__box__article {
+  width: 100%;
+}
 .todo__box__title {
-	word-break:break-all;
+  word-break: break-all;
   margin-top: 22px;
   font-size: 28px;
   font-family: "ProductSansR", "NanumSB";
 }
 .todo__box__text {
-	word-break:break-all;
+  word-break: break-all;
   font-size: 18px;
   font-family: "ProductSansR", "NanumSR";
   margin-bottom: 16px;
@@ -367,7 +359,7 @@ export default {
 }
 .todo__box__dday {
   width: 80%;
-  display:inline;
+  display: inline;
   padding: 8px 15px;
   border-radius: 14px;
   color: white;
@@ -399,39 +391,39 @@ progress::-webkit-progress-value {
   background-size: 35px 20px, 100% 100%, 100% 100%;
 }
 .todo__complete {
-	display:flex;
-	align-items:center;
-	justify-content:center;
-	width:14%;
-	margin: auto 6px;
-    border-radius: 6px;
-    font-family: "NanumSB";
-    cursor: pointer;
-    height: 40px;
-    border: 0;
-    text-align: center;
-    font-size: 17px;
-    padding: 5px 10px;
-    color: #ffffff;
-    background-color: #6c63ff;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14%;
+  margin: auto 6px;
+  border-radius: 6px;
+  font-family: "NanumSB";
+  cursor: pointer;
+  height: 40px;
+  border: 0;
+  text-align: center;
+  font-size: 17px;
+  padding: 5px 10px;
+  color: #ffffff;
+  background-color: #6c63ff;
+}
 .todo__delete {
-	display:flex;
-	align-items:center;
-	justify-content:center;
-	width:14%;
-	margin: auto 6px;
-    border-radius: 6px;
-    font-family: "NanumSB";
-    cursor: pointer;
-    height: 40px;
-    border: 1px solid #6c63ff;
-    text-align: center;
-    font-size: 17px;
-    padding: 5px 10px;
-    color: #6c63ff;
-  }
-	/* .todo__delete:hover{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14%;
+  margin: auto 6px;
+  border-radius: 6px;
+  font-family: "NanumSB";
+  cursor: pointer;
+  height: 40px;
+  border: 1px solid #6c63ff;
+  text-align: center;
+  font-size: 17px;
+  padding: 5px 10px;
+  color: #6c63ff;
+}
+/* .todo__delete:hover{
 		color: white;
 		background-color: #6c63ff;
 		transition: 0.3s;

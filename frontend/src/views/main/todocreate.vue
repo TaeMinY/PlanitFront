@@ -2,19 +2,14 @@
   <div class="todocreate">
     <div class="todocreate__title">Add Plan</div>
     <div class="todocreate__main">
-		<img src="../../assets/arrow_back.svg" alt="" width="25px" class="arrow" @click="arrow_back"/>
+      <img src="../../assets/arrow_back.svg" alt width="25px" class="arrow" @click="arrow_back" />
       <img src="../../assets/undraw_scrum_board_cesn.svg" alt="새로운 목표" width="15%" />
 
       <div class="todocreate__section">목표 설정</div>
       <input type="text" placeholder="목표 이름" class="todocreate__input" v-model="title" />
       <input type="text" placeholder="세부 실천 내용" class="todocreate__input" v-model="text" />
       <div class="todocreate__section">달성 기간 (오늘~)</div>
-      <input
-        type="date"
-        class="todocreate__input"
-        style="font-size:14px"
-        v-model="endDay"
-      />
+      <input type="date" class="todocreate__input" style="font-size:14px" v-model="endDay" />
       <div class="errorMes">{{ errorMes }}</div>
       <input type="submit" value="Add to Plan" class="todocreate__submit" @click="submit()" />
     </div>
@@ -32,22 +27,22 @@ export default {
       send: false
     };
   },
-  created(){
-	this.$store.state.status.plans = true;
-	this.$store.state.status.calendar = false;
-	this.$store.state.status.memo = false;  
+  created() {
+    this.$store.state.status.plans = true;
+    this.$store.state.status.calendar = false;
+    this.$store.state.status.memo = false;
   },
-	beforeDestory(){
-  		this.$store.state.status.plans = false;
-		this.$store.state.status.calendar = false;
-	  	this.$store.state.status.memo = false;
-	},
+  beforeDestory() {
+    this.$store.state.status.plans = false;
+    this.$store.state.status.calendar = false;
+    this.$store.state.status.memo = false;
+  },
   computed: {},
   mounted() {},
   methods: {
-	arrow_back(){
-		this.$router.push("/wrap/main");	
-	},
+    arrow_back() {
+      this.$router.push("/wrap/main");
+    },
     dateDiff(_date1, _date2) {
       var diffDate_1 = _date1 instanceof Date ? _date1 : new Date(_date1);
       var diffDate_2 = _date2 instanceof Date ? _date2 : new Date(_date2);
@@ -127,22 +122,19 @@ export default {
               this.text = "";
               this.startDay = "";
               this.endDay = "";
-				this.$store
-      .dispatch("token", {
-        token: localStorage.getItem("token")
-      })
-      .then(response => {
-        if (response.data.result == true) {
-			this.$store.state.userdata = response.data.userdata;
-        } else {
-			this.errorMes = response.data.mes
-        }
-      })
-      .catch(e => {
-      });
-				
-				
-				
+              this.$store
+                .dispatch("token", {
+                  token: localStorage.getItem("token")
+                })
+                .then(response => {
+                  if (response.data.result == true) {
+                    this.$store.state.userdata = response.data.userdata;
+                  } else {
+                    this.errorMes = response.data.mes;
+                  }
+                })
+                .catch(e => {});
+
               this.$router.push("/wrap/main");
             } else {
               this.errorM = response.data.mes;
@@ -158,12 +150,12 @@ export default {
 };
 </script>
 <style scoped>
-	.arrow{
-		cursor:pointer;
-		position:absolute;
-		top:35px;
-		left:30px;
-	}
+.arrow {
+  cursor: pointer;
+  position: absolute;
+  top: 35px;
+  left: 30px;
+}
 .todocreate {
   width: 100%;
   height: 100%;
@@ -196,7 +188,7 @@ export default {
   margin: 8px 0px;
   background-color: white;
   border-radius: 30px;
-	position:relative;
+  position: relative;
 }
 .errorMes {
   font-size: 14px;

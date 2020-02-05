@@ -21,13 +21,14 @@
       </div>
       <div class="profile__email">{{$store.state.userdata.email}}</div>
 
-      <input type="submit" class="profile__edit" value="Edit Profile" />
+		<div class="profile__edit">Edit Profile</div>
       <!-- <img
         src="../../assets/undraw_2020.svg"
         alt="2020"
         style="width:20%;margin-top:36px;"
       /> -->
 
+		<div class="profile__myarticle">My Article</div>
       <div v-for="(value,index) in postdata" :key="index" style="width:80%">
         <div class="profile__article__box">
             <div class="profile__article__left">
@@ -166,8 +167,8 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin-top: 24px;
-    margin-bottom: 20px;
+    margin-top: 4px;
+    margin-bottom: 44px;
     border-radius: 30px;
     padding: 45px;
     position: relative;
@@ -271,7 +272,10 @@
     background-color: #f03434;
   }
   .profile__edit {
-    border-radius: 3px;
+	display:flex;
+	  align-items:center;
+	  justify-content:center;
+    border-radius: 6px;
     font-family: "ProductSansR";
     cursor: pointer;
     height: 30px;
@@ -279,9 +283,15 @@
     border: 0;
     text-align: center;
     font-size: 14px;
-    padding: 5px 10px;
+    padding: 20px;
     color: #ffffff;
     background-color: #6c63ff;
-    box-sizing: content-box;
   }
+	.profile__myarticle{
+		margin-top:36px;
+		font-size:24px;
+		font-family: "ProductSansM";
+		width:75%;
+		text-align:left;
+	}
 </style>

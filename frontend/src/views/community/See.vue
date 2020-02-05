@@ -335,12 +335,12 @@
     flex-direction: column;
     width: 100%;
     min-height: 200px;
-    margin-top: 24px;
-    margin-bottom: 20px;
+    margin-top: 28px;
+    margin-bottom: 24px;
     background-color: white;
     border-radius: 30px;
     box-sizing: border-box;
-    padding: 45px;
+    padding: 50px;
     position: relative;
   }
   .see__left {

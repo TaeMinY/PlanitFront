@@ -74,7 +74,6 @@ export default {
       var dd = today.getDate();
       var mm = today.getMonth() + 1; //January is 0!
       var yyyy = today.getFullYear();
-
       if (dd < 10) {
         dd = "0" + dd;
       }
@@ -130,6 +129,23 @@ export default {
               this.text = "";
               this.startDay = "";
               this.endDay = "";
+				this.$store
+      .dispatch("token", {
+        token: localStorage.getItem("token")
+      })
+      .then(response => {
+        if (response.data.result == true) {
+			console.log(response)
+			this.$store.state.userdata = response.data.userdata;
+        } else {
+        }
+      })
+      .catch(e => {
+        console.log(e);
+      });
+				
+				
+				
               this.$router.push("/wrap/main");
             } else {
               this.errorM = response.data.mes;

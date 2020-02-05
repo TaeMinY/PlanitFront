@@ -117,6 +117,20 @@ export default new Vuex.Store({
 			  })
 		  })
 	  },
+	   TODO__COMPLETE({commit,state},data){
+		  return new Promise((resolve,reject)=>{
+			  console.log(data);
+			  axios
+				  .post("http://nulllove-rgobq.run.goorm.io/api/account/todocomplete",data)
+				  .then(value=>{
+				  	console.log(value);
+				  	resolve(value);
+			  	  })
+			  .catch(err=>{
+				  reject(err);
+			  })
+		  })
+	  },
 	   FIND__DATA({commit,state},data){
 		  return new Promise((resolve,reject)=>{
 			  console.log(data);
@@ -232,7 +246,17 @@ export default new Vuex.Store({
 				  reject(err);
 			  })
 		  })
-	  }
+	  },
+	  TODO__COMPLETE__TIME({commit,state},data){
+		  return new Promise((resolve,reject)=>{
+			  axios.post("http://nulllove-rgobq.run.goorm.io/api/account/todocompletetime",data).then(value=>{
+				  resolve(value);
+			  })
+			  .catch(err=>{
+				  reject(err);
+			  })
+		  })
+	  },
   },
   modules: {
   }

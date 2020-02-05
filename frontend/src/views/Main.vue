@@ -20,8 +20,9 @@
       </div>
       <div class="main__nofitications">
 			<img :src="'http://nulllove-rgobq.run.goorm.io/api/' + $store.state.userdata.email + '.png'" class="main__nofitications__img"/>
-		  <div>안녕하세요, <span style="font-family: NanumSB;" >{{$store.state.userdata.username}}님!</span></div>
-		  	<div style="word-break:keep-all; font-size: 24px; font-family:NanumSB;">환영합니다!</div>
+		  	  <div>현재 등록한 목표 {{$store.state.userdata.userdata.plane_left}}</div>
+		  	  <div>현재 달성한 목표 {{$store.state.userdata.userdata.complete}}</div>
+
 		</div>
     </div>
     <div style="width:100%;height:100%; position:relative; background-color:#f1f3f5">
@@ -41,12 +42,27 @@ export default {
   },
 	data(){
 	return{
-		imageurl:"http://nulllove-rgobq.run.goorm.io/"+this.$store.state.userdata.email+'.png'
+		imageurl:"http://nulllove-rgobq.run.goorm.io/"+this.$store.state.userdata.email+'.png',
+		plane_left:0
 	}	
 	},
   created() {
 	this.$store.state.status.planner = true;
 	this.$store.state.status.community = false;
+	 this.$store
+      .dispatch("token", {
+        token: localStorage.getItem("token")
+      })
+      .then(response => {
+        if (response.data.result == true) {
+			console.log(response)
+			this.$store.state.userdata = response.data.userdata;
+        } else {
+        }
+      })
+      .catch(e => {
+        console.log(e);
+      });
   },
 	beforeDestory(){
 		this.$store.state.status.planner = false;

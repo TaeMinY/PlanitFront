@@ -14,10 +14,12 @@
       <div class="todo__box" v-for="(value,index) in todoData" :key="index">
 		  
 		<div class="todo__box__article">
-			<div class="todo__box__dday" v-if="day(value.endDay)<=0">Complete!</div>
+			<div class="todo__box__dday" v-if="value.iscomplete">Complete!</div>
+			<div class="todo__box__dday" v-else-if="day(value.endDay)<=0">Expired</div>
 			<div class="todo__box__dday" v-else>D - {{day(value.endDay)}}</div>
         	<div class="todo__box__title">{{value.title}}</div>
         	<div class="todo__box__text">{{value.text}}</div> 
+			
 		</div>
         
 
@@ -29,9 +31,21 @@
           :value="dayBetween(value.startDay, value.endDay)-day(value.endDay)"
           :max="dayBetween(value.startDay, value.endDay)"
           class="todo__box__progress"
+			v-if="(value.iscomplete == false)"
         />
-        <div class="todo__delete" @click="remove(value)">×</div>
+		  <progress
+          :value="dayBetween(value.startDay, value.endDay)-day(value.endDay)+1"
+          :max="dayBetween(value.startDay, value.endDay)"
+          class="todo__box__progress"
+			v-else
+        />
+		  <div style="display:flex;width:100%;align-items:center;justify-content:center;margin-top:32px;">
+				<div class="todo__complete" @click="complete(value)">Complete</div>
+				<div class="todo__delete" @click="remove(value)">Remove</div>
+		  </div>
+		  
       </div>
+		
     </div>
 	<div v-else class="todoed">
 		<div class="todoed__title">새로운 목표를 추가해보세요</div>
@@ -53,6 +67,49 @@ export default {
   computed: {},
   mounted() {},
   methods: {
+	  complete(e){
+		   var today = new Date();
+      var dd = today.getDate() ;
+      var mm = today.getMonth() + 1; //January is 0!
+      var yyyy = today.getFullYear();
+
+      if (dd < 10) {
+        dd = "0" + dd;
+      }
+
+      if (mm < 10) {
+        mm = "0" + mm;
+      }
+
+      today = yyyy + "-" + mm + "-" + dd;
+			  
+		  console.log(e.complete);
+		  if(e.iscomplete == false){
+		  this.$store
+        .dispatch("TODO__COMPLETE", {
+          id: e.id,
+		time:today,
+          token: localStorage.getItem("token")
+        })
+        .then(response => {
+	 		this.todoData = response.data.userdata.todo
+			  this.$store
+      .dispatch("token", {
+        token: localStorage.getItem("token")
+      })
+      .then(response => {
+        if (response.data.result == true) {
+			console.log(response)
+			this.$store.state.userdata = response.data.userdata;
+        } else {
+        }
+      })
+      .catch(e => {
+        console.log(e);
+      });
+		  })
+		 }
+	  },
     remove(value) {
       this.$store
         .dispatch("TODO__DELETE", {
@@ -61,14 +118,16 @@ export default {
         })
         .then(response => {
           this.$store
-            .dispatch("FIND__DATA", {
+            .dispatch("token", {
               token: localStorage.getItem("token")
             })
             .then(response => {
               console.log(response);
               if (response.data.result == true) {
                 console.log("11");
-                this.todoData = response.data.userdata.todo;
+                this.todoData = response.data.userdata.userdata.todo;
+				  			this.$store.state.userdata = response.data.userdata;
+
                 console.log(this.todoData);
               } else {
               }
@@ -164,11 +223,9 @@ export default {
         token: localStorage.getItem("token")
       })
       .then(response => {
-        console.log(response);
         if (response.data.result == true) {
-          console.log("11");
           this.todoData = response.data.userdata.todo;
-          console.log(this.todoData);
+
         } else {
         }
       })
@@ -218,7 +275,7 @@ export default {
 	.todoed > *{
 		margin:10px;
 	}
-.todo__delete {
+.todo__deleteold {
   cursor:pointer;
   padding: 4px;
   font-size: 24px;
@@ -265,15 +322,22 @@ export default {
   height: fit-content;
 }
 .todo__box {
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+	align-items:center;
   width: 100%;
   min-height: 200px;
   margin-bottom: 20px;
   background-color: white;
   border-radius: 30px;
   box-sizing: border-box;
-  padding: 64px 18px;
+  padding: 48px 18px;
   position: relative;
 }
+	.todo__box__article{
+		width:100%;
+	}
 .todo__box__title {
   margin-top: 22px;
   font-size: 28px;
@@ -337,4 +401,42 @@ progress::-webkit-progress-value {
   border-radius: 4px;
   background-size: 35px 20px, 100% 100%, 100% 100%;
 }
+.todo__complete {
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	width:12%;
+	margin: auto 8px;
+    border-radius: 8px;
+    font-family: "ProductSansR";
+    cursor: pointer;
+    height: 40px;
+    border: 0;
+    text-align: center;
+    font-size: 14px;
+    padding: 5px 10px;
+    color: #ffffff;
+    background-color: #6c63ff;
+  }
+.todo__delete {
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	width:12%;
+	margin: auto 8px;
+    border-radius: 8px;
+    font-family: "ProductSansR";
+    cursor: pointer;
+    height: 40px;
+    border: 1px solid #6c63ff;
+    text-align: center;
+    font-size: 14px;
+    padding: 5px 10px;
+    color: #6c63ff;
+  }
+	/* .todo__delete:hover{
+		color: white;
+		background-color: #6c63ff;
+		transition: 0.3s;
+	} */
 </style>

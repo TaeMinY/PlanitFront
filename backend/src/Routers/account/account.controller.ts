@@ -46,7 +46,9 @@ export const Signup = async (req: Request, res: Response) => {
 		  userdata: {
 			  todo:[],
 			  memo:[],
-			  reminder:[]
+			  reminder:[],
+			  complete:0,
+			  plane_left:0
 		  }
         });
         user.save().then(data => {
@@ -117,16 +119,17 @@ export const TodoCreate = (req:Request,res:Response)=>{
 
 	User.findOne({email:decoded.email},function(err,result){
 		const R = result.userdata;
-		R.todo.push({id:random,title:title,text:text,startDay:startDay,endDay:endDay,progress:progress})
+		R.todo.push({id:random,title:title,text:text,startDay:startDay,endDay:endDay,progress:progress,iscomplete:false})
 			console.log("값",result.userdata,R)
-		
+		result.userdata.plane_left++;
 		User.findOneAndUpdate({email: decoded.email},{$set : {
 			userdata : result.userdata,
+			
 		}},{new : true})
 		.exec(function (err, r) {
 			console.log(r)
 		})
-	
+		
 		Send(res,200,'저장성공',true,token,result.userdata);
 	})
 	
@@ -136,7 +139,7 @@ export const TodoDelete = (req:Request,res:Response)=>{
 	const {token,id} = req.body;
 	  let decoded = jwt.verify(token, jwtpassword);
 
-	
+
 	User.findOne({email:decoded.email},function(err,result){
 		var R = result.userdata.todo;
 		
@@ -145,6 +148,8 @@ export const TodoDelete = (req:Request,res:Response)=>{
 		console.log("a",Re);
 		console.log(result.userdata.todo)
 		
+		result.userdata.plane_left--;
+
 		User.findOneAndUpdate({email: decoded.email},{$set : {
 			userdata : result.userdata
 		}},{new : true})
@@ -239,6 +244,27 @@ export const ChangePassword = (req: Request, res: Response) => {
   });
 };
 
+export const TodoComplete = (req:Request,res:Response)=>{
+	const {token,id,time} = req.body;
+	  let decoded = jwt.verify(token, jwtpassword);
 
 
+	User.findOne({email:decoded.email},function(err,result){
+		result.userdata.complete++;
+		for(let i = 0; i < result.userdata.todo.length;i++){
+			if(result.userdata.todo[i].id == id){
+			   		result.userdata.todo[i].iscomplete = true;
+					result.userdata.todo[i].endDay = time;
+			  }
+		}
+		User.findOneAndUpdate({email: decoded.email},{$set : {
+			userdata : result.userdata
+		}},{new : true})
+		.exec(function (err, r) {
+			console.log(r)
+		})
+		
+		Send(res,200,'성공',true,token,result.userdata);
+	})
+}
 

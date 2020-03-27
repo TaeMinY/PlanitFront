@@ -12,7 +12,7 @@
         @click="arrow_back"
       />
       <img
-        :src="'http://nulllove-rgobq.run.goorm.io/api/' + $store.state.userdata.email + '.png'"
+        :src="'http://taemin.dev/planit/' + $store.state.userdata.email + '.png'"
         class="profile__image"
         style="object-fit: cover;"
       />

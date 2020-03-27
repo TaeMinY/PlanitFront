@@ -8,39 +8,33 @@
 <script>
 export default {
   created() {
-	  console.log(window.location.pathname.slice(0,17));
     if (
       !localStorage.getItem("token") &&
       window.location.pathname != "/" &&
       window.location.pathname != "/account/signin" &&
-      window.location.pathname != "/account/signup"&&
-      window.location.pathname != "/account/find"&&
-	  window.location.pathname.slice(0,18) != "/account/changepwd"
+      window.location.pathname != "/account/signup" &&
+      window.location.pathname != "/account/find" &&
+      window.location.pathname.slice(0, 18) != "/account/changepwd"
     ) {
-		console.log("걸림")
       this.$router.push("/");
     }
     if (localStorage.getItem("token")) {
-      console.log("토큰인증");
       this.$store
         .dispatch("token", {
           token: localStorage.getItem("token")
         })
         .then(response => {
           if (response.data.result) {
-		  		this.$store.state.userdata = response.data.userdata
+            this.$store.state.userdata = response.data.userdata;
 
-			  if (window.location.pathname == "/") {
-				
+            if (window.location.pathname == "/") {
               this.$router.push("/wrap/main");
             }
           } else {
             this.$router.push("/");
           }
         })
-        .catch(e => {
-          console.log("에러");
-        });
+        .catch(e => {});
     }
   }
 };

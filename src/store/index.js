@@ -36,7 +36,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         console.log(data)
         axios
-          .post("https://taemin.dev/planit/account/signin", data)
+          .post("https://www.taemin.dev/planit/account/signin", data)
           .then(value => {
             console.log(value)
             resolve(value)
@@ -50,7 +50,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         console.log(data)
         axios
-          .post("https://taemin.dev/planit/account/signup", data)
+          .post("https://www.taemin.dev/planit/account/signup", data)
           .then(value => {
             console.log(value)
             resolve(value)
@@ -64,7 +64,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         console.log(data)
         axios
-          .post("https://taemin.dev/planit/account/token", data)
+          .post("https://www.taemin.dev/planit/account/token", data)
           .then(value => {
             console.log(value)
             resolve(value)
@@ -78,7 +78,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         console.log("a", data)
         axios
-          .post("https://taemin.dev/planit/account/profile", data)
+          .post("https://www.taemin.dev/planit/account/profile", data)
           .then(value => {
             console.log(value)
             resolve(value)
@@ -92,7 +92,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         console.log(data)
         axios
-          .post("https://taemin.dev/planit/account/todocreate", data)
+          .post("https://www.taemin.dev/planit/account/todocreate", data)
           .then(value => {
             console.log(value)
             resolve(value)
@@ -106,7 +106,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         console.log(data)
         axios
-          .post("https://taemin.dev/planit/account/tododelete", data)
+          .post("https://www.taemin.dev/planit/account/tododelete", data)
           .then(value => {
             console.log(value)
             resolve(value)
@@ -120,7 +120,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         console.log(data)
         axios
-          .post("https://taemin.dev/planit/account/todocomplete", data)
+          .post("https://www.taemin.dev/planit/account/todocomplete", data)
           .then(value => {
             console.log(value)
             resolve(value)
@@ -134,7 +134,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         console.log(data)
         axios
-          .post("https://taemin.dev/planit/account/DataFind", data)
+          .post("https://www.taemin.dev/planit/account/DataFind", data)
           .then(value => {
             console.log(value)
             resolve(value)
@@ -148,7 +148,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         console.log(data)
         axios
-          .post("https://taemin.dev/planit/post/postcreate", data)
+          .post("https://www.taemin.dev/planit/post/postcreate", data)
           .then(value => {
             console.log(value)
             resolve(value)
@@ -162,7 +162,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         console.log(data)
         axios
-          .post("https://taemin.dev/planit/post/postfind", data)
+          .post("https://www.taemin.dev/planit/post/postfind", data)
           .then(value => {
             console.log("요청들어옴")
             resolve(value)
@@ -176,7 +176,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         console.log(data)
         axios
-          .post("https://taemin.dev/planit/post/findmypost", data)
+          .post("https://www.taemin.dev/planit/post/findmypost", data)
           .then(value => {
             console.log("요청들어옴")
             resolve(value)
@@ -190,7 +190,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         console.log(data)
         axios
-          .post("https://taemin.dev/planit/post/commentfind", data)
+          .post("https://www.taemin.dev/planit/post/commentfind", data)
           .then(value => {
             console.log("요청들어옴")
             resolve(value)
@@ -204,7 +204,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         console.log(data)
         axios
-          .post("https://taemin.dev/planit/post/commentcreate", data)
+          .post("https://www.taemin.dev/planit/post/commentcreate", data)
           .then(value => {
             console.log("요청들어옴")
             resolve(value)
@@ -218,7 +218,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         console.log(data)
         axios
-          .post("https://taemin.dev/planit/post/commentfindall", data)
+          .post("https://www.taemin.dev/planit/post/commentfindall", data)
           .then(value => {
             console.log("요청들어옴")
             resolve(value)
@@ -232,7 +232,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         console.log(data)
         axios
-          .post("https://taemin.dev/planit/post/deletecomment", data)
+          .post("https://www.taemin.dev/planit/post/deletecomment", data)
           .then(value => {
             console.log("요청들어옴")
             resolve(value)
@@ -245,7 +245,7 @@ export default new Vuex.Store({
     POST__LIKE({ commit, state }, data) {
       return new Promise((resolve, reject) => {
         axios
-          .post("https://taemin.dev/planit/post/postlike", data)
+          .post("https://www.taemin.dev/planit/post/postlike", data)
           .then(value => {
             resolve(value)
           })
@@ -257,7 +257,7 @@ export default new Vuex.Store({
     CHANGE__PASSWORD({ commit, state }, data) {
       return new Promise((resolve, reject) => {
         axios
-          .post("https://taemin.dev/planit/account/changepassword", data)
+          .post("https://www.taemin.dev/planit/account/changepassword", data)
           .then(value => {
             resolve(value)
           })
@@ -269,7 +269,7 @@ export default new Vuex.Store({
     TODO__COMPLETE__TIME({ commit, state }, data) {
       return new Promise((resolve, reject) => {
         axios
-          .post("https://taemin.dev/planit/account/todocompletetime", data)
+          .post("https://www.taemin.dev/planit/account/todocompletetime", data)
           .then(value => {
             resolve(value)
           })
@@ -281,7 +281,7 @@ export default new Vuex.Store({
     MEMO__SAVE({ commit, state }, data) {
       return new Promise((resolve, reject) => {
         axios
-          .post("https://taemin.dev/planit/account/memosave", data)
+          .post("https://www.taemin.dev/planit/account/memosave", data)
           .then(value => {
             resolve(value)
           })
@@ -293,7 +293,7 @@ export default new Vuex.Store({
     MEMO__DELETE({ commit, state }, data) {
       return new Promise((resolve, reject) => {
         axios
-          .post("https://taemin.dev/planit/account/memodelete", data)
+          .post("https://www.taemin.dev/planit/account/memodelete", data)
           .then(value => {
             resolve(value)
           })
@@ -305,7 +305,7 @@ export default new Vuex.Store({
     POST__DELETE({ commit, state }, data) {
       return new Promise((resolve, reject) => {
         axios
-          .post("https://taemin.dev/planit/post/postdelete", data)
+          .post("https://www.taemin.dev/planit/post/postdelete", data)
           .then(value => {
             resolve(value)
           })
@@ -317,7 +317,7 @@ export default new Vuex.Store({
     MY__PROFILE__SAVE({ commit, state }, data) {
       return new Promise((resolve, reject) => {
         axios
-          .post("https://taemin.dev/planit/account/profilesave", data)
+          .post("https://www.taemin.dev/planit/account/profilesave", data)
           .then(value => {
             resolve(value)
           })
@@ -329,7 +329,7 @@ export default new Vuex.Store({
     END({ commit, state }, data) {
       return new Promise((resolve, reject) => {
         axios
-          .post("https://taemin.dev/planit/account/end", data)
+          .post("https://www.taemin.dev/planit/account/end", data)
           .then(value => {
             resolve(value)
           })

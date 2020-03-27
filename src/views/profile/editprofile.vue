@@ -6,7 +6,7 @@
     <div class="edit__box">
       <img src="../../assets/arrow_back.svg" alt width="25px" class="arrow" @click="arrow_back" />
       <img
-        :src="'http://nulllove-rgobq.run.goorm.io/api/' + $store.state.userdata.email + '.png'"
+        :src="'http://taemin.dev/planit/' + $store.state.userdata.email + '.png'"
         class="edit__image"
         style="object-fit: cover;"
       />

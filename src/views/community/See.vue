@@ -19,7 +19,7 @@
               <div style="display:flex; align-items:center">
                 <img
                   class="see__article__image"
-                  :src="'http://nulllove-rgobq.run.goorm.io/api/'+value.email+'.png'"
+                  :src="'http://taemin.dev/planit/'+value.email+'.png'"
                   alt="profile"
                   width="42px"
                   height="42px"
@@ -83,7 +83,7 @@
                 <div style="display:flex;align-items:center;">
                   <img
                     class="see__comment__image"
-                    :src="'http://nulllove-rgobq.run.goorm.io/api/'+d.email+'.png'"
+                    :src="'http://taemin.dev/planit/'+d.email+'.png'"
                     alt="comment profile"
                   />
                   <div class="see__comment__name">{{d.name}}</div>

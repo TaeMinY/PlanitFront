@@ -36,7 +36,7 @@
               <div style="display:flex; align-items:center">
                 <img
                   class="profile__article__image"
-                  :src="'http://nulllove-rgobq.run.goorm.io/api/'+value.email+'.png'"
+                  :src="'http://taemin.dev/planit/'+value.email+'.png'"
                   alt="profile"
                   width="42px"
                   height="42px"
